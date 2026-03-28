@@ -325,6 +325,38 @@
 #addressList div:hover {
   background: #f5f5f5;
 }
+ /* 🔻 Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  z-index: 9999;
+}
+
+.nav-item {
+  text-align: center;
+  font-size: 12px;
+  color: #555;
+  cursor: pointer;
+}
+
+.nav-item div {
+  font-size: 18px;
+}
+
+.nav-item.active {
+  color: #2874f0;
+  font-weight: bold;
+}
+ body {
+  padding-bottom: 70px;
+ }
     </style>
 </head>
 <body>
@@ -831,6 +863,51 @@ function renderFilteredProducts(list) {
     </div>
   `).join('');
 }
+  // 🔻 Bottom Nav Functions
+function goHome() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+function goCategory() {
+  const section = document.querySelector(".categories");
+  
+  if (section) {
+    section.scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+}
+
+function goAccount() {
+  alert("Account section coming soon 😎");
+}
     </script>
+<!-- 🔻 Bottom Navigation -->
+<div class="bottom-nav">
+
+  <div class="nav-item active" onclick="goHome()">
+    <div>🏠</div>
+    <span>Home</span>
+  </div>
+
+  <div class="nav-item" onclick="goCategory()">
+    <div>📂</div>
+    <span>Categories</span>
+  </div>
+
+  <div class="nav-item" onclick="goAccount()">
+    <div>👤</div>
+    <span>Account</span>
+  </div>
+
+  <div class="nav-item" onclick="toggleCart()">
+    <div>🛒</div>
+    <span>Cart</span>
+  </div>
+
+</div>
 </body>
 </html>
