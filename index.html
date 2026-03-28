@@ -310,7 +310,7 @@
     <!-- Header -->
     <header>
      <div class="top-header-bar">
-  <div class="location">🏠 Home</div>
+  <div class="location" onclick="openPopup()">🏠 Home</div>
   <div class="address">Your City, India</div>
   <div class="cart-mini">⚡ 0</div>
      </div> 
@@ -354,10 +354,7 @@
   <input type="text" placeholder="Search for products..." id="searchBox">
 </div>
 
-            <div style="margin:10px;">
-  <input type="text" id="userAddress" placeholder="Enter your address" style="padding:10px; width:70%;">
-  <button onclick="saveAddress()">Save</button>
-</div> 
+
 
             <div class="categories">
   <div class="cat">📱 Mobiles</div>
@@ -390,7 +387,19 @@
     <div class="success-message" id="successMessage">
         Purchase completed successfully! 🎉
     </div>
-<!-- Firebase START -->
+<!-- 📍 Address Popup -->
+<div id="addressPopup" style="display:none; position:fixed; bottom:0; left:0; width:100%; background:#fff; padding:20px; border-top-left-radius:20px; border-top-right-radius:20px; box-shadow:0 -5px 15px rgba(0,0,0,0.2); z-index:9999;">
+
+  <h3>Select delivery address</h3>
+
+  <input type="text" id="popupAddress" placeholder="Enter your address" style="width:100%; padding:10px; margin-top:10px;">
+
+  <button onclick="savePopupAddress()" style="margin-top:10px; padding:10px; width:100%;">Save Address</button>
+
+  <button onclick="closePopup()" style="margin-top:10px; padding:10px; width:100%; background:red; color:white;">Close</button>
+
+</div>
+    <!-- Firebase START -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 
@@ -668,6 +677,30 @@ window.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".address").textContent = savedAddress;
   }
 });
+      // 📍 Open Popup
+function openPopup() {
+  document.getElementById("addressPopup").style.display = "block";
+}
+
+// 📍 Close Popup
+function closePopup() {
+  document.getElementById("addressPopup").style.display = "none";
+}
+
+// 📍 Save Address from Popup
+function savePopupAddress() {
+  const address = document.getElementById("popupAddress").value;
+
+  if (address === "") {
+    alert("Enter address first ⚠️");
+    return;
+  }
+
+  localStorage.setItem("userAddress", address);
+  document.querySelector(".address").textContent = address;
+
+  closePopup();
+}
         // 🔍 Search Function FIX
 document.addEventListener("DOMContentLoaded", function () {
   const searchBox = document.getElementById("searchBox");
