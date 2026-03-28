@@ -250,6 +250,33 @@
             border-radius: 8px;
             z-index: 3000;
         }
+  /* 🔥 NEW UI */
+.top-bar {
+  margin: 20px;
+  text-align: center;
+}
+
+.top-bar input {
+  width: 90%;
+  padding: 12px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+}
+
+.categories {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background: #fff;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.cat {
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+}
     </style>
 </head>
 <body>
@@ -290,6 +317,19 @@
 <button onclick="forgotPassword()" style="margin:10px; padding:10px;">Forgot Password</button>
 </div>
 <!-- LOGIN FORM END -->
+<!-- 🔥 ADD START -->
+<div class="top-bar">
+  <input type="text" placeholder="Search for products..." id="searchBox">
+</div>
+
+<div class="categories">
+  <div class="cat">📱 Mobiles</div>
+  <div class="cat">👕 Fashion</div>
+  <div class="cat">💻 Electronics</div>
+  <div class="cat">🏠 Home</div>
+  <div class="cat">🧴 Beauty</div>
+</div>
+<!-- 🔥 ADD END -->  
         </section>
 
         <!-- Products Section -->
