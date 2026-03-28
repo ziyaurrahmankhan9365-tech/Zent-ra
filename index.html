@@ -558,6 +558,18 @@ function removeItem(id) {
   updateCartCount();
   renderCart();
 }
+// 🛒 Update Cart Count
+function updateCartCount() {
+  const cartCount = document.getElementById("cartCount");
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  cartCount.textContent = totalItems;
+}
+
+// 🛒 Toggle Cart Modal
+function toggleCart() {
+  const modal = document.getElementById("cartModal");
+  modal.style.display = modal.style.display === "block" ? "none" : "block";
+}
     </script>
 </body>
 </html>
