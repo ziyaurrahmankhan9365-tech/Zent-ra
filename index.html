@@ -288,7 +288,6 @@
   border-radius: 8px;
   margin-bottom: 10px;
 }
-
 .location {
   font-size: 14px;
 }
@@ -304,6 +303,28 @@
   border-radius: 20px;
   font-size: 12px;
 }     
+   #addressPopup {
+  font-family: Arial;
+}
+
+#addressPopup h3 {
+  margin-bottom: 10px;
+}
+
+#addressPopup input {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+#addressPopup button {
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+#addressList div:hover {
+  background: #f5f5f5;
+}
     </style>
 </head>
 <body>
@@ -394,7 +415,9 @@
 
   <input type="text" id="popupAddress" placeholder="Enter your address" style="width:100%; padding:10px; margin-top:10px;">
 
-  <button onclick="addNewAddress()" style="margin-top:10px; padding:10px; width:100%;">➕ Add Address</button>
+    <button onclick="useCurrentLocation()" style="margin-top:10px; padding:10px; width:100%; background:#2874f0; color:white;">📍 Use My Current Location</button>
+  
+    <button onclick="addNewAddress()" style="margin-top:10px; padding:10px; width:100%;">➕ Add Address</button>
 
   <!-- 📦 Address List -->
   <div id="addressList" style="margin-top:15px;"></div>
@@ -680,7 +703,24 @@ window.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".address").textContent = savedAddress;
   }
 });
-      // 📦 Get addresses
+     function useCurrentLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      const locationText = `Lat: ${lat.toFixed(3)}, Lon: ${lon.toFixed(3)}`;
+
+      localStorage.setItem("userAddress", locationText);
+      document.querySelector(".address").textContent = locationText;
+
+      closePopup();
+    });
+  } else {
+    alert("Geolocation not supported ❌");
+  }
+     }
+        // 📦 Get addresses
 function getAddresses() {
   return JSON.parse(localStorage.getItem("addresses")) || [];
 }
@@ -708,12 +748,21 @@ function renderAddressList() {
   const list = document.getElementById("addressList");
   const addresses = getAddresses();
 
-  list.innerHTML = addresses.map((addr, index) => `
-    <div style="padding:10px; border:1px solid #ddd; margin-top:5px; border-radius:10px; display:flex; justify-content:space-between;">
-      <span onclick="selectAddress('${addr}')" style="cursor:pointer;">🏠 ${addr}</span>
+  const selected = localStorage.getItem("userAddress");
+
+list.innerHTML = addresses.map((addr, index) => {
+  return `
+    <div style="padding:10px; border:1px solid #ddd; margin-top:5px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;">
+      
+      <div onclick="selectAddress('${addr}')" style="cursor:pointer;">
+        🏠 ${addr}
+        ${selected === addr ? `<span style="background:#2874f0; color:white; padding:2px 8px; border-radius:10px; font-size:12px; margin-left:5px;">Selected</span>` : ""}
+      </div>
+
       <button onclick="deleteAddress(${index})">❌</button>
     </div>
-  `).join('');
+  `;
+}).join('');
 }
 
 // 📍 Select address
