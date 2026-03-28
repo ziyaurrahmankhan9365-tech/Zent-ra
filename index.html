@@ -428,11 +428,20 @@
             }
 
             cartItems.innerHTML = cart.map(item => `
-                <div class="cart-item">
-                    <span>${item.name} (x${item.quantity})</span>
-                    <span>$${(item.price * item.quantity).toFixed(2)}</span>
-                </div>
-            `).join('');
+  <div class="cart-item">
+    <span>${item.name}</span>
+
+    <div>
+      <button onclick="decreaseQty(${item.id})">➖</button>
+      <span>${item.quantity}</span>
+      <button onclick="increaseQty(${item.id})">➕</button>
+    </div>
+
+    <span>$${(item.price * item.quantity).toFixed(2)}</span>
+
+    <button onclick="removeItem(${item.id})" style="background:red;color:white;">❌</button>
+  </div>
+`).join('');
 
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             cartTotal.textContent = `Total: $${total.toFixed(2)}`;
