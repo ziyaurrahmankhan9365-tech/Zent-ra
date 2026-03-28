@@ -354,7 +354,12 @@
   <input type="text" placeholder="Search for products..." id="searchBox">
 </div>
 
-<div class="categories">
+            <div style="margin:10px;">
+  <input type="text" id="userAddress" placeholder="Enter your address" style="padding:10px; width:70%;">
+  <button onclick="saveAddress()">Save</button>
+</div> 
+
+            <div class="categories">
   <div class="cat">📱 Mobiles</div>
   <div class="cat">👕 Fashion</div>
   <div class="cat">💻 Electronics</div>
@@ -642,7 +647,28 @@ function toggleCart() {
   const modal = document.getElementById("cartModal");
   modal.style.display = modal.style.display === "block" ? "none" : "block";
 }
-   // 🔍 Search Function FIX
+ // 📍 Save Address
+function saveAddress() {
+  const address = document.getElementById("userAddress").value;
+
+  if (address === "") {
+    alert("Enter address first ⚠️");
+    return;
+  }
+
+  localStorage.setItem("userAddress", address);
+  document.querySelector(".address").textContent = address;
+}
+
+// 📍 Load saved address
+window.addEventListener("DOMContentLoaded", () => {
+  const savedAddress = localStorage.getItem("userAddress");
+
+  if (savedAddress) {
+    document.querySelector(".address").textContent = savedAddress;
+  }
+});
+        // 🔍 Search Function FIX
 document.addEventListener("DOMContentLoaded", function () {
   const searchBox = document.getElementById("searchBox");
 
