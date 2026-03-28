@@ -411,23 +411,10 @@
             }
 
             updateCartCount();
+           renderCart();
             showSuccess('Product added to cart!');
         }
 
-        // Update Cart Count
-        function updateCartCount() {
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            document.getElementById('cartCount').textContent = totalItems;
-        }
-
-        // Toggle Cart Modal
-        function toggleCart() {
-            const modal = document.getElementById('cartModal');
-            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
-            if (modal.style.display === 'block') {
-                renderCart();
-            }
-        }
 
         // Render Cart
         function renderCart() {
