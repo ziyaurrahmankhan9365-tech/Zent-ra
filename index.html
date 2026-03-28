@@ -312,7 +312,20 @@
     <div class="success-message" id="successMessage">
         Purchase completed successfully! 🎉
     </div>
+<!-- Firebase START -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyBP...", 
+    authDomain: "zentra-6d057.firebaseapp.com",
+    projectId: "zentra-6d057"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+</script>
+<!-- Firebase END -->
     <script>
         // Product Data
         const products = [
@@ -465,20 +478,10 @@
         }
 
         // Initialize when page loads
-        <script>
-  // products code
-  // aur sab code
-
-  // 🔥 YE LAST ME ADD KAR 👇
-
+window.addEventListener('load', init);
   function signup() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(() => alert("Signup Successful ✅"))
-      .catch(error => alert(error.message));
-  }
 
   function login() {
     const email = document.getElementById("email").value;
@@ -489,31 +492,5 @@
       .catch(error => alert(error.message));
   }
 
-</script>
-        window.addEventListener('load', init);
-    </script>
-    <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBPGqVgZJVGoTG-bhvtLT_zgDucNPixMB4",
-    authDomain: "zentra-6d057.firebaseapp.com",
-    projectId: "zentra-6d057",
-    storageBucket: "zentra-6d057.firebasestorage.app",
-    messagingSenderId: "972544114586",
-    appId: "1:972544114586:web:d4b8eba3ca0ca9762d4423",
-    measurementId: "G-0Z7MEX86TF"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-    </script>
 </body>
 </html>
