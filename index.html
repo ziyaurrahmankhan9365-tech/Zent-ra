@@ -499,6 +499,21 @@ function login() {
   auth.signInWithEmailAndPassword(email, password)
     .then(() => alert("Login Successful 🔥"))
     .catch(error => alert(error.message));
+// ✅ AUTO LOGIN CHECK
+auth.onAuthStateChanged(user => {
+  if (user) {
+    document.querySelector(".hero").innerHTML = "<h2>Welcome " + user.email + " 🎉</h2><button onclick='logout()'>Logout</button>";
+    `;
+  }
+});
+
+// ✅ LOGOUT FUNCTION
+function logout() {
+  auth.signOut().then(() => {
+    alert("Logout Successful 👋");
+    location.reload();
+  });
+}
 }
 </script>
 </body>
