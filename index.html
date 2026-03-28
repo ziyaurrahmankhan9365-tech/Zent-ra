@@ -617,18 +617,28 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!searchBox) return;
 
   searchBox.addEventListener("input", function (e) {
-    const value = e.target.value.toLowerCase();
+  const value = e.target.value.toLowerCase();
 
-    const filtered = products.filter(p =>
-      p.name.toLowerCase().includes(value)
-    );
+  if (value === "") {
+    renderProducts();   // ✅ sab products wapas
+    return;
+  }
 
-    renderFilteredProducts(filtered);
+  const filtered = products.filter(p =>
+    p.name.toLowerCase().includes(value)
+  );
+
+  renderFilteredProducts(filtered);
   });
 });
 
 function renderFilteredProducts(list) {
   const productsGrid = document.querySelector('.products-grid');
+
+  if (list.length === 0) {
+    productsGrid.innerHTML = "<h3>No product found 😢</h3>";
+    return;
+  }
 
   productsGrid.innerHTML = list.map(product => `
     <div class="product-card">
