@@ -591,7 +591,32 @@ function decreaseQty(id) {
   updateCartCount();
   renderCart();
 }
+// 🔍 Search Function
+window.addEventListener("load", () => {
+  document.getElementById("searchBox").addEventListener("input", function(e) {
+  const value = e.target.value.toLowerCase();
 
+  const filtered = products.filter(p =>
+    p.name.toLowerCase().includes(value)
+  );
+
+  renderFilteredProducts(filtered);
+});
+
+function renderFilteredProducts(list) {
+  const productsGrid = document.querySelector('.products-grid');
+
+  productsGrid.innerHTML = list.map(product => `
+    <div class="product-card">
+      <img src="${product.image}" class="product-image">
+      <div class="product-info">
+        <h3>${product.name}</h3>
+        <div>$${product.price}</div>
+        <button onclick="addToCart(${product.id})">Add to Cart</button>
+      </div>
+    </div>
+  `).join('');
+}
 // ❌ Remove Item
 function removeItem(id) {
   cart = cart.filter(i => i.id !== id);
