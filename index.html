@@ -530,6 +530,34 @@ function forgotPassword() {
     .then(() => alert("Password reset email sent 📩"))
     .catch(error => alert(error.message));
 }
+ // ➕ Increase Quantity
+function increaseQty(id) {
+  const item = cart.find(i => i.id === id);
+  item.quantity++;
+  updateCartCount();
+  renderCart();
+}
+
+// ➖ Decrease Quantity
+function decreaseQty(id) {
+  const item = cart.find(i => i.id === id);
+
+  if (item.quantity > 1) {
+    item.quantity--;
+  } else {
+    cart = cart.filter(i => i.id !== id);
+  }
+
+  updateCartCount();
+  renderCart();
+}
+
+// ❌ Remove Item
+function removeItem(id) {
+  cart = cart.filter(i => i.id !== id);
+  updateCartCount();
+  renderCart();
+}
     </script>
 </body>
 </html>
