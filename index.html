@@ -394,11 +394,14 @@
 
   <input type="text" id="popupAddress" placeholder="Enter your address" style="width:100%; padding:10px; margin-top:10px;">
 
-  <button onclick="savePopupAddress()" style="margin-top:10px; padding:10px; width:100%;">Save Address</button>
+  <button onclick="addNewAddress()" style="margin-top:10px; padding:10px; width:100%;">➕ Add Address</button>
+
+  <!-- 📦 Address List -->
+  <div id="addressList" style="margin-top:15px;"></div>
 
   <button onclick="closePopup()" style="margin-top:10px; padding:10px; width:100%; background:red; color:white;">Close</button>
 
-</div>
+</div> 
     <!-- Firebase START -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
@@ -677,29 +680,66 @@ window.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".address").textContent = savedAddress;
   }
 });
-      // 📍 Open Popup
-function openPopup() {
-  document.getElementById("addressPopup").style.display = "block";
+      // 📦 Get addresses
+function getAddresses() {
+  return JSON.parse(localStorage.getItem("addresses")) || [];
 }
 
-// 📍 Close Popup
-function closePopup() {
-  document.getElementById("addressPopup").style.display = "none";
-}
+// 📍 Add new address
+function addNewAddress() {
+  const input = document.getElementById("popupAddress");
+  const value = input.value.trim();
 
-// 📍 Save Address from Popup
-function savePopupAddress() {
-  const address = document.getElementById("popupAddress").value;
-
-  if (address === "") {
-    alert("Enter address first ⚠️");
+  if (value === "") {
+    alert("Enter address ⚠️");
     return;
   }
 
-  localStorage.setItem("userAddress", address);
-  document.querySelector(".address").textContent = address;
+  let addresses = getAddresses();
+  addresses.push(value);
+  localStorage.setItem("addresses", JSON.stringify(addresses));
 
+  input.value = "";
+  renderAddressList();
+}
+
+// 📍 Render address list
+function renderAddressList() {
+  const list = document.getElementById("addressList");
+  const addresses = getAddresses();
+
+  list.innerHTML = addresses.map((addr, index) => `
+    <div style="padding:10px; border:1px solid #ddd; margin-top:5px; border-radius:10px; display:flex; justify-content:space-between;">
+      <span onclick="selectAddress('${addr}')" style="cursor:pointer;">🏠 ${addr}</span>
+      <button onclick="deleteAddress(${index})">❌</button>
+    </div>
+  `).join('');
+}
+
+// 📍 Select address
+function selectAddress(addr) {
+  localStorage.setItem("userAddress", addr);
+  document.querySelector(".address").textContent = addr;
   closePopup();
+}
+
+// 📍 Delete address
+function deleteAddress(index) {
+  let addresses = getAddresses();
+  addresses.splice(index, 1);
+  localStorage.setItem("addresses", JSON.stringify(addresses));
+  renderAddressList();
+}
+
+// 📍 Open popup (update)
+function openPopup() {
+  document.getElementById("addressPopup").style.display = "block";
+  renderAddressList();
+}
+
+// 📍 Close popup
+function closePopup() {
+  document.getElementById("addressPopup").style.display = "none";
 }
         // 🔍 Search Function FIX
 document.addEventListener("DOMContentLoaded", function () {
