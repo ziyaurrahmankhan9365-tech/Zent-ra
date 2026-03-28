@@ -324,6 +324,7 @@
   };
 
   firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
 </script>
 <!-- Firebase END -->
     <script>
@@ -487,7 +488,7 @@ window.addEventListener('load', init);
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    auth.signInWithEmailAndPassword(email, password)
       .then(() => alert("Login Successful 🔥"))
       .catch(error => alert(error.message));
   }
