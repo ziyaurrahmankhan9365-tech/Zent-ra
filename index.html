@@ -458,7 +458,10 @@
 
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
-function loadUserName() {
+function goAccount() {
+  window.location.href = "login.html";
+}
+    function loadUserName() {
   const email = localStorage.getItem("userEmail");
 
   if (email) {
