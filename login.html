@@ -1,1 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login - ShopMart</title>
+</head>
 
+<body style="font-family:Arial; padding:20px;">
+
+<h2>Login / Signup</h2>
+
+<input type="email" id="email" placeholder="Enter Email"
+style="display:block; margin:10px 0; padding:10px; width:100%;">
+
+<input type="password" id="password" placeholder="Enter Password"
+style="display:block; margin:10px 0; padding:10px; width:100%;">
+
+<button onclick="signup()" style="padding:10px; width:100%;">Signup</button>
+
+<button onclick="login()" style="padding:10px; width:100%; margin-top:10px;">Login</button>
+
+<button onclick="forgotPassword()" style="padding:10px; width:100%; margin-top:10px;">
+Forgot Password
+</button>
+
+<script>
+function signup() {
+  alert("Signup working (Firebase connect karenge next)");
+}
+
+function login() {
+  alert("Login working");
+}
+
+function forgotPassword() {
+  alert("Reset link sent 📩");
+}
+</script>
+
+</body>
+</html>
