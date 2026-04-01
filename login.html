@@ -5,7 +5,14 @@
 </head>
 
 <body style="font-family:Arial; padding:20px;">
+<div style="display:flex; align-items:center; background:#2874f0; color:white; padding:12px;">
 
+  <span onclick="goBack()" style="font-size:20px; margin-right:10px; cursor:pointer;">⬅</span>
+
+  <h3 style="margin:0;">Account</h3>
+
+</div>
+  
 <h2>Login / Signup</h2>
 
 <input type="email" id="email" placeholder="Enter Email"
@@ -30,7 +37,9 @@ function signup() {
 function login() {
   alert("Login working");
 }
-
+function goBack() {
+  window.history.back();
+}
 function forgotPassword() {
   alert("Reset link sent 📩");
 }
