@@ -18,8 +18,15 @@
 <input type="email" id="email" placeholder="Enter Email"
 style="display:block; margin:10px 0; padding:10px; width:100%;">
 
-<input type="password" id="password" placeholder="Enter Password"
-style="display:block; margin:10px 0; padding:10px; width:100%;">
+<div style="position:relative;">
+  <input type="password" id="password" placeholder="Enter Password"
+  style="display:block; margin:10px 0; padding:10px; width:100%;">
+
+  <span onclick="togglePassword()" 
+  style="position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer;">
+  👁
+  </span>
+</div>
 
 <button onclick="signup()" style="padding:10px; width:100%;">Signup</button>
 
@@ -29,21 +36,61 @@ style="display:block; margin:10px 0; padding:10px; width:100%;">
 Forgot Password
 </button>
 
-<script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script>
+var firebaseConfig = {
+  apiKey: "AIzaSyBPGqVgZJVGoTG-bhvtLT_zgDucNPixMB4",
+  authDomain: "zentra-6d057.firebaseapp.com",
+  projectId: "zentra-6d057"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
 function signup() {
-  alert("Signup working (Firebase connect karenge next)");
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .then(() => alert("Signup Successful ✅"))
+    .catch(error => alert(error.message));
 }
 
 function login() {
-  alert("Login working");
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+      alert("Login Successful 🔥");
+      localStorage.setItem("userEmail", email);
+      window.location.href = "index.html";
+    })
+    .catch(error => alert(error.message));
 }
+
+function forgotPassword() {
+  const email = document.getElementById("email").value;
+
+  auth.sendPasswordResetEmail(email)
+    .then(() => alert("Reset email sent 📩"))
+    .catch(error => alert(error.message));
+}
+
 function goBack() {
   window.history.back();
 }
-function forgotPassword() {
-  alert("Reset link sent 📩");
-}
-</script>
+    function togglePassword() {
+  const pass = document.getElementById("password");
+
+  if (pass.type === "password") {
+    pass.type = "text";
+  } else {
+    pass.type = "password";
+  }
+    
+  </script>
 
 </body>
 </html>
