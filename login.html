@@ -192,5 +192,37 @@ function goBack() {
     } 
   </script>
 
+    <!-- 🔻 BOTTOM NAV -->
+<div style="
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:10px 0;
+border-top:1px solid #ccc;
+z-index:999;
+">
+
+  <div onclick="goHome()" style="text-align:center;">
+    🏠<br><span>Home</span>
+  </div>
+
+  <div onclick="goCategory()" style="text-align:center;">
+    📂<br><span>Categories</span>
+  </div>
+
+  <div onclick="goAccount()" style="text-align:center;">
+    👤<br><span>Account</span>
+  </div>
+
+  <div onclick="goCart()" style="text-align:center;">
+    🛒<br><span>Cart</span>
+  </div>
+
+</div>
+    
 </body>
 </html>
