@@ -15,6 +15,8 @@
   
 <h2>Login / Signup</h2>
 
+  <div id="loginBox">
+  
 <input type="email" id="email" placeholder="Enter Email"
 style="display:block; margin:10px 0; padding:10px; width:100%;">
 
@@ -35,7 +37,10 @@ style="display:block; margin:10px 0; padding:10px; width:100%;">
 <button onclick="forgotPassword()" style="padding:10px; width:100%; margin-top:10px;">
 Forgot Password
 </button>
+</div>
 
+<h2 id="userName" style="display:none; font-weight:bold; margin-top:20px;"></h2>
+  
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script>
@@ -65,7 +70,14 @@ function login() {
     .then(() => {
       alert("Login Successful 🔥");
       localStorage.setItem("userEmail", email);
-      window.location.href = "index.html";
+   document.getElementById("loginBox").style.display = "none";
+
+const name = email.split("@")[0].toUpperCase();
+
+const userNameBox = document.getElementById("userName");
+userNameBox.style.display = "block";
+userNameBox.innerText = name;
+      
     })
     .catch(error => alert(error.message));
 }
@@ -90,6 +102,19 @@ function goBack() {
     pass.type = "password";
   }
     } 
+window.onload = function () {
+  const user = localStorage.getItem("userEmail");
+
+  if (user) {
+    document.getElementById("loginBox").style.display = "none";
+
+    const name = user.split("@")[0].toUpperCase();
+
+    const userNameBox = document.getElementById("userName");
+    userNameBox.style.display = "block";
+    userNameBox.innerText = name;
+  }
+};
   </script>
 
 </body>
