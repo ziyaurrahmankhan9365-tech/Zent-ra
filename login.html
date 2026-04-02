@@ -103,8 +103,6 @@ function login() {
   const name = email.split("@")[0].toUpperCase();
   document.getElementById("accountName").innerText = name;
 })
-      
-    })
     .catch(error => alert(error.message));
 }
 
