@@ -362,17 +362,88 @@
 <body>
     <!-- Header -->
     <header>
-    <div class="top-header-bar">
+    ✅ 🔥 FINAL UPDATED HEADER CODE (COPY PASTE)
+👉 Isko index.html ke top me paste kar
+HTML
+<div style="background:#e3f2fd; padding:10px;">
 
-  <div style="font-weight:bold; font-size:18px;">
-    🛒 ShopMart
+  <!-- 🔷 TOP 3 BOX -->
+  <div style="display:flex; gap:10px;">
+
+    <!-- 🛍️ SHOPMART (LOGO) -->
+    <div style="
+    flex:1;
+    background:#ffe500;
+    border-radius:10px;
+    text-align:center;
+    padding:8px;
+    ">
+      <img src="logo.png" style="height:24px;">
+    </div>
+
+    <!-- ✈️ TRAVEL -->
+    <div style="
+    flex:1;
+    background:white;
+    border-radius:10px;
+    text-align:center;
+    padding:10px;
+    ">
+      ✈️ Travel
+    </div>
+
+    <!-- 🧺 GROCERY (FIX ICON) -->
+    <div style="
+    flex:1;
+    background:white;
+    border-radius:10px;
+    text-align:center;
+    padding:10px;
+    ">
+      🧺 Grocery
+    </div>
+
   </div>
 
-  <div style="background:yellow; padding:5px 10px; border-radius:20px;">
-    ⚡ 0
+  <!-- 📍 LOCATION + COIN -->
+  <div style="
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
+  ">
+
+    <div id="locationText" style="font-size:14px;">
+      📍 Detecting location...
+    </div>
+
+    <div style="
+    background:#fff;
+    padding:5px 10px;
+    border-radius:20px;
+    ">
+      ⚡ 0
+    </div>
+
   </div>
-        
-    </header>
+
+  <!-- 🔍 SEARCH BAR -->
+  <div style="margin-top:10px;">
+    <input type="text" placeholder="🔍 Search for Products"
+style="
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid #bbdefb;
+outline:none;
+transition:all 0.3s ease;
+"
+onfocus="this.style.boxShadow='0 0 10px rgba(33,150,243,0.5)'"
+onblur="this.style.boxShadow='none'"
+>
+  </div>
+
+</div>
 
 </div>   
     <!-- Main Content -->
@@ -891,6 +962,39 @@ function goCategory() {
 function goCart() {
   window.location.href = "cart.html";
 }
+  // 📍 AUTO LOCATION DETECT
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+
+    // 🌍 Reverse Geocoding API
+    fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+      .then(res => res.json())
+      .then(data => {
+
+        let address = data.address;
+
+        let country = address.country || "";
+        let postcode = address.postcode || "";
+        let state = address.state || "";
+        let city = address.city || address.town || address.village || "";
+
+        document.getElementById("locationText").innerText =
+          `📍 ${postcode}, ${city}, ${state}, ${country}`;
+
+      })
+      .catch(() => {
+        document.getElementById("locationText").innerText = "📍 Location not found";
+      });
+
+  }, function() {
+    document.getElementById("locationText").innerText = "📍 Permission denied";
+  });
+} else {
+  document.getElementById("locationText").innerText = "📍 Not supported";
+} 
     </script>
 <!-- 🔻 Bottom Navigation -->
 <div class="bottom-nav">
