@@ -4,13 +4,68 @@
   <title>Cart - ShopMart</title>
 </head>
 
-<body style="font-family:Arial; padding:20px; background:#f1f3f6;">
+<body style="font-family:Arial; padding:20px; padding-bottom:80px; background:#f1f3f6;">
 
-<h2>🛒 Your Cart</h2>
+<div style="display:flex; align-items:center; background:#2874f0; color:white; padding:12px;">
+  <span onclick="goBack()" style="font-size:20px; margin-right:10px; cursor:pointer;">⬅</span>
+  <h3 style="margin:0;">Your Cart</h3>
+</div>
 
 <div style="background:white; padding:15px; border-radius:10px; margin-top:10px;">
   <p>Your cart is empty 😢</p>
 </div>
+<!-- 🔻 BOTTOM NAV -->
+<div style="
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:10px 0;
+border-top:1px solid #ccc;
+z-index:999;
+">
 
+  <div onclick="goHome()" style="text-align:center;">
+    🏠<br><span>Home</span>
+  </div>
+
+  <div onclick="goCategory()" style="text-align:center;">
+    📂<br><span>Categories</span>
+  </div>
+
+  <div onclick="goAccount()" style="text-align:center;">
+    👤<br><span>Account</span>
+  </div>
+
+  <div onclick="goCart()" style="text-align:center;">
+    🛒<br><span>Cart</span>
+  </div>
+
+</div>
+ <script>
+function goHome() {
+  window.location.href = "index.html";
+}
+
+function goCategory() {
+  window.location.href = "index.html";
+}
+
+function goAccount() {
+  window.location.href = "login.html";
+}
+
+function goCart() {
+  window.location.href = "cart.html";
+}
+
+function goBack() {
+  window.history.back();
+}
+ </script>
+  
 </body>
 </html>
