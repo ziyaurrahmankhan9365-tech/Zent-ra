@@ -116,7 +116,61 @@ Forgot Password
   </div>
 
   </div>
-  
+<!-- 🔻 MY ACTIVITY -->
+<div style="background:white; margin-top:15px; border-radius:10px; padding:10px;">
+  <h3 style="margin-bottom:10px;">My Activity</h3>
+
+  <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;">
+    <span>📝 Reviews</span>
+    <span>></span>
+  </div>
+
+  <div style="display:flex; justify-content:space-between; padding:10px 0;">
+    <span>💬 Questions & Answers</span>
+    <span>></span>
+  </div>
+</div>
+
+<!-- 🔻 EARN WITH SHOPMART -->
+<div style="background:white; margin-top:15px; border-radius:10px; padding:10px;">
+  <h3 style="margin-bottom:10px;">Earn with ShopMart</h3>
+
+  <div style="display:flex; justify-content:space-between; padding:10px 0;">
+    <span>🏪 Sell on ShopMart</span>
+    <span>></span>
+  </div>
+</div>
+
+<!-- 🔻 FEEDBACK & INFO -->
+<div style="background:white; margin-top:15px; border-radius:10px; padding:10px;">
+  <h3 style="margin-bottom:10px;">Feedback & Information</h3>
+
+  <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;">
+    <span>📄 Terms, Policies and Licenses</span>
+    <span>></span>
+  </div>
+
+  <div style="display:flex; justify-content:space-between; padding:10px 0;">
+    <span>❓ Browse FAQs</span>
+    <span>></span>
+  </div>
+</div>
+
+<!-- 🔻 LOGOUT BUTTON -->
+<div style="background:white; margin-top:15px; border-radius:10px; padding:15px; text-align:center;">
+  <button onclick="logout()" style="
+    width:100%;
+    padding:12px;
+    border:none;
+    background:#2874f0;
+    color:white;
+    font-size:16px;
+    border-radius:8px;
+  ">
+    Log Out
+  </button>
+</div>
+    
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script>
@@ -206,6 +260,11 @@ function goAccount() {
 function goCart() {
   window.location.href = "cart.html";
 }
+function logout() {
+  localStorage.removeItem("userEmail");
+  alert("Logged out successfully ✅");
+  window.location.href = "login.html";
+} 
   </script>
 
     <!-- 🔻 BOTTOM NAV -->
