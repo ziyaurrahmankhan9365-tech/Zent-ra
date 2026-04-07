@@ -203,6 +203,9 @@ function login() {
   // ❌ login hide
   document.getElementById("loginBox").style.display = "none";
 
+      // account show
+document.getElementById("accountSection").style.display = "block";
+      
   // ✅ name set
   const name = email.split("@")[0].toUpperCase();
   document.getElementById("accountName").innerText = name;
@@ -226,7 +229,7 @@ function goBack() {
 
   if (user) {
     document.getElementById("loginBox").style.display = "none";
-    
+    document.getElementById("accountSection").style.display = "block";
 
     const name = user.split("@")[0].toUpperCase();
     document.getElementById("accountName").innerText = name;
