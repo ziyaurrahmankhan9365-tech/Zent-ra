@@ -336,7 +336,6 @@
   display: flex;
   justify-content: space-around;
   padding: 8px 0;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
   z-index: 9999;
 }
 
@@ -358,6 +357,9 @@
  body {
   padding-bottom: 70px;
  }
+  div::-webkit-scrollbar {
+  display: none;
+  }
     </style>
 </head>
 <body>
@@ -366,9 +368,9 @@
 <div style="
 background:#e3f2fd;
 padding:10px;
-margin-left:-10px;
-margin-right:-10px;
-width:calc(100% + 20px);
+position:relative;
+left:-16px;
+width:calc(100% + 32px);
 ">
 
   <!-- 🔷 TOP 3 BOX -->
@@ -471,7 +473,12 @@ background:white;
 border-bottom:1px solid #ddd;
 ">
 
-  <div style="text-align:center; min-width:70px;">
+<div style="text-align:center; min-width:70px;">
+  <img src="https://img.icons8.com/color/48/shop.png" style="height:30px;"><br>
+  <span style="font-size:12px; color:black;">For You</span>
+</div>
+    
+    <div style="text-align:center; min-width:70px;">
     <img src="https://img.icons8.com/color/48/t-shirt.png" style="height:30px;"><br>
     <span style="font-size:12px; color:black;">Fashion</span>
   </div>
@@ -496,10 +503,28 @@ border-bottom:1px solid #ddd;
     <span style="font-size:12px;">Home</span>
   </div>
 
-  <div style="text-align:center; min-width:70px;">
-    <img src="https://img.icons8.com/color/48/book.png" style="height:30px;"><br>
-    <span style="font-size:12px;">Books</span>
+<div style="text-align:center; min-width:70px;">
+  <img src="https://img.icons8.com/color/48/washing-machine.png" style="height:30px;"><br>
+  <span style="font-size:12px; color:black;">Appliances</span>
+</div>
+   
+ <div style="text-align:center; min-width:80px;">
+  <div style="display:flex; justify-content:center; gap:4px;">
+    <img src="https://img.icons8.com/color/48/toy.png" style="height:24px;">
+    <img src="https://img.icons8.com/color/48/baby.png" style="height:24px;">
   </div>
+  <span style="font-size:12px; color:black;">Toys, Baby</span>
+</div>
+    
+  <div style="text-align:center; min-width:70px;">
+  <img src="https://img.icons8.com/color/48/healthy-food.png" style="height:30px;"><br>
+  <span style="font-size:12px; color:black;">Food & Health</span>
+  </div>
+    
+    <div style="text-align:center; min-width:70px;">
+  <img src="https://img.icons8.com/color/48/book.png" style="height:30px;"><br>
+  <span style="font-size:12px; color:black;">Books & Media</span>
+</div>
 
 </div>
     <!-- Main Content -->
