@@ -390,6 +390,43 @@
 .cat-item.active .active-line {
   display: block;
 }
+  /* 🔥 SLIDER CSS */
+.slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-top: 10px;
+}
+
+.slides {
+  display: flex;
+  width: 900%; /* 9 images */
+  transition: 0.5s;
+}
+
+.slides img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* DOTS */
+.dots {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.dot {
+  height: 6px;
+  width: 6px;
+  margin: 3px;
+  display: inline-block;
+  background: #ccc;
+  border-radius: 50%;
+}
+
+.dot.active {
+  background: #2874f0;
+}
     </style>
 </head>
 <body>
@@ -564,7 +601,36 @@ background:white;
     </div>
         
 </div>
-     </header> 
+ <!-- 🔥 BANNER SLIDER -->
+<div class="slider">
+
+  <div class="slides">
+    <img src="ad1.png">
+    <img src="ad2.png">
+    <img src="ad3.png">
+    <img src="ad4.png">
+    <img src="ad5.png">
+    <img src="ad6.png">
+    <img src="ad7.png">
+    <img src="ad8.png">
+    <img src="ad9.png">
+  </div>
+
+  <!-- DOTS -->
+  <div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+
+</div> 
+    </header> 
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
@@ -1125,6 +1191,24 @@ if (navigator.geolocation) {
 
     });
   });
+</script>
+<script>
+let index = 0;
+const slides = document.querySelector(".slides");
+const dots = document.querySelectorAll(".dot");
+const total = 9; // 🔥 total images
+
+function showSlide() {
+  index++;
+  if (index >= total) index = 0;
+
+  slides.style.transform = `translateX(-${index * (100 / total)}%)`;
+
+  dots.forEach(dot => dot.classList.remove("active"));
+  dots[index].classList.add("active");
+}
+
+setInterval(showSlide, 500); // 0.5 sec
 </script>
 </body>
 </html>
