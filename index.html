@@ -360,6 +360,36 @@
   div::-webkit-scrollbar {
   display: none;
   }
+  .cat-item {
+  text-align: center;
+  min-width: 70px;
+  cursor: pointer;
+}
+
+.cat-icon {
+  height: 30px;
+  padding: 5px;
+  border-radius: 8px;
+  background: transparent;
+  transition: 0.3s;
+}
+
+.active-line {
+  height: 3px;
+  background: #2874f0;
+  margin-top: 5px;
+  border-radius: 10px;
+  display: none;
+}
+
+/* ACTIVE */
+.cat-item.active .cat-icon {
+  background: #e3f2fd;
+}
+
+.cat-item.active .active-line {
+  display: block;
+}
     </style>
 </head>
 <body>
@@ -470,57 +500,67 @@ padding:10px;
 background:white;
 ">
 
-<div style="text-align:center; min-width:70px;">
-  <img src="https://img.icons8.com/color/48/shop.png" style="height:30px;"><br>
+<div class="cat-item active">
+  <img src="https://img.icons8.com/color/48/shop.png" class="cat-icon"><br>
   <span style="font-size:12px; color:black;">For You</span>
+<div class="active-line"></div>
 </div>
     
-    <div style="text-align:center; min-width:70px;">
-    <img src="https://img.icons8.com/color/48/t-shirt.png" style="height:30px;"><br>
+    <div class="cat-item">
+    <img src="https://img.icons8.com/color/48/t-shirt.png" class="cat-icon"><br>
     <span style="font-size:12px; color:black;">Fashion</span>
-  </div>
+ <div class="active-line"></div>
+    </div>
 
-  <div style="text-align:center; min-width:70px;">
-    <img src="https://img.icons8.com/color/48/smartphone.png" style="height:30px;"><br>
+  <div class="cat-item">
+    <img src="https://img.icons8.com/color/48/smartphone.png" class="cat-icon"><br>
     <span style="font-size:12px;">Mobiles</span>
+ <div class="active-line"></div> 
   </div>
 
-  <div style="text-align:center; min-width:70px;">
-    <img src="https://img.icons8.com/color/48/lipstick.png" style="height:30px;"><br>
+  <div class="cat-item">
+    <img src="https://img.icons8.com/color/48/lipstick.png" class="cat-icon"><br>
     <span style="font-size:12px;">Beauty</span>
+ <div class="active-line"></div>
   </div>
 
-  <div style="text-align:center; min-width:70px;">
-    <img src="https://img.icons8.com/color/48/laptop.png" style="height:30px;"><br>
+  <div class="cat-item">
+    <img src="https://img.icons8.com/color/48/laptop.png" class="cat-icon"><br>
     <span style="font-size:12px;">Electronics</span>
+<div class="active-line"></div>
   </div>
 
-  <div style="text-align:center; min-width:70px;">
-    <img src="https://img.icons8.com/color/48/sofa.png" style="height:30px;"><br>
+  <div class="cat-item">
+    <img src="https://img.icons8.com/color/48/sofa.png" class="cat-icon"><br>
     <span style="font-size:12px;">Home</span>
+ <div class="active-line"></div>
   </div>
 
-<div style="text-align:center; min-width:70px;">
-  <img src="https://img.icons8.com/color/48/washing-machine.png" style="height:30px;"><br>
+<div class="cat-item">
+  <img src="https://img.icons8.com/color/48/washing-machine.png" class="cat-icon"><br>
   <span style="font-size:12px; color:black;">Appliances</span>
+<div class="active-line"></div>
 </div>
    
- <div style="text-align:center; min-width:80px;">
+ <div class="cat-item">
   <div style="display:flex; justify-content:center; gap:4px;">
-    <img src="https://img.icons8.com/color/48/toy.png" style="height:24px;">
-    <img src="https://img.icons8.com/color/48/baby.png" style="height:24px;">
+    <img src="https://img.icons8.com/color/48/toy.png" class="cat-icon">
+    <img src="https://img.icons8.com/color/48/baby.png" class="cat-icon">
   </div>
   <span style="font-size:12px; color:black;">Toys, Baby</span>
-</div>
+<div class="active-line"></div>
+ </div>
     
-  <div style="text-align:center; min-width:70px;">
-  <img src="https://img.icons8.com/color/48/healthy-food.png" style="height:30px;"><br>
+  <div class="cat-item">
+  <img src="https://img.icons8.com/color/48/healthy-food.png" class="cat-icon"><br>
   <span style="font-size:12px; color:black;">Food & Health</span>
+<div class="active-line"></div>
   </div>
     
-    <div style="text-align:center; min-width:70px;">
-  <img src="https://img.icons8.com/color/48/book.png" style="height:30px;"><br>
+    <div class="cat-item">
+  <img src="https://img.icons8.com/color/48/book.png" class="cat-icon"><br>
   <span style="font-size:12px; color:black;">Books & Media</span>
+    <div class="active-line"></div>
     </div>
         
 </div>
@@ -1074,5 +1114,17 @@ if (navigator.geolocation) {
   </div>
 
 </div>
+<script>
+  const items = document.querySelectorAll(".cat-item");
+
+  items.forEach(item => {
+    item.addEventListener("click", () => {
+
+      items.forEach(i => i.classList.remove("active"));
+      item.classList.add("active");
+
+    });
+  });
+</script>
 </body>
 </html>
