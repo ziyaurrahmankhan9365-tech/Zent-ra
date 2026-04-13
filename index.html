@@ -416,21 +416,21 @@
 /* 🔥 DOTS = FLIPKART STYLE */
 .dots {
   text-align: center;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
 .dot {
-  width: 20px;
-  height: 4px;
-  background: #ddd;
+  width: 18px;
+  height: 3px;
+  background: #e0e0e0;
   display: inline-block;
-  margin: 3px;
+  margin: 2px;
   border-radius: 10px;
   overflow: hidden;
   position: relative;
 }
 
-/* moving progress */
+/* moving blue line */
 .dot span {
   display: block;
   height: 100%;
@@ -438,6 +438,7 @@
   background: #2874f0;
 }
 
+/* active animation */
 .dot.active span {
   animation: fill 3s linear forwards;
 }
@@ -446,6 +447,9 @@
   from { width: 0%; }
   to { width: 100%; }
 }
+ .category-bar {
+  border-bottom: 1px solid #e0e0e0;
+ } 
     </style>
 </head>
 <body>
@@ -548,7 +552,7 @@ onblur="this.style.boxShadow='none'"
 
 </div>   
 
-        <div style="
+        <div class="category-bar" style="
 display:flex;
 overflow-x:auto;
 gap:15px;
