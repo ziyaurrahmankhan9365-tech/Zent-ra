@@ -392,88 +392,83 @@
   display: block;
 }
   /* 🔥 SLIDER CSS */
-.slider {
-  width: 100%;
-  aspect-ratio: 2 / 1;
-  overflow: hidden;
-  position: relative;
-  margin-top: 120px;
-  border-radius: 12px;
-}
-.dots {
-  position: relative;
-  margin-top: 10px;
-  text-align: center;
-  z-index: 10;
-}
-.slides {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  transition: 0.6s ease;
+/* Aspect Ratio & Container Setup */
+.banner-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px; /* Max desktop width based on your 1000x501 preference */
+    margin: 0 auto;
+    padding-bottom: 25px; /* Spaces out the dots below the banner */
 }
 
-.slides img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 12px;
-flex-shrink: 0;
+/* The structural aspect ratio trick (1000x501 ~ 50.1% height-to-width ratio) */
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 4px; /* Subtle Flipkart-style rounding */
+    aspect-ratio: 1000 / 501; /* Modern CSS approach for responsiveness */
 }
 
-/* 🔥 DOTS = FLIPKART STYLE */
+/* The Track holding all 9 images horizontally */
+.slider-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out; /* Smooth sliding transition */
+}
+
+/* Image scaling & behavior */
+.slider-track img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Prevents stretching on mobile screens */
+    flex-shrink: 0;    /* CRITICAL: Stops images from squeezing to fit a single viewport */
+}
+
+/* Flipkart-style Bottom Dots */
+.slider-dots {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
 
 .dot {
-  width: 22px;
-  height: 4px;
-  background: #d0d0d0; /* 🔥 visible grey */
-  display: inline-block;
-  margin: 4px;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 3s ease;
 }
 
-/* moving blue line */
-.dot span {
-  display: block;
-  height: 100%;
-  width: 0%;
-  background: #2874f0;
+/* Flipkart active dot styling (slightly wider/elongated or solid white) */
+.dot.active {
+    background-color: #ffffff;
+    width: 18px; /* Elongated active dot effect */
+    border-radius: 4px;
 }
 
-/* active animation */
-.dot.active span {
-  animation: fill 3s linear forwards;
+/* Mobile Responsiveness Check */
+@media (max-width: 768px) {
+    .banner-container {
+        max-width: 100%;
+        padding-bottom: 15px;
+    }
+    .dot {
+        width: 6px;
+        height: 6px;
+    }
+    .dot.active {
+        width: 12px;
+    }
 }
 
-@keyframes fill {
-  from { width: 0%; }
-  to { width: 100%; }
-}
- .category-bar {
-  border-bottom: 1px solid #e0e0e0;
- } 
-header {
-  padding-bottom: 10px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-}
-        /* 🔥 DOT POSITION FIX */
-.slider {
-  position: relative;
-margin-top: 10px;
-}
-
-.dots {
-  text-align: center;
-  margin-top: 10px;
-  display: block;
-  visibility: visible;
-  opacity: 1;
-}
+  
     </style>
 </head>
 <body>
@@ -650,32 +645,26 @@ background:white;
 </div>
     </header> 
  <!-- 🔥 BANNER SLIDER -->
-<div class="slider">
+    <div class="banner-container">
+    
+    <div class="slider-wrapper">
+        <div class="slider-track" id="sliderTrack">
+            <img src="ad1.png" alt="Banner 1">
+            <img src="ad2.png" alt="Banner 2">
+            <img src="ad3.png" alt="Banner 3">
+            <img src="ad4.png" alt="Banner 4">
+            <img src="ad5.png" alt="Banner 5">
+            <img src="ad6.png" alt="Banner 6">
+            <img src="ad7.png" alt="Banner 7">
+            <img src="ad8.png" alt="Banner 8">
+            <img src="ad9.png" alt="Banner 9">
+        </div>
+    </div>
 
-  <div class="slides">
-    <img src="ad1.png">
-    <img src="ad2.png">
-    <img src="ad3.png">
-    <img src="ad4.png">
-    <img src="ad5.png">
-    <img src="ad6.png">
-    <img src="ad7.png">
-    <img src="ad8.png">
-    <img src="ad9.png">
-  </div>
-</div>
-  <!-- DOTS -->
-  <div class="dots">
-  <div class="dot active"><span></span></div>
-  <div class="dot"><span></span></div>
-  <div class="dot"><span></span></div>
-  <div class="dot"><span></span></div>
-  <div class="dot"><span></span></div>
-  <div class="dot"><span></span></div>
-  <div class="dot"><span></span></div>
-  <div class="dot"><span></span></div>
-  <div class="dot"><span></span></div>
-  </div>
+    <div class="slider-dots" id="sliderDots">
+    </div>
+
+    </div>
 
     <!-- Main Content -->
     <main>
@@ -1239,36 +1228,67 @@ if (navigator.geolocation) {
   });
 </script>
 <script>
-let index = 0;
-const slides = document.querySelector(".slides");
-const dots = document.querySelectorAll(".dot");
-const total = dots.length;
+document.addEventListener("DOMContentLoaded", () => {
+    const track = document.getElementById("sliderTrack");
+    const dotsContainer = document.getElementById("sliderDots");
+    const slides = track.getElementsByTagName("img");
+    const totalSlides = slides.length;
+    let currentIndex = 0;
+    let slideInterval;
 
-function showSlide() {
-  index++;
+    function createDots() {
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement("div");
+            dot.classList.add("dot");
 
-  if (index >= total) index = 0;
+            if (i === 0) dot.classList.add("active");
 
-  slides.style.transform = `translateX(-${index * 100}%)`;
+            dot.addEventListener("click", () => {
+                goToSlide(i);
+                resetTimer();
+            });
 
-  dots.forEach(dot => {
-    dot.classList.remove("active");
-    dot.querySelector("span").style.width = "0%";
-  });
+            dotsContainer.appendChild(dot);
+        }
+    }
 
-  dots[index].classList.add("active");
+    function goToSlide(index) {
+        currentIndex = index;
 
-  let span = dots[index].querySelector("span");
-  span.style.animation = "none";
-  span.offsetHeight;
-  span.style.animation = "fill 3s linear forwards";
-}
-setInterval(showSlide, 3000);
+        if (currentIndex >= totalSlides) currentIndex = 0;
+        if (currentIndex < 0) currentIndex = totalSlides - 1;
 
-dots[0].classList.add("active");
+        track.style.transform =
+        `translateX(-${currentIndex * 100}%)`;
 
-dots[0].querySelector("span").style.animation =
-"fill 3s linear forwards";
+        const dots =
+        dotsContainer.getElementsByClassName("dot");
+
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].classList.remove("active");
+        }
+
+        if (dots[currentIndex]) {
+            dots[currentIndex].classList.add("active");
+        }
+    }
+
+    function startTimer() {
+        slideInterval = setInterval(() => {
+            goToSlide(currentIndex + 1);
+        }, 3500);
+    }
+
+    function resetTimer() {
+        clearInterval(slideInterval);
+        startTimer();
+    }
+
+    if (totalSlides > 0) {
+        createDots();
+        startTimer();
+    }
+});
 </script>
 </body>
 </html>
