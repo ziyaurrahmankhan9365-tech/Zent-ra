@@ -394,63 +394,55 @@
   /* 🔥 SLIDER CSS */
 /* Aspect Ratio & Container Setup */
 .banner-container {
-    position: relative;
     width: 100%;
-    max-width: 1000px; /* Max desktop width based on your 1000x501 preference */
+    max-width: 1000px;
     margin: 0 auto;
-    padding-bottom: 25px; /* Spaces out the dots below the banner */
+    padding-top: 10px;
 }
 
-/* The structural aspect ratio trick (1000x501 ~ 50.1% height-to-width ratio) */
 .slider-wrapper {
-    position: relative;
     width: 100%;
+    aspect-ratio: 1000 / 501;
     overflow: hidden;
-    border-radius: 4px; /* Subtle Flipkart-style rounding */
-    aspect-ratio: 1000 / 501; /* Modern CSS approach for responsiveness */
+    position: relative;
+    border-radius: 12px;
+    background: #f1f3f6;
 }
 
-/* The Track holding all 9 images horizontally */
 .slider-track {
     display: flex;
     width: 100%;
     height: 100%;
-    transition: transform 0.5s ease-in-out; /* Smooth sliding transition */
+    transition: transform 0.5s ease-in-out;
 }
 
-/* Image scaling & behavior */
 .slider-track img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Prevents stretching on mobile screens */
-    flex-shrink: 0;    /* CRITICAL: Stops images from squeezing to fit a single viewport */
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
 }
 
-/* Flipkart-style Bottom Dots */
 .slider-dots {
-    position: absolute;
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
-    gap: 8px;
-    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
 }
 
 .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-    transition: all 3s ease;
+    width: 18px;
+    height: 4px;
+    border-radius: 10px;
+    background: #d0d0d0;
+    transition: all 0.3s ease;
 }
 
-/* Flipkart active dot styling (slightly wider/elongated or solid white) */
 .dot.active {
-    background-color: #ffffff;
-    width: 18px; /* Elongated active dot effect */
-    border-radius: 4px;
+    background: #2874f0;
+    width: 30px;
 }
 
 /* Mobile Responsiveness Check */
