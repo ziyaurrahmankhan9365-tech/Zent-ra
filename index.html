@@ -922,6 +922,94 @@
     margin-top:6px;
     line-height:20px;
 } 
+   .more-products{
+    padding:16px;
+    background:#fff;
+}
+
+.more-products h2{
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:16px;
+    color:#212121;
+}
+
+.products-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.product-card{
+    position:relative;
+}
+
+.product-image{
+    background:#f5f5f5;
+    border-radius:12px;
+    overflow:hidden;
+    position:relative;
+}
+
+.product-image img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:contain;
+    display:block;
+}
+
+.rating-badge{
+    position:absolute;
+    left:8px;
+    bottom:8px;
+    background:#fff;
+    border-radius:8px;
+    padding:4px 8px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.product-title{
+    font-size:15px;
+    color:#212121;
+    margin-top:8px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.price-row{
+    margin-top:4px;
+}
+
+.old-price{
+    color:#878787;
+    text-decoration:line-through;
+    margin-right:5px;
+}
+
+.new-price{
+    font-size:18px;
+    font-weight:700;
+    color:#212121;
+}
+
+.offer-text{
+    color:#2874f0;
+    font-size:14px;
+    margin-top:4px;
+}
+
+.ad-tag{
+    position:absolute;
+    top:8px;
+    left:8px;
+    background:#9e9e9e;
+    color:white;
+    font-size:12px;
+    padding:4px 8px;
+    border-radius:8px;
+} 
     </style>
 </head>
 <body>
@@ -1707,9 +1795,15 @@ background:white;
 <!-- Products Section -->
 
         <!-- Products Section -->
-        <section class="products-grid" id="products">
-            <!-- Products will be populated by JavaScript -->
-        </section>
+<main>
+
+<section class="more-products">
+    <h2>More products for you</h2>
+
+    <div class="products-grid" id="products">
+    </div>
+</section>
+
     </main>
 
     <!-- Shopping Cart Modal -->
@@ -2324,6 +2418,261 @@ document.addEventListener("DOMContentLoaded", () => {
         startTimer();
     }
 });
+<script>
+
+const products = [
+{
+img:"samsung-book4-360.png",
+name:"Samsung Galaxy Book4 360",
+rating:"4.3",
+reviews:"22",
+oldPrice:"159839",
+price:"126999",
+offer:"₹1,21,989 Only for you!"
+},
+
+{
+img:"samsung-powerbank.png",
+name:"Samsung 10000 mAh Power Bank",
+rating:"4.3",
+reviews:"4,360",
+oldPrice:"3999",
+price:"2999",
+offer:"₹2,919 with UPI offer"
+},
+
+{
+img:"revive-liquid-stiffener.png",
+name:"Revive Liquid Stiffener",
+rating:"4.3",
+reviews:"486",
+oldPrice:"170",
+price:"119",
+offer:"₹59 with UPI offer + more"
+},
+
+{
+img:"denver-magnus-perfume.png",
+name:"Denver Magnus Perfume",
+rating:"4.3",
+reviews:"173",
+oldPrice:"399",
+price:"219",
+offer:"₹169 with UPI offer + more",
+ad:true
+},
+
+{
+img:"samsung-book5-360.png",
+name:"Samsung Galaxy Book5 360",
+rating:"4.5",
+reviews:"69",
+oldPrice:"137988",
+price:"107890",
+offer:"₹1,232 with UPI offer + more"
+},
+
+{
+img:"ajmal-zeal-perfume.png",
+name:"Ajmal Zeal Eau De Parfum",
+rating:"4.3",
+reviews:"5632",
+oldPrice:"2000",
+price:"1350",
+offer:"₹1,232 with UPI offer + more"
+},
+
+{
+img:"ujala-young-fresh-conditioner.png",
+name:"Ujala Young & Fresh",
+rating:"4.8",
+reviews:"4",
+oldPrice:"390",
+price:"180",
+offer:"₹130 with UPI offer + more"
+},
+
+{
+img:"samsung-book3-360.png",
+name:"Samsung Galaxy Book3 360",
+rating:"4.2",
+reviews:"17",
+oldPrice:"141439",
+price:"112999",
+offer:"₹1,07,989 Only for you!"
+},
+
+{
+img:"crompton-ceiling-fan.png",
+name:"Crompton Surebreeze Fan",
+rating:"4.2",
+reviews:"1230",
+oldPrice:"4999",
+price:"2197",
+offer:"₹2,147 with UPI offer"
+},
+
+{
+img:"kuhl-brown-remote-fan.png",
+name:"KUHL Prima A7 BLDC Fan",
+rating:"4.2",
+reviews:"1230",
+oldPrice:"6350",
+price:"2949",
+offer:"₹2,949 with UPI offer",
+ad:true
+},
+
+{
+img:"dennis-lingo-shirt.png",
+name:"Dennis Lingo Shirt",
+rating:"4.0",
+reviews:"5,28,594",
+oldPrice:"1849",
+price:"469",
+offer:"₹419 with UPI offer"
+},
+
+{
+img:"lux-radiant-bodywash.png",
+name:"Lux Radiant Orchid Body Wash",
+rating:"4.3",
+reviews:"486",
+oldPrice:"99",
+price:"87",
+offer:"₹37 with UPI offer"
+},
+
+{
+img:"samsung-25w-charger.png",
+name:"Samsung 25W Charger",
+rating:"4.5",
+reviews:"61,066",
+oldPrice:"1699",
+price:"999",
+offer:"₹949 with UPI offer"
+},
+
+{
+img:"kuhl-remote-fan.png",
+name:"KUHL Fest B2 Remote Fan",
+rating:"4.1",
+reviews:"20,014",
+oldPrice:"5000",
+price:"2399",
+offer:"₹2,349 with UPI offer",
+ad:true
+},
+
+{
+img:"denver-ascend-deo.png",
+name:"Denver Ascend Deo",
+rating:"4.3",
+reviews:"173",
+oldPrice:"399",
+price:"219",
+offer:"₹169 with UPI offer + more"
+},
+
+{
+img:"mcaffeine-caramel-bodywash.png",
+name:"mCaffeine Body Wash Combo",
+rating:"4.4",
+reviews:"57",
+oldPrice:"698",
+price:"419",
+offer:"₹369 with UPI offer"
+},
+
+{
+img:"emirates-zara-rollon-perfume.png",
+name:"Emirates Zara Floral Attar",
+rating:"4.3",
+reviews:"173",
+oldPrice:"295",
+price:"163",
+offer:"₹113 with UPI offer"
+},
+
+{
+img:"mcaffeine-shampoo-conditioner.png",
+name:"mCaffeine Shampoo & Conditioner",
+rating:"4.5",
+reviews:"29",
+oldPrice:"948",
+price:"711",
+offer:"₹661 with UPI offer"
+},
+
+{
+img:"divulge-backpack.png",
+name:"Divulge Backpack",
+rating:"4.1",
+reviews:"117",
+oldPrice:"499",
+price:"264",
+offer:"₹214 with UPI offer + more"
+},
+
+{
+img:"mcaffeine-guava-bodywash.png",
+name:"mCaffeine Guava Body Wash",
+rating:"4.5",
+reviews:"806",
+oldPrice:"898",
+price:"673",
+offer:"₹623 with UPI offer"
+},
+
+{
+img:"revive-red.png",
+name:"Revive Liquid Stiffener Red",
+rating:"4.3",
+reviews:"486",
+oldPrice:"170",
+price:"119",
+offer:"₹59 with UPI offer + more"
+},
+{
+img:"milton-water-bottle.png",
+name:"Milton Water Bottle",
+rating:"4.4",
+reviews:"2,366",
+oldPrice:"599",
+price:"449",
+offer:"₹399 with UPI offer"
+},
+
+const container = document.getElementById("productsGrid");
+
+products.forEach(product=>{
+
+container.innerHTML += `
+<div class="product-card">
+
+${product.ad ? `<div class="ad-tag">AD</div>` : ""}
+
+<div class="product-image">
+<img src="images/${product.img}" alt="">
+<div class="rating-badge">
+${product.rating} ⭐ (${product.reviews})
+</div>
+</div>
+
+<div class="product-title">${product.name}</div>
+
+<div class="price-row">
+<span class="old-price">₹${product.oldPrice}</span>
+<span class="new-price">₹${product.price}</span>
+</div>
+
+<div class="offer-text">${product.offer}</div>
+
+</div>
+`;
+
+});
+
 </script>
 </body>
 </html>
