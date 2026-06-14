@@ -1795,7 +1795,6 @@ background:white;
 <!-- Products Section -->
 
         <!-- Products Section -->
-<main>
 
 <section class="more-products">
     <h2>More products for you</h2>
@@ -2647,7 +2646,10 @@ offer:"₹399 with UPI offer"
 
 console.log("Script Running");
 const container = document.getElementById("productsGrid");
-console.log(container);
+if(!container){
+  alert("productsGrid not found");
+}
+    console.log(container);
 products.forEach(product=>{
 
 container.innerHTML += `
