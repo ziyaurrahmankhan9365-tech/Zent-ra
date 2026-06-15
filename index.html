@@ -471,7 +471,7 @@
     margin:15px;
 }
 
-.product-card{
+.scroll-card{
     min-width:120px;
     max-width:120px;
     background:white;
@@ -481,7 +481,7 @@
     flex-shrink:0;
 }
 
-.product-card img{
+.scroll-card img{
     width:100%;
     height:120px;
     object-fit:cover;
@@ -489,13 +489,13 @@
 }
 
 
-.product-card p{
+.scroll-card p{
     color:gray;
     font-size:14px;
     margin-top:8px;
 }
 
-.product-card h4{
+.scroll-card h4{
     font-size:20px;
     margin-top:4px;
 }
@@ -942,18 +942,23 @@
 
 .product-card{
     position:relative;
+    width:100%;
 }
 
 .product-image{
+    height:180px;
     background:#f5f5f5;
     border-radius:12px;
     overflow:hidden;
     position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .product-image img{
     width:100%;
-    aspect-ratio:1/1;
+    height:100%;
     object-fit:contain;
     display:block;
 }
@@ -1210,25 +1215,25 @@ background:white;
 
 <div class="product-scroll">
 
-    <div class="product-card">
+    <div class="scroll-card">
         <img src="charger.png">
         <p>Samsung</p>
         <h4>Chargers</h4>
     </div>
 
-    <div class="product-card">
+    <div class="scroll-card">
         <img src="perfume.png">
         <p>Wild Stone</p>
         <h4>Perfume</h4>
     </div>
 
-    <div class="product-card">
+    <div class="scroll-card">
         <img src="boat.png">
         <p>boAt</p>
         <h4>Airdopes</h4>
     </div>
 
-    <div class="product-card">
+    <div class="scroll-card">
         <img src="comfort.png">
         <p>Comfort</p>
         <h4>Fabric Care</h4>
@@ -2419,7 +2424,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
     <script>
-alert("SCRIPT START");
 const products = [
 {
 img:"samsung-book4-360.png",
@@ -2648,11 +2652,11 @@ offer:"₹399 with UPI offer"
 console.log("Script Running");
 const container = document.getElementById("productsGrid");
 if(!container){
-  alert("productsGrid not found");
+  // alert("productsGrid not found");
 }
     console.log(container);
-alert(products.length);
-    container.innerHTML = "<h1>TEST</h1>";
+// alert(products.length);
+    container.innerHTML = "";
     products.forEach(product=>{
 
 container.innerHTML += `
@@ -2680,9 +2684,6 @@ ${product.rating} ⭐ (${product.reviews})
 `;
 
 });
-</script>
- <script>
-alert("LAST SCRIPT WORKING");
 </script>
 </body>
 </html>
