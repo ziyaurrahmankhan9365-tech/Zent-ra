@@ -100,7 +100,7 @@ body{
 
 <p>
 <span class="price" id="productPrice"></span>
-<span class="old-price">₹159839</span>
+<span class="old-price" id="oldPrice"></span>
 </p>
 
 <p class="offer">
@@ -143,6 +143,9 @@ product.name;
 document.getElementById("productPrice").innerText =
 "₹" + product.price;
 
+document.getElementById("oldPrice").innerText =
+"₹" + product.oldPrice;
+    
 document.getElementById("productImage").src =
 "images/" + product.img;
 
