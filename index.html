@@ -2674,7 +2674,7 @@ if(!container){
     products.forEach(product=>{
 
 container.innerHTML += `
-<div class="product-card" onclick="openProductPage()">
+<div class="product-card" onclick="openProductPage(${JSON.stringify(product).replace(/"/g,'&quot;')})">
 
 ${product.ad ? `<div class="ad-tag">AD</div>` : ""}
 
@@ -2698,9 +2698,15 @@ ${product.rating} ⭐ (${product.reviews})
 `;
 
 });
-    function openProductPage() {
-  window.location.href = "product.html";
-        }
+    function openProductPage(product) {
+
+localStorage.setItem(
+"selectedProduct",
+JSON.stringify(product)
+);
+
+window.location.href = "product.html";
+    }
 </script>
 </body>
 </html>
