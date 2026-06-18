@@ -2674,7 +2674,7 @@ if(!container){
     products.forEach(product=>{
 
 container.innerHTML += `
-<div class="product-card">
+<div class="product-card" onclick="openProductPage()">
 
 ${product.ad ? `<div class="ad-tag">AD</div>` : ""}
 
@@ -2698,6 +2698,9 @@ ${product.rating} ⭐ (${product.reviews})
 `;
 
 });
+    function openProductPage() {
+  window.location.href = "product.html";
+        }
 </script>
 </body>
 </html>
