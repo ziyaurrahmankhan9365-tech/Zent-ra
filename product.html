@@ -112,14 +112,15 @@ body{
 <div class="section">
 <h3>Product Highlights</h3>
 
-<p>✔ Intel Evo Processor</p>
-<p>✔ Touch Screen Display</p>
-<p>✔ 16GB RAM</p>
-<p>✔ 512GB SSD</p>
-<p>✔ Windows 11</p>
+<div id="productHighlights"></div>
 
 </div>
 
+<div class="section">
+  <h3>Description</h3>
+  <p id="productDescription"></p>
+</div>
+    
 <div style="height:90px;"></div>
 
 <div class="bottom-bar">
@@ -152,6 +153,17 @@ document.getElementById("productImage").src =
 document.getElementById("productRating").innerText =
 product.rating + " ★";
 
+ document.getElementById("productDescription").innerText =
+product.description;
+
+let highlightsHTML = "";
+
+product.highlights.forEach(item => {
+  highlightsHTML += `<p>✔ ${item}</p>`;
+});
+
+document.getElementById("productHighlights").innerHTML =
+highlightsHTML;
 }
 </script>
 </body>
