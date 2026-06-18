@@ -92,16 +92,14 @@ body{
 
 <div class="product-container">
 
-<img src="https://images.samsung.com/is/image/samsung/p6pim/in/galaxy-book4/gallery/in-galaxy-book4-np750xgj-545471-np750xgj-545471-front-gray-thumb-539826245?$344_344_PNG$" class="product-image">
+<img id="productImage" src="" class="product-image">
 
-<div class="rating">4.3 ★</div>
+<div class="rating" id="productRating"></div>
 
-<div class="product-title">
-Samsung Galaxy Book4 360
-</div>
+<div class="product-title" id="productName"></div>
 
 <p>
-<span class="price">₹126999</span>
+<span class="price" id="productPrice"></span>
 <span class="old-price">₹159839</span>
 </p>
 
@@ -133,6 +131,25 @@ Add to Cart
 Buy Now
 </button>
 </div>
+<script>
+const product =
+JSON.parse(localStorage.getItem("selectedProduct"));
 
+if(product){
+
+document.getElementById("productName").innerText =
+product.name;
+
+document.getElementById("productPrice").innerText =
+"₹" + product.price;
+
+document.getElementById("productImage").src =
+"images/" + product.img;
+
+document.getElementById("productRating").innerText =
+product.rating + " ★";
+
+}
+</script>
 </body>
 </html>
