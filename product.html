@@ -96,6 +96,9 @@ body{
 
 <div class="rating" id="productRating"></div>
 
+<div class="rating" id="productRating"></div>
+<div id="productReviews"></div>
+    
 <div class="product-title" id="productName"></div>
 
 <p>
@@ -103,9 +106,7 @@ body{
 <span class="old-price" id="oldPrice"></span>
 </p>
 
-<p class="offer">
-₹1,21,989 Only for you!
-</p>
+<p class="offer" id="productOffer"></p>
 
 </div>
 
@@ -119,6 +120,11 @@ body{
 <div class="section">
   <h3>Description</h3>
   <p id="productDescription"></p>
+</div>
+
+<div class="section">
+  <h3>Similar Products</h3>
+  <div id="similarProducts"></div>
 </div>
     
 <div style="height:90px;"></div>
@@ -146,6 +152,9 @@ document.getElementById("productPrice").innerText =
 
 document.getElementById("oldPrice").innerText =
 "₹" + product.oldPrice;
+
+document.getElementById("productOffer").innerText =
+product.offer;
     
 document.getElementById("productImage").src =
 "images/" + product.img;
@@ -153,6 +162,9 @@ document.getElementById("productImage").src =
 document.getElementById("productRating").innerText =
 product.rating + " ★";
 
+document.getElementById("productReviews").innerText =
+product.reviews + " Reviews";
+    
  document.getElementById("productDescription").innerText =
 product.description;
 
