@@ -85,6 +85,27 @@ body{
     background:#ffcc00;
     font-weight:bold;
 }
+.slider{
+  position:relative;
+}
+
+#dots{
+  text-align:center;
+  margin:10px 0;
+}
+
+.dot{
+  height:8px;
+  width:8px;
+  margin:0 4px;
+  background:#ccc;
+  border-radius:50%;
+  display:inline-block;
+}
+
+.active-dot{
+  background:#2874f0;
+}
 </style>
 
 </head>
@@ -92,7 +113,11 @@ body{
 
 <div class="product-container">
 
-<img id="productImage" src="" class="product-image">
+<div class="slider">
+  <img id="productImage" src="" class="product-image">
+</div>
+
+<div id="dots"></div>
 
 <div class="rating" id="productRating"></div>
 
@@ -159,6 +184,44 @@ product.offer;
 document.getElementById("productImage").src =
 "images/" + product.img;
 
+if(product.images && product.images.length > 0){
+
+let currentImage = 0;
+
+document.getElementById("productImage").src =
+"images/" + product.images[0];
+
+let dotsHTML = "";
+
+product.images.forEach((img,index)=>{
+dotsHTML += `
+<span class="dot ${index===0 ? 'active-dot' : ''}"></span>
+`;
+});
+
+document.getElementById("dots").innerHTML = dotsHTML;
+
+setInterval(()=>{
+
+currentImage++;
+
+if(currentImage >= product.images.length){
+currentImage = 0;
+}
+
+document.getElementById("productImage").src =
+"images/" + product.images[currentImage];
+
+let dots = document.querySelectorAll(".dot");
+
+dots.forEach(dot=>dot.classList.remove("active-dot"));
+
+dots[currentImage].classList.add("active-dot");
+
+},3000);
+
+}
+    
 document.getElementById("productRating").innerText =
 product.rating + " ★";
 
