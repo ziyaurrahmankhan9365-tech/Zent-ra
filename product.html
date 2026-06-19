@@ -201,12 +201,36 @@ dotsHTML += `
 
 document.getElementById("dots").innerHTML = dotsHTML;
 
-setInterval(()=>{
+let startX = 0;
+
+const slider = document.querySelector(".slider");
+
+slider.addEventListener("touchstart",(e)=>{
+startX = e.touches[0].clientX;
+});
+
+slider.addEventListener("touchend",(e)=>{
+
+let endX = e.changedTouches[0].clientX;
+
+if(startX - endX > 50){
 
 currentImage++;
 
 if(currentImage >= product.images.length){
 currentImage = 0;
+}
+
+}
+
+else if(endX - startX > 50){
+
+currentImage--;
+
+if(currentImage < 0){
+currentImage = product.images.length - 1;
+}
+
 }
 
 document.getElementById("productImage").src =
@@ -218,7 +242,7 @@ dots.forEach(dot=>dot.classList.remove("active-dot"));
 
 dots[currentImage].classList.add("active-dot");
 
-},3000);
+});
 
 }
     
