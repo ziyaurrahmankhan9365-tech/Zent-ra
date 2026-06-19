@@ -130,6 +130,29 @@ body{
     color:#878787;
     font-size:18px;
 }
+.offer-box{
+    background:#f1f8ff;
+    border:1px solid #cce5ff;
+    border-radius:12px;
+    padding:15px;
+    margin-top:15px;
+}
+
+.offer-box h3{
+    margin:0 0 10px 0;
+    font-size:18px;
+    font-weight:600;
+}
+
+.offer-item{
+    padding:10px 0;
+    border-bottom:1px solid #e5e5e5;
+    font-size:14px;
+}
+
+.offer-item:last-child{
+    border-bottom:none;
+}
 </style>
 
 </head>
@@ -158,7 +181,11 @@ body{
 
 <p class="offer" id="productOffer"></p>
 
-
+<div class="offer-box">
+    <h3>Available Offers</h3>
+    <div id="offerList"></div>
+</div>
+    
 </div>
 
 <div class="section">
@@ -290,6 +317,21 @@ product.reviews + " Reviews";
     
  document.getElementById("productDescription").innerText =
 product.description;
+
+let offerHTML = "";
+
+if(product.offers){
+    product.offers.forEach(offer=>{
+        offerHTML += `
+        <div class="offer-item">
+            <span class="offer-tag">🏷 Offer</span>
+            ${offer}
+        </div>
+        `;
+    });
+
+    document.getElementById("offerList").innerHTML = offerHTML;
+}
 
 let highlightsHTML = "";
 
