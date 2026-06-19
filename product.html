@@ -106,6 +106,13 @@ body{
 .active-dot{
   background:#2874f0;
 }
+
+#discountPercent{
+    color:#2874f0;
+    font-weight:bold;
+    font-size:28px;
+    margin:10px 0;
+}
 </style>
 
 </head>
@@ -132,6 +139,7 @@ body{
 </p>
 
 <p class="offer" id="productOffer"></p>
+<div id="discountPercent"></div>
 
 </div>
 
@@ -180,7 +188,17 @@ document.getElementById("oldPrice").innerText =
 
 document.getElementById("productOffer").innerText =
 product.offer;
-    
+
+let oldPrice = parseInt(product.oldPrice);
+let price = parseInt(product.price);
+
+let discount = Math.round(
+((oldPrice - price) / oldPrice) * 100
+);
+
+document.getElementById("discountPercent").innerHTML =
+"⬇️ " + discount + "% OFF";
+
 document.getElementById("productImage").src =
 "images/" + product.img;
 
