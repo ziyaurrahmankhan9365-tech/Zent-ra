@@ -423,7 +423,9 @@ if(product.offers){
         margin-bottom:6px;
         ">
         Best value for you
-    <div style="
+   </div>
+${offer.includes("UPI") ? `
+<div style="
 color:#008c3a;
 font-size:13px;
 font-weight:600;
@@ -431,6 +433,24 @@ margin-top:4px;
 ">
 UPI Cashback
 </div>
+` : offer.includes("EMI") ? `
+<div style="
+color:#666;
+font-size:13px;
+margin-top:4px;
+">
+Pay Later Available
+</div>
+` : `
+<div style="
+color:#666;
+font-size:13px;
+margin-top:4px;
+">
+Bank Offer
+</div>
+`}
+    
         <div style="display:flex;align-items:center;gap:8px;">
 
 ${offer.includes("UPI")
