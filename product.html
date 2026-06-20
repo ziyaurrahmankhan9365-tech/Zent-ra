@@ -453,24 +453,40 @@ Bank Offer
 </div>
 `}
     
-        <div style="display:flex;align-items:center;gap:8px;">
+        <div style="display:flex;align-items:center;gap:10px;">
 
-${offer.includes("UPI")
- ? '<img src="images/upi.png" width="32">'
- : offer.includes("EMI")
- ? '<img src="images/emi.jpg" width="32">'
- : '<img src="images/hdfc.png" width="32">'}
+    <img src="${
+        offer.includes('UPI')
+        ? 'images/upi.png'
+        : offer.includes('EMI')
+        ? 'images/emi.jpg'
+        : 'images/hdfc.png'
+    }"
+    width="42">
 
-<div>
-    <b>${offer}</b>
-</div>
+    <div style="flex:1;">
+
+        <b style="
+        font-size:16px;
+        line-height:1.3;
+        ">
+        ${offer}
+        </b>
+
+    </div>
 
 </div>
     </div>
 
+    <div style="
+display:flex;
+justify-content:flex-end;
+margin-top:10px;
+">
     <div class="apply-btn">
         Apply
     </div>
+</div>
 
 </div>
 `;
