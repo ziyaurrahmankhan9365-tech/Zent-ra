@@ -428,15 +428,17 @@ margin-top:4px;
 ">
 UPI Cashback
 </div>
-        </div>
-
         <div style="display:flex;align-items:center;gap:8px;">
 
-    <span style="font-size:22px;">💳</span>
+${offer.includes("UPI")
+ ? '<img src="images/upi.png" width="45">'
+ : offer.includes("EMI")
+ ? '<img src="images/emi.jpg" width="45">'
+ : '<img src="images/hdfc.png" width="45">'}
 
-    <div>
-        <b>${offer}</b>
-    </div>
+<div>
+    <b>${offer}</b>
+</div>
 
 </div>
     </div>
