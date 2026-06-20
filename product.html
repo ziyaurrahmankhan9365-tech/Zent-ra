@@ -166,10 +166,13 @@ font-weight:700;
     background:white;
     border-radius:16px;
     padding:14px;
-    width:48%;
+    width:100%;
     box-sizing:border-box;
     border:1px solid #e5e5e5;
-    min-height:160px;
+    min-height:170px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
 }
 .offer-card{
     transition:0.2s;
@@ -180,9 +183,9 @@ font-weight:700;
 }
 
 .offer-grid{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
 .apply-btn{
@@ -431,10 +434,10 @@ UPI Cashback
         <div style="display:flex;align-items:center;gap:8px;">
 
 ${offer.includes("UPI")
- ? '<img src="images/upi.png" width="45">'
+ ? '<img src="images/upi.png" width="32">'
  : offer.includes("EMI")
- ? '<img src="images/emi.jpg" width="45">'
- : '<img src="images/hdfc.png" width="45">'}
+ ? '<img src="images/emi.jpg" width="32">'
+ : '<img src="images/hdfc.png" width="32">'}
 
 <div>
     <b>${offer}</b>
