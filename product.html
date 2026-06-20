@@ -131,27 +131,44 @@ body{
     font-size:18px;
 }
 .offer-box{
-    background:#f1f8ff;
-    border:1px solid #cce5ff;
-    border-radius:12px;
-    padding:15px;
     margin-top:15px;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid #b3d9ff;
+    background:#dff1ff;
 }
 
-.offer-box h3{
-    margin:0 0 10px 0;
-    font-size:18px;
-    font-weight:600;
+.offer-header{
+    background:#0d5eff;
+    color:white;
+    padding:14px;
+    font-size:22px;
+    font-weight:700;
 }
 
-.offer-item{
-    padding:10px 0;
-    border-bottom:1px solid #e5e5e5;
-    font-size:14px;
+.offer-content{
+    padding:15px;
 }
 
-.offer-item:last-child{
-    border-bottom:none;
+.offer-price{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.offer-card{
+    background:white;
+    border-radius:14px;
+    padding:12px;
+    margin-bottom:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.apply-btn{
+    color:#0d5eff;
+    font-weight:700;
 }
 </style>
 
@@ -182,8 +199,20 @@ body{
 <p class="offer" id="productOffer"></p>
 
 <div class="offer-box">
-    <h3>Available Offers</h3>
-    <div id="offerList"></div>
+
+    <div class="offer-header">
+        WOW DEAL! Apply offers for maximum savings
+    </div>
+
+    <div class="offer-content">
+
+        <div class="offer-price" id="offerPrice">
+        </div>
+
+        <div id="offerList"></div>
+
+    </div>
+
 </div>
     
 </div>
@@ -234,6 +263,9 @@ document.getElementById("oldPrice").innerText =
 document.getElementById("productOffer").innerText =
 product.offer;
 
+document.getElementById("offerPrice").innerText =
+product.offer;
+    
 let oldPrice = parseInt(product.oldPrice);
 let price = parseInt(product.price);
 
@@ -323,11 +355,19 @@ let offerHTML = "";
 if(product.offers){
     product.offers.forEach(offer=>{
         offerHTML += `
-        <div class="offer-item">
-            <span class="offer-tag">🏷 Offer</span>
-            ${offer}
-        </div>
-        `;
+        offerHTML += `
+<div class="offer-card">
+
+    <div>
+        <b>${offer}</b>
+    </div>
+
+    <div class="apply-btn">
+        Apply
+    </div>
+
+</div>
+`;
     });
 
     document.getElementById("offerList").innerHTML = offerHTML;
