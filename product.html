@@ -146,6 +146,12 @@ body{
     font-weight:700;
 }
 
+.offer-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+    
 .offer-content{
     padding:15px;
 }
@@ -164,11 +170,24 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
+    width:48%;
+    box-sizing:border-box;
 }
 
 .apply-btn{
     color:#0d5eff;
     font-weight:700;
+}
+.offer-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.apply-btn{
+    color:#0d5eff;
+    font-weight:700;
+    font-size:18px;
 }
 </style>
 
@@ -201,15 +220,25 @@ body{
 <div class="offer-box">
 
     <div class="offer-header">
-        WOW DEAL! Apply offers for maximum savings
+    <span>WOW DEAL! Apply offers for maximum savings</span>
+    <span style="font-size:24px;">⌃</span>
     </div>
 
     <div class="offer-content">
 
+        <h3 style="
+margin:0 0 12px 0;
+font-size:18px;
+font-weight:700;
+color:#444;
+">
+Bank Offers
+        </h3>
+
         <div class="offer-price" id="offerPrice">
         </div>
 
-        <div id="offerList"></div>
+        <div id="offerList" class="offer-grid"></div>
 
     </div>
 
@@ -358,7 +387,19 @@ if(product.offers){
 <div class="offer-card">
 
     <div>
-        <b>${offer}</b>
+        <div style="
+        background:#f4d77a;
+        display:inline-block;
+        padding:3px 8px;
+        border-radius:6px;
+        font-size:12px;
+        font-weight:700;
+        margin-bottom:6px;
+        ">
+        Best value for you
+        </div>
+
+        <div><b>${offer}</b></div>
     </div>
 
     <div class="apply-btn">
