@@ -476,6 +476,30 @@ Bank Offer
     </div>
 
 </div>
+  <div style="
+background:#f5f5f5;
+padding:8px 10px;
+margin-top:10px;
+border-radius:8px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:13px;
+font-weight:600;
+color:#333;
+">
+
+<span>
+${offer.includes('UPI')
+? 'UPI • Cashback'
+: offer.includes('EMI')
+? 'EMI • Pay Later'
+: 'Credit Card • Cashback'}
+</span>
+
+<span>›</span>
+
+</div>
     </div>
 
     <div style="
