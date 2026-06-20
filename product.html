@@ -81,9 +81,9 @@ body{
     width:50%;
     padding:18px;
     border:none;
-    font-size:18px;
-    background:#ffcc00;
-    font-weight:bold;
+    font-size:20px;
+background:#ffc400;
+font-weight:700;
 }
 .slider{
   position:relative;
@@ -171,7 +171,13 @@ body{
     border:1px solid #e5e5e5;
     min-height:160px;
 }
+.offer-card{
+    transition:0.2s;
+}
 
+.offer-card:active{
+    transform:scale(0.98);
+}
 
 .offer-grid{
     display:flex;
@@ -184,6 +190,9 @@ body{
     font-size:18px;
     font-weight:700;
     cursor:pointer;
+}
+#offerArrow{
+    transition:0.3s;
 }
 </style>
 
@@ -411,6 +420,14 @@ if(product.offers){
         margin-bottom:6px;
         ">
         Best value for you
+    <div style="
+color:#008c3a;
+font-size:13px;
+font-weight:600;
+margin-top:4px;
+">
+UPI Cashback
+</div>
         </div>
 
         <div style="display:flex;align-items:center;gap:8px;">
@@ -452,9 +469,11 @@ arrow.addEventListener("click", ()=>{
     if(content.style.display === "none"){
         content.style.display = "block";
         arrow.innerHTML = "⌃";
+       arrow.style.transform = "rotate(0deg)";
     }else{
         content.style.display = "none";
         arrow.innerHTML = "⌄";
+    arrow.style.transform = "rotate(180deg)";
     }
 
 });
