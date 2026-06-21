@@ -404,7 +404,7 @@ product.reviews + " Reviews";
  document.getElementById("productDescription").innerText =
 product.description;
 
-let offerHTML = "";
+offerHTML += `
 
 if(product.offers){
     product.offers.forEach(offer=>{
@@ -490,7 +490,7 @@ offerHTML += `
             : offer.includes('EMI')
             ? 'images/emi.jpg'
             : 'images/hdfc.png'
-        }" width="50">
+        }" width="30">
 
         <b style="
             font-size:13px;
