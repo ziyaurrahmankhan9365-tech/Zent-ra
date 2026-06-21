@@ -166,12 +166,10 @@ font-weight:700;
     background:white;
     border-radius:12px;
     border:1px solid #e5e5e5;
-    padding:10px;
-    min-height:110px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
+    padding:12px;
     box-shadow:0 1px 4px rgba(0,0,0,0.08);
+    width:100%;
+    box-sizing:border-box;
 }
 .offer-card{
     transition:0.2s;
@@ -183,8 +181,9 @@ font-weight:700;
 
 .offer-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(2,minmax(0,1fr));
     gap:12px;
+    align-items:start;
 }
 
 .apply-btn{
@@ -438,9 +437,9 @@ ${offer.includes("UPI")
 
 <div style="
 display:flex;
-align-items:center;
-justify-content:space-between;
-gap:8px;
+flex-direction:column;
+align-items:flex-start;
+gap:10px;
 margin-top:10px;">
 
 <div style="
@@ -466,7 +465,7 @@ ${offer}
 
 </div>
 
-<div class="apply-btn">
+<div class="apply-btn" style="align-self:flex-end;">
 Apply
 </div>
 
