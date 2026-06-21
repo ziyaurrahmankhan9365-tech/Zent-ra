@@ -42,7 +42,8 @@ margin-top:5px;
 
 const wishlist =
 JSON.parse(localStorage.getItem("wishlist")) || [];
-
+console.log(wishlist);
+  
 let html = "";
 
 wishlist.forEach(product=>{
@@ -50,7 +51,7 @@ wishlist.forEach(product=>{
 html += `
 <div class="wishlist-card">
 
-<img src="images/${product.images[0]}">
+<img src="images/${product.img}">
 
 <h3>${product.name}</h3>
 
