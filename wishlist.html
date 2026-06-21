@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Wishlist</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<style>
+body{
+font-family:Arial;
+background:#f1f3f6;
+padding:15px;
+}
+
+.wishlist-card{
+background:#fff;
+padding:15px;
+margin-bottom:10px;
+border-radius:10px;
+}
+
+.wishlist-card img{
+width:100px;
+height:100px;
+object-fit:contain;
+}
+
+.price{
+font-weight:bold;
+font-size:20px;
+margin-top:5px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>❤️ My Wishlist</h2>
+
+<div id="wishlistItems"></div>
+
+<script>
+
+const wishlist =
+JSON.parse(localStorage.getItem("wishlist")) || [];
+
+let html = "";
+
+wishlist.forEach(product=>{
+
+html += `
+<div class="wishlist-card">
+
+<img src="images/${product.images[0]}">
+
+<h3>${product.name}</h3>
+
+<div class="price">
+₹${product.price}
+</div>
+
+</div>
+`;
+
+});
+
+document.getElementById("wishlistItems").innerHTML =
+html || "<p>No items in wishlist</p>";
+
+</script>
+
+</body>
+</html>
