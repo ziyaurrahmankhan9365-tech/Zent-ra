@@ -302,9 +302,9 @@ Buy Now
 <script>
 const product =
 JSON.parse(localStorage.getItem("selectedProduct"));
-
+console.log(product);
 if(product){
-
+alert("Product Loaded");
 document.getElementById("productName").innerText =
 product.name;
 
