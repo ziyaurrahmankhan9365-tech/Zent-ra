@@ -163,12 +163,11 @@ font-weight:700;
 }
 
 .offer-card{
+    width:calc(50% - 6px);
     background:white;
     border-radius:12px;
     border:1px solid #e5e5e5;
-    padding:12px;
-    box-shadow:0 1px 4px rgba(0,0,0,0.08);
-    width:100%;
+    padding:10px;
     box-sizing:border-box;
 }
 .offer-card{
@@ -180,10 +179,9 @@ font-weight:700;
 }
 
 .offer-grid{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
+    display:flex;
+    flex-wrap:wrap;
     gap:12px;
-    align-items:start;
 }
 
 .apply-btn{
