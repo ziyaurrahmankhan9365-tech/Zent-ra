@@ -703,22 +703,39 @@ showWishlistToast(
 "Product is added to My Wishlist"
 );
     
- let wishlist =
+  let wishlist =
 JSON.parse(
 localStorage.getItem("wishlist")
 ) || [];
 
-wishlist.push(product);
+if(!wishlist.find(item => item.name === product.name)){
+
+    wishlist.push(product);
+
+}
 
 localStorage.setItem(
 "wishlist",
 JSON.stringify(wishlist)
-);   
+);
 }
 else{
 
 wishlistBtn.innerHTML="💔";
-showWishlistToast(
+let wishlist =
+JSON.parse(
+localStorage.getItem("wishlist")
+) || [];
+
+wishlist = wishlist.filter(
+item => item.name !== product.name
+);
+
+localStorage.setItem(
+"wishlist",
+JSON.stringify(wishlist)
+);
+    showWishlistToast(
 "Product removed from My Wishlist"
 );
     
