@@ -29,12 +29,75 @@ font-weight:bold;
 font-size:20px;
 margin-top:5px;
 }
+.wishlist-header{
+background:#2874f0;
+color:white;
+padding:18px;
+font-size:24px;
+font-weight:500;
+display:flex;
+gap:15px;
+align-items:center;
+}
+
+.tabs{
+display:flex;
+background:white;
+}
+
+.tab{
+flex:1;
+text-align:center;
+padding:16px;
+font-size:18px;
+}
+
+.active{
+color:#2874f0;
+border-bottom:3px solid #2874f0;
+}
+
+.collection-card{
+background:white;
+margin-top:15px;
+border-radius:8px;
+overflow:hidden;
+border:1px solid #ddd;
+}
+
+.preview-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:4px;
+padding:8px;
+}
+
+.preview-grid img{
+width:100%;
+height:80px;
+object-fit:contain;
+background:#f5f5f5;
+}
+
+  .collection-card{
+cursor:pointer;
+}
 </style>
 </head>
 
 <body>
 
-<h2>❤️ My Wishlist</h2>
+<div class="wishlist-header">
+  <span onclick="history.back()">←</span>
+  <span>Wishlist & Collections</span>
+</div>
+
+<div class="tabs">
+  <div class="tab active">My Collections</div>
+  <div class="tab">Collections I Follow</div>
+</div>
+
+<div id="collectionContainer"></div>
 
 <div id="wishlistItems"></div>
 
@@ -42,7 +105,34 @@ margin-top:5px;
 
 const wishlist =
 JSON.parse(localStorage.getItem("wishlist")) || [];
-console.log(wishlist);
+let previewImages = "";
+
+wishlist.slice(0,4).forEach(item=>{
+previewImages += `
+<img src="images/${item.images ? item.images[0] : item.img}">
+`;
+});
+
+document.getElementById("collectionContainer").innerHTML = `
+<div class="collection-card">
+
+<div class="preview-grid">
+${previewImages}
+</div>
+
+<div style="padding:15px;">
+<div style="font-size:30px;">
+My Wishlist
+</div>
+
+<div style="color:gray;margin-top:5px;">
+🔒 Private • ${wishlist.length} items
+</div>
+</div>
+
+</div>
+`;
+  console.log(wishlist);
   
 let html = "";
 
