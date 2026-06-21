@@ -391,9 +391,6 @@ dots.forEach(dot=>dot.classList.remove("active-dot"));
 
 dots[currentImage].classList.add("active-dot");
 
-});
-
-}
     
 document.getElementById("productRating").innerText =
 product.rating + " ★";
@@ -404,56 +401,77 @@ product.reviews + " Reviews";
  document.getElementById("productDescription").innerText =
 product.description;
 
-offerHTML += `
+let offerHTML = "";
 
 if(product.offers){
-    product.offers.forEach(offer=>{
-        offerHTML += `
+
+product.offers.forEach(offer => {
+
+offerHTML += `
 <div class="offer-card">
 
-    <div>
-        <div style="
-        background:#f4d77a;
-        display:inline-block;
-        padding:3px 8px;
-        border-radius:6px;
-        font-size:12px;
-        font-weight:700;
-        margin-bottom:6px;
-        ">
-        Best value for you
-   </div>
-${offer.includes("UPI") ? `
+<div>
+<div style="
+background:#f4d77a;
+display:inline-block;
+padding:3px 8px;
+border-radius:6px;
+font-size:12px;
+font-weight:700;
+margin-bottom:6px;">
+Best value for you
+</div>
+
 <div style="
 color:#008c3a;
 font-size:13px;
 font-weight:600;
-margin-top:4px;
-">
-UPI Cashback
+margin-top:4px;">
+${offer.includes("UPI")
+? "UPI Cashback"
+: offer.includes("EMI")
+? "Pay Later Available"
+: "Bank Offer"}
 </div>
-` : offer.includes("EMI") ? `
+</div>
+
 <div style="
-color:#008c3a;
-font-size:13px;
-font-weight:600;
-margin-top:4px;
-">
-Pay Later Available
-</div>
-` : `
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:8px;
+margin-top:10px;">
+
 <div style="
-color:#008c3a;
+display:flex;
+align-items:center;
+gap:8px;
+flex:1;">
+
+<img src="${
+offer.includes('UPI')
+? 'images/upi.png'
+: offer.includes('EMI')
+? 'images/emi.jpg'
+: 'images/hdfc.png'
+}" width="40">
+
+<b style="
 font-size:13px;
-font-weight:600;
-margin-top:4px;
-">
-Bank Offer
-</div>
-`}
+line-height:1.3;
+font-weight:600;">
+${offer}
+</b>
 
 </div>
-  <div style="
+
+<div class="apply-btn">
+Apply
+</div>
+
+</div>
+
+<div style="
 background:#f5f5f5;
 padding:6px 10px;
 margin-top:8px;
@@ -463,8 +481,7 @@ justify-content:space-between;
 align-items:center;
 font-size:12px;
 font-weight:600;
-color:#333;
-">
+color:#333;">
 
 <span>
 ${offer.includes('UPI')
@@ -477,40 +494,13 @@ ${offer.includes('UPI')
 <span>›</span>
 
 </div>
-    </div>
-    
-offerHTML += `
-<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;">
 
-    <div style="display:flex;align-items:center;gap:8px;flex:1;">
-
-        <img src="${
-            offer.includes('UPI')
-            ? 'images/upi.png'
-            : offer.includes('EMI')
-            ? 'images/emi.jpg'
-            : 'images/hdfc.png'
-        }" width="30">
-
-        <b style="
-            font-size:13px;
-            line-height:1.3;
-            font-weight:600;
-        ">
-            ${offer}
-        </b>
-
-    </div>
-
-    <div class="apply-btn">
-        Apply
-    </div>
-
-</div> 
+</div>
 `;
-    });
 
-    document.getElementById("offerList").innerHTML = offerHTML;
+});
+
+document.getElementById("offerList").innerHTML = offerHTML;
 }
 
 let highlightsHTML = "";
