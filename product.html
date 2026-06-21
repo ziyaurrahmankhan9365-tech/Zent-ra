@@ -196,6 +196,22 @@ font-weight:700;
 #offerArrow{
     transition:0.3s;
 }
+.applied-offer{
+    background:white;
+    border-radius:12px;
+    padding:12px;
+    margin-bottom:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 6px rgba(0,0,0,0.08);
+}
+
+.remove-btn{
+    color:#2874f0;
+    font-weight:700;
+    cursor:pointer;
+}
 </style>
 
 </head>
@@ -263,6 +279,8 @@ Bank Offers
         <div class="offer-price" id="offerPrice">
         </div>
 
+       <div id="appliedOfferBox" style="display:none;"></div>
+        
         <div id="offerList" class="offer-grid"></div>
 
     </div>
@@ -534,11 +552,56 @@ document.querySelectorAll(".apply-btn").forEach(btn => {
 
     btn.addEventListener("click", () => {
 
-        alert("Offer Applied Successfully 🎉");
+const offerText =
+btn.parentElement.querySelector("b").innerText;
 
-    });
+localStorage.setItem(
+"appliedOffer",
+offerText
+);
+
+showAppliedOffer();
 
 });
+
+});
+function showAppliedOffer(){
+
+const offer =
+localStorage.getItem("appliedOffer");
+
+if(!offer) return;
+
+document.getElementById("appliedOfferBox").style.display = "block";
+
+document.getElementById("appliedOfferBox").innerHTML = `
+
+<div class="applied-offer">
+
+<div>
+✅ ${offer}
+</div>
+
+<div class="remove-btn"
+onclick="removeOffer()">
+Remove
+</div>
+
+</div>
+
+`;
+
+}
+    function removeOffer(){
+
+localStorage.removeItem("appliedOffer");
+
+document.getElementById(
+"appliedOfferBox"
+).style.display = "none";
+
+    }
+    showAppliedOffer();
 </script>
 </body>
 </html>
