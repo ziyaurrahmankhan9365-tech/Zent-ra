@@ -245,6 +245,32 @@ font-weight:700;
     color:#878787;
     font-weight:500;
 }
+.product-actions{
+    position:absolute;
+    top:20px;
+    right:12px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.action-btn{
+    width:44px;
+    height:44px;
+    background:#fff;
+    border:none;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+}
+
+.action-btn svg{
+    width:24px;
+    height:24px;
+}
 </style>
 
 </head>
@@ -256,6 +282,32 @@ font-weight:700;
 
     <div class="slider">
         <img id="productImage" src="" class="product-image">
+
+        <div class="product-actions">
+
+<button id="wishlistBtn" class="action-btn">
+🤍
+</button>
+
+<button id="shareBtn" class="action-btn">
+
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+<path d="M21 3L10 14"
+stroke="#000"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+
+<path d="M21 3L14 21L10 14L3 10L21 3Z"
+stroke="#000"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+</svg>
+
+</button>
+
+</div>
     </div>
 
     <div class="rating-badge">
@@ -639,6 +691,38 @@ document.getElementById(
 ).style.display = "none";
 
     }
+ const wishlistBtn =
+document.getElementById("wishlistBtn");
+
+wishlistBtn.addEventListener("click",()=>{
+
+if(wishlistBtn.innerHTML==="🤍"){
+
+wishlistBtn.innerHTML="❤️";
+
+ let wishlist =
+JSON.parse(
+localStorage.getItem("wishlist")
+) || [];
+
+wishlist.push(product);
+
+localStorage.setItem(
+"wishlist",
+JSON.stringify(wishlist)
+);   
+}
+else{
+
+wishlistBtn.innerHTML="💔";
+
+setTimeout(()=>{
+wishlistBtn.innerHTML="🤍";
+},2000);
+
+}
+
+});
     showAppliedOffer();
 </script>
 </body>
