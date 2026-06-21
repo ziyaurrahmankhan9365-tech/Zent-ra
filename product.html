@@ -699,7 +699,10 @@ wishlistBtn.addEventListener("click",()=>{
 if(wishlistBtn.innerHTML==="🤍"){
 
 wishlistBtn.innerHTML="❤️";
-
+showWishlistToast(
+"Product is added to My Wishlist"
+);
+    
  let wishlist =
 JSON.parse(
 localStorage.getItem("wishlist")
@@ -715,7 +718,10 @@ JSON.stringify(wishlist)
 else{
 
 wishlistBtn.innerHTML="💔";
-
+showWishlistToast(
+"Product removed from My Wishlist"
+);
+    
 setTimeout(()=>{
 wishlistBtn.innerHTML="🤍";
 },2000);
@@ -723,7 +729,45 @@ wishlistBtn.innerHTML="🤍";
 }
 
 });
+   function showWishlistToast(message){
+
+const toast =
+document.getElementById("wishlistToast");
+
+document.getElementById("toastText")
+.innerText = message;
+
+toast.style.display = "flex";
+
+setTimeout(()=>{
+toast.style.display = "none";
+},5000);
+
+   }
     showAppliedOffer();
 </script>
+<div id="wishlistToast" style="
+position:fixed;
+bottom:80px;
+left:15px;
+right:15px;
+background:#212121;
+color:white;
+padding:16px;
+border-radius:8px;
+display:none;
+justify-content:space-between;
+align-items:center;
+z-index:9999;
+">
+
+<span id="toastText"></span>
+
+<span id="toastAction"
+style="color:#ffb300;font-weight:bold;">
+CHANGE
+</span>
+
+</div>
 </body>
 </html>
