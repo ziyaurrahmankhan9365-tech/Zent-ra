@@ -85,6 +85,67 @@ background:#f5f5f5;
   .collection-card{
 cursor:pointer;
 }
+#createCollectionBtn{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:56px;
+background:white;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:22px;
+color:#2874f0;
+border-top:1px solid #ddd;
+}
+
+#collectionPopup{
+position:fixed;
+left:0;
+right:0;
+bottom:-100%;
+background:white;
+transition:.3s;
+z-index:999;
+border-radius:16px 16px 0 0;
+}
+
+.popup-header{
+padding:20px;
+font-size:24px;
+display:flex;
+gap:20px;
+border-bottom:1px solid #eee;
+}
+
+.popup-body{
+padding:20px;
+}
+
+.collection-input{
+width:100%;
+padding:15px;
+font-size:18px;
+border:1px solid #ddd;
+border-radius:8px;
+}
+
+.radio-row{
+display:block;
+padding:15px 0;
+font-size:20px;
+}
+
+.create-btn{
+width:100%;
+height:50px;
+background:#2874f0;
+color:white;
+border:none;
+font-size:18px;
+border-radius:8px;
+}
 </style>
 </head>
 
@@ -141,8 +202,64 @@ My Wishlist
 </div>
 `;
   console.log(wishlist);  
+document
+.getElementById("createCollectionBtn")
+.onclick=()=>{
+document
+.getElementById("collectionPopup")
+.style.bottom="0";
+};
 
+function closePopup(){
+document
+.getElementById("collectionPopup")
+.style.bottom="-100%";
+}
+  
 </script>
 
+  <div id="createCollectionBtn">
+    + Create a new collection
+</div>
+
+<div id="collectionPopup">
+
+<div class="popup-header">
+<span onclick="closePopup()">✕</span>
+<span>Create a new collection</span>
+</div>
+
+<div class="popup-body">
+
+<input
+type="text"
+placeholder="Collection name*"
+class="collection-input">
+
+<p style="color:gray;">*Required</p>
+
+<h3>Share settings</h3>
+
+<label class="radio-row">
+<input type="radio" name="share" checked>
+Private
+</label>
+
+<label class="radio-row">
+<input type="radio" name="share">
+Shared
+</label>
+
+<label class="radio-row">
+<input type="radio" name="share">
+Public
+</label>
+
+<button class="create-btn">
+Create collection
+</button>
+
+</div>
+</div>
 </body>
 </html>
