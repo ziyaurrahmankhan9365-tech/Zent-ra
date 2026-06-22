@@ -159,6 +159,17 @@ position:sticky;
 bottom:0;
 border-radius:0;
 }
+
+.create-btn:disabled{
+background:#d6d6d6;
+color:white;
+cursor:not-allowed;
+}
+
+.create-btn.active{
+background:#2874f0;
+color:white;
+}
   
 .suggestions{
 display:flex;
@@ -336,7 +347,7 @@ class="collection-input">
 
 </label>
 
-<button id="createBtn" class="create-btn">
+<button id="createBtn" class="create-btn" disabled>
 Create collection
 </button>
 
@@ -368,6 +379,46 @@ document.querySelector(".collection-input").value=
 this.innerText;
 
 };
+
+  const inputBox =
+document.querySelector(".collection-input");
+
+const createBtn =
+document.getElementById("createBtn");
+
+function checkInput(){
+
+if(inputBox.value.trim()!==""){
+
+createBtn.disabled=false;
+createBtn.classList.add("active");
+
+}else{
+
+createBtn.disabled=true;
+createBtn.classList.remove("active");
+
+}
+
+}
+
+inputBox.addEventListener(
+"input",
+checkInput
+);
+
+document.querySelectorAll(".chip")
+.forEach(chip=>{
+
+chip.addEventListener(
+"click",
+function(){
+
+inputBox.value=this.innerText;
+
+checkInput();
+
+});
 
 });
 
