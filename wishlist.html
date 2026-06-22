@@ -507,17 +507,26 @@ checkInput();
 document.getElementById("myTab").onclick=function(){
 
 document.getElementById("collectionContainer").style.display="block";
+document.getElementById("wishlistItems").style.display="block";
 document.getElementById("followCollections").style.display="none";
+document.getElementById("createCollectionBtn").style.display="block";
+  
+document.getElementById("myTab").classList.add("active");
+document.getElementById("followTab").classList.remove("active");
 
 };
 
-document.getElementById("followTab").onclick=function(){
+ document.getElementById("followTab").onclick=function(){
 
 document.getElementById("collectionContainer").style.display="none";
+document.getElementById("wishlistItems").style.display="none";
 document.getElementById("followCollections").style.display="block";
+document.getElementById("createCollectionBtn").style.display="none";
+  
+document.getElementById("followTab").classList.add("active");
+document.getElementById("myTab").classList.remove("active");
 
 };
-
   </script>
   
 </body>
