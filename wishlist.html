@@ -120,15 +120,12 @@ border-bottom:1px solid #eee;
 }
 
 .popup-body{
-padding:20px;
+padding:24px;
 }
 
 .collection-input{
-width:100%;
-padding:15px;
-font-size:18px;
-border:1px solid #ddd;
-border-radius:8px;
+height:58px;
+box-sizing:border-box;
 }
 
 .radio-row{
@@ -147,11 +144,14 @@ font-size:14px;
 
 .create-btn{
 width:100%;
-height:55px;
+height:52px;
 background:#d6d6d6;
 color:white;
 border:none;
 font-size:18px;
+font-weight:500;
+position:sticky;
+bottom:0;
 border-radius:0;
 }
   
@@ -175,12 +175,26 @@ cursor:pointer;
 .chip:hover{
 background:#f5f5f5;
 }
+
+  #overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.45);
+display:none;
+z-index:998;
+  }
+  
 </style>
 </head>
 
 <body>
 
-<div class="wishlist-header">
+  <div id="overlay"></div>
+
+  <div class="wishlist-header">
   <span onclick="history.back()"
 style="font-size:28px;margin-right:20px;">
 ←
@@ -239,6 +253,7 @@ document
 document
 .getElementById("collectionPopup")
 .style.bottom="0";
+document.getElementById("overlay").style.display="block";
 };
 
 };
@@ -247,6 +262,7 @@ function closePopup(){
 document
 .getElementById("collectionPopup")
 .style.bottom="-100%";
+document.getElementById("overlay").style.display="none";
 }
   
 </script>
@@ -282,19 +298,17 @@ class="collection-input">
 <label class="radio-row">
 
 <div>
-<b>Private</b>
+🔒 <b>Private</b>
 <br>
 <small>Only you can view</small>
 </div>
-
-<input type="radio" name="share" checked>
 
 </label>
 
 <label class="radio-row">
 
 <div>
-<b>Shared</b>
+👥 <b>Shared</b>
 <br>
 <small>Only people with link can view</small>
 </div>
@@ -306,7 +320,7 @@ class="collection-input">
 <label class="radio-row">
 
 <div>
-<b>Public</b>
+🌐 <b>Public</b>
 <br>
 <small>Anyone can search for and view</small>
 </div>
