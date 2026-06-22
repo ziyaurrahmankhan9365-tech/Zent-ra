@@ -124,8 +124,13 @@ padding:24px;
 }
 
 .collection-input{
-height:58px;
+width:100%;
 box-sizing:border-box;
+padding:16px;
+font-size:18px;
+border:1px solid #ddd;
+border-radius:4px;
+height:74px;
 }
 
 .radio-row{
@@ -303,6 +308,8 @@ class="collection-input">
 <small>Only you can view</small>
 </div>
 
+ <input type="radio" name="share" checked> 
+  
 </label>
 
 <label class="radio-row">
@@ -329,11 +336,41 @@ class="collection-input">
 
 </label>
 
-<button class="create-btn">
+<button id="createBtn" class="create-btn">
 Create collection
 </button>
 
 </div>
 </div>
-</body>
+
+  <script>
+document.getElementById("createBtn").onclick=function(){
+
+let name=document.querySelector(".collection-input").value;
+
+if(name.trim()==""){
+alert("Enter collection name");
+return;
+}
+
+alert("Collection Created: " + name);
+
+closePopup();
+
+};
+ 
+
+document.querySelectorAll(".chip").forEach(chip=>{
+
+chip.onclick=function(){
+
+document.querySelector(".collection-input").value=
+this.innerText;
+
+};
+
+});
+
+  </script>
+  </body>
 </html>
