@@ -368,17 +368,7 @@ alert("Collection Created: " + name);
 
 closePopup();
 
-};
- 
-
-document.querySelectorAll(".chip").forEach(chip=>{
-
-chip.onclick=function(){
-
-document.querySelector(".collection-input").value=
-this.innerText;
-checkInput();
-};
+);
 
   const inputBox =
 document.querySelector(".collection-input");
@@ -392,7 +382,7 @@ if(inputBox.value.trim()!==""){
 
 createBtn.disabled=false;
 createBtn.classList.add("active");
-
+console.log("Button Enabled");
 }else{
 
 createBtn.disabled=true;
