@@ -203,6 +203,76 @@ display:none;
 z-index:998;
   }
   
+#followCollections{
+text-align:center;
+padding-top:120px;
+}
+
+.empty-heart{
+width:180px;
+height:180px;
+}
+
+#followCollections h2{
+font-size:34px;
+margin-top:20px;
+}
+
+#followCollections p{
+color:gray;
+font-size:20px;
+padding:0 30px;
+}
+
+.hand-heart{
+position:relative;
+width:220px;
+margin:auto;
+height:220px;
+}
+
+.hand{
+position:absolute;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+font-size:90px;
+line-height:1;
+}
+
+.heart{
+position:absolute;
+bottom:40px;
+left:50%;
+transform:translateX(-50%) scale(0);
+font-size:70px;
+z-index:2;
+animation:heartMagic 3s infinite;
+}
+
+@keyframes heartMagic{
+
+0%{
+transform:translateX(-50%) translateY(40px) scale(0);
+opacity:0;
+}
+
+30%{
+transform:translateX(-50%) translateY(0) scale(1);
+opacity:1;
+}
+
+50%{
+transform:translateX(-50%) translateY(0) scale(1.2);
+filter:drop-shadow(0 0 15px #ff4d6d);
+}
+
+100%{
+transform:translateX(-50%) translateY(-25px) scale(1);
+opacity:1;
+}
+}
+  
 </style>
 </head>
 
@@ -227,6 +297,23 @@ style="font-size:28px;margin-right:20px;">
   
   <div id="wishlistItems"></div>
 
+ <div id="followCollections">
+
+<div class="hand-heart">
+
+<div class="heart">❤️</div>
+
+<div class="hand">🤲</div>
+
+</div> 
+
+<h2>It's empty in here</h2>
+
+<p>
+Follow collections you love to find them here
+</p>
+
+  </div>
 <script>
 
 const wishlist =
