@@ -294,6 +294,7 @@ font-weight:700;
     font-size:38px;
     font-weight:700;
     padding:0;
+    flex-shrink:0;
 }
 
 .search-box{
@@ -303,7 +304,7 @@ font-weight:700;
     height:44px;
     background:#fff;
 
-    border-radius:8px;
+    border-radius:10px;
 
     display:flex;
     align-items:center;
@@ -313,7 +314,9 @@ font-weight:700;
 
     color:#878787;
     font-size:16px;
+    min-width:0;
 }
+    
 
 .search-box span{
     white-space:nowrap;
@@ -321,11 +324,12 @@ font-weight:700;
     text-overflow:ellipsis;
 }
     
-.cart-btn{
+.header-cart-btn{
     border:none;
     background:none;
     color:#fff;
     font-size:24px;
+    flex-shrink:0;
 }
     
 </style>
@@ -339,12 +343,12 @@ font-weight:700;
         ←
     </button>
 
-    <div class="search-box">
+    <div class="search-box" onclick="location.href='index.html'">
         🔍
         <span>Search for products</span>
     </div>
 
-    <button class="cart-btn" onclick="location.href='cart.html'">
+    <button class="header-cart-btn" onclick="location.href='cart.html'">
         🛒
     </button>
 
