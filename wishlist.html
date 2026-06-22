@@ -504,17 +504,22 @@ checkInput();
 
   <script>
 
-document.getElementById("myTab").onclick=function(){
+function showMyCollections(){
 
 document.getElementById("collectionContainer").style.display="block";
 document.getElementById("wishlistItems").style.display="block";
 document.getElementById("followCollections").style.display="none";
 document.getElementById("createCollectionBtn").style.display="block";
-  
+
 document.getElementById("myTab").classList.add("active");
 document.getElementById("followTab").classList.remove("active");
+
 localStorage.setItem("activeTab","my");
-  
+
+}
+    
+document.getElementById("myTab").onclick=function(){
+showMyCollections();
 };
 
  document.getElementById("followTab").onclick=function(){
@@ -530,7 +535,7 @@ localStorage.setItem("activeTab","follow");
    
 };
 
-    window.onload=function(){
+  window.onload=function(){
 
 if(localStorage.getItem("activeTab")==="follow"){
 
@@ -541,6 +546,10 @@ document.getElementById("createCollectionBtn").style.display="none";
 
 document.getElementById("followTab").classList.add("active");
 document.getElementById("myTab").classList.remove("active");
+
+}else{
+
+showMyCollections();
 
 }
 
