@@ -333,12 +333,11 @@ font-weight:700;
 }
     
 .delivery-card{
-    background:#fff;
+    background:#f5f5f5;
     border-radius:12px;
     padding:15px;
-    margin-top:10px;
+    margin-top:4px;
     display:flex;
-    align-items:flex-start;
     gap:12px;
 }
 
@@ -405,12 +404,44 @@ font-weight:700;
 .saved-header{
     display:flex;
     justify-content:space-between;
+    align-items:center;
     margin-top:20px;
-}
+   }
 
-.address-item{
+.saved-header .blue-text{
+    white-space:nowrap;
+    }
+    
+    .address-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
     padding:15px 0;
     border-bottom:1px solid #eee;
+}
+
+.menu-dot{
+    font-size:28px;
+}
+
+.close-btn{
+    font-size:32px;
+    color:#444;
+    cursor:pointer;
+   font-weight:bold;
+}
+
+.dotted-line{
+    border-top:2px dashed #e5e5e5;
+    margin:20px 0;
+}
+    
+.sheet-handle{
+    width:60px;
+    height:5px;
+    background:#d9d9d9;
+    border-radius:10px;
+    margin:0 auto 20px;
 }
 
 </style>
@@ -986,15 +1017,21 @@ document.getElementById("savedAddresses").innerHTML = `
 🏠 <b>ZIYA KHAN</b><br>
 Singaria near Singaria panchayat office
 </div>
+<span class="menu-dot">⋯</span>
+</div>
 
 <div class="address-item">
 🏠 <b>ZIYA KHAN</b><br>
 Kadhiman near Al Hira School
 </div>
+<span class="menu-dot">⋯</span>
+</div>
 
 <div class="address-item">
 🏠 <b>Ziya Khan</b><br>
 Ashirbad PG Road Badarpur
+</div>
+<span class="menu-dot">⋯</span>
 </div>
 `;
 
@@ -1028,10 +1065,13 @@ CHANGE
 <div id="addressModal" class="address-modal">
 
     <div class="address-sheet">
-
+    <div class="sheet-handle"></div>
+        
         <div class="address-header">
+          
             <h2>Select delivery address</h2>
-            <span onclick="closeAddressModal()">✕</span>
+           
+            <span class="close-btn" onclick="closeAddressModal()">✕</span>
         </div>
 
         <div class="address-search">
@@ -1042,7 +1082,7 @@ CHANGE
             📍 Use my current location
         </div>
 
-        <hr>
+        <div class="dotted-line"></div>
 
         <div class="saved-header">
             <b>Saved addresses</b>
