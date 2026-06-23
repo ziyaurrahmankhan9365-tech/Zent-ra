@@ -385,6 +385,11 @@ font-weight:700;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    width:100%;
+}
+
+.address-header h2{
+    margin:0;
 }
 
 .address-search{
@@ -410,7 +415,8 @@ font-weight:700;
 
 .saved-header .blue-text{
     white-space:nowrap;
-    }
+  font-size:18px;
+}
     
     .address-item{
     display:flex;
@@ -429,6 +435,8 @@ font-weight:700;
     color:#444;
     cursor:pointer;
    font-weight:bold;
+   flex-shrink:0;
+    margin-left:15px;
 }
 
 .dotted-line{
@@ -1013,25 +1021,32 @@ function closeAddressModal(){
 window.onload = function(){
 
 document.getElementById("savedAddresses").innerHTML = `
+
 <div class="address-item">
-🏠 <b>ZIYA KHAN</b><br>
-Singaria near Singaria panchayat office
-</div>
-<span class="menu-dot">⋯</span>
+   <div>
+      🏠 <b>ZIYA KHAN</b><br>
+      Singaria near Singaria panchayat office
+   </div>
+
+   <span class="menu-dot">⋮</span>
 </div>
 
 <div class="address-item">
-🏠 <b>ZIYA KHAN</b><br>
-Kadhiman near Al Hira School
-</div>
-<span class="menu-dot">⋯</span>
+   <div>
+      🏠 <b>ZIYA KHAN</b><br>
+      Kadhiman near Al Hira School
+   </div>
+
+   <span class="menu-dot">⋮</span>
 </div>
 
 <div class="address-item">
-🏠 <b>Ziya Khan</b><br>
-Ashirbad PG Road Badarpur
-</div>
-<span class="menu-dot">⋯</span>
+   <div>
+      🏠 <b>Ziya Khan</b><br>
+      Ashirbad PG Road Badarpur
+   </div>
+
+   <span class="menu-dot">⋮</span>
 </div>
 `;
 
@@ -1074,9 +1089,10 @@ CHANGE
             <span class="close-btn" onclick="closeAddressModal()">✕</span>
         </div>
 
-        <div class="address-search">
-            🔍 Search by area, street name, pin code
-        </div>
+        <input
+type="text"
+class="address-search"
+placeholder="Search by area, street name, pin code"/>
 
         <div class="current-location">
             📍 Use my current location
@@ -1086,7 +1102,10 @@ CHANGE
 
         <div class="saved-header">
             <b>Saved addresses</b>
-            <span class="blue-text">+ Add New</span>
+            <span class="blue-text"
+onclick="openAddAddressPage()">
++ Add New
+            </span>
         </div>
 
         <div id="savedAddresses"></div>
