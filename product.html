@@ -1230,6 +1230,16 @@ function openAddressForm(){
 function closeAddressForm(){
     document.getElementById("addressFormPage").style.display="none";
 }
+
+function saveAddress(){
+
+    alert("Address Saved Successfully");
+
+    document.getElementById("addressFormPage").style.display="none";
+    document.getElementById("addAddressPage").style.display="none";
+    document.getElementById("addressModal").style.display="none";
+
+}
     
     window.onload = function(){
 
@@ -1448,8 +1458,9 @@ class="form-input">
 <span>Make this my default address</span>
 </div>
 
-<div class="save-address-btn">
-Use this address
+<div class="save-address-btn"
+onclick="saveAddress()">
+    Use this address
 </div>
 
 </div>
