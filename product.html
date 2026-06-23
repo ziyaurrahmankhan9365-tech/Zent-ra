@@ -577,6 +577,78 @@ text-align:right;
     margin-top:15px;
 }
 
+.address-form-page{
+display:none;
+position:fixed;
+inset:0;
+background:#fff;
+z-index:10001;
+overflow:auto;
+}
+
+.form-header{
+height:70px;
+display:flex;
+align-items:center;
+gap:15px;
+padding:0 20px;
+border-bottom:1px solid #eee;
+font-size:28px;
+font-weight:bold;
+background:#fff;
+}
+
+.form-container{
+padding:20px;
+}
+
+.form-container label{
+display:block;
+font-size:18px;
+font-weight:600;
+margin-top:18px;
+margin-bottom:8px;
+}
+
+.form-input{
+width:100%;
+padding:14px;
+font-size:17px;
+border:1px solid #ccc;
+border-radius:8px;
+box-sizing:border-box;
+}
+
+.row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.map-link{
+margin-top:20px;
+font-size:18px;
+color:#2874f0;
+font-weight:600;
+}
+
+.checkbox-row{
+display:flex;
+align-items:center;
+gap:10px;
+margin-top:20px;
+}
+
+.save-address-btn{
+margin-top:30px;
+background:#ffd814;
+padding:16px;
+text-align:center;
+border-radius:40px;
+font-size:22px;
+font-weight:bold;
+}
+
 </style>
 
 </head>
@@ -1150,6 +1222,14 @@ function openAddAddressPage(){
 function closeAddAddressPage(){
     document.getElementById("addAddressPage").style.display="none";
 }
+
+function openAddressForm(){
+    document.getElementById("addressFormPage").style.display="block";
+}
+
+function closeAddressForm(){
+    document.getElementById("addressFormPage").style.display="none";
+}
     
     window.onload = function(){
 
@@ -1288,16 +1368,94 @@ CHANGE
             This will help with the right map location
         </p>
 
-        <button class="away-btn">
-            Away from my location
+        <button class="away-btn"
+onclick="openAddressForm()">
+Away from my location
         </button>
 
-        <button class="use-location-btn">
+        <button class="use-location-btn"
+onclick="openAddressForm()">
             ⊕ Use current location
         </button>
 
     </div>
+<div id="addressFormPage" class="address-form-page">
 
+<div class="form-header">
+<span class="back-arrow"
+onclick="closeAddressForm()">←</span>
+
+<span class="form-title">
+Add Address Details
+</span>
+</div>
+
+<div class="form-container">
+
+<label>Country/Region</label>
+<select class="form-input">
+<option>India</option>
+</select>
+
+<label>Full name (First and Last name)</label>
+<input type="text" class="form-input">
+
+<label>Mobile number</label>
+<input type="tel"
+class="form-input"
+placeholder="10-digit mobile number">
+
+<div class="map-link">
+📍 Add location on map
+</div>
+
+<label>Flat, House no., Building, Company, Apartment</label>
+<input type="text" class="form-input">
+
+<label>Area, Street, Sector, Village</label>
+<input type="text" class="form-input">
+
+<label>Landmark</label>
+<input type="text"
+class="form-input"
+placeholder="E.g. near hospital">
+
+<div class="row">
+<div>
+<label>Pincode</label>
+<input type="text"
+class="form-input"
+placeholder="6-digit">
+</div>
+
+<div>
+<label>Town/City</label>
+<input type="text"
+class="form-input">
+</div>
+</div>
+
+<label>State</label>
+<select class="form-input">
+<option>Select</option>
+<option>Assam</option>
+<option>Tripura</option>
+<option>Meghalaya</option>
+</select>
+
+<div class="checkbox-row">
+<input type="checkbox">
+<span>Make this my default address</span>
+</div>
+
+<div class="save-address-btn">
+Use this address
+</div>
+
+</div>
+</div>
+
+    
 </div>
     
 </body>
