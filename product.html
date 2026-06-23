@@ -378,7 +378,7 @@ font-weight:700;
     background:#fff;
     border-radius:20px 20px 0 0;
     overflow:auto;
-    padding:20px;
+    padding:20px 30px;
 }
 
 .address-header{
@@ -392,15 +392,28 @@ font-weight:700;
     margin:0;
 }
 
-.address-search{
-    margin-top:15px;
-    border:1px solid #ddd;
-    border-radius:12px;
-    padding:15px;
-    color:#888;
+
+.search-wrapper{
+    position:relative;
 }
 
-.current-location{
+.search-icon{
+    position:absolute;
+    left:15px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:20px;
+}
+
+.address-search{
+    width:100%;
+    padding:15px 15px 15px 50px;
+    border:1px solid #ddd;
+    border-radius:16px;
+    font-size:18px;
+}
+    
+    .current-location{
     margin-top:20px;
     color:#2874f0;
     font-weight:600;
@@ -410,6 +423,7 @@ font-weight:700;
     display:flex;
     justify-content:space-between;
     align-items:center;
+   gap:10px;
     margin-top:20px;
    }
 
@@ -424,19 +438,23 @@ font-weight:700;
     align-items:flex-start;
     padding:15px 0;
     border-bottom:1px solid #eee;
-}
+ }
 
 .menu-dot{
     font-size:28px;
+    font-weight:bold;
+    min-width:30px;
+text-align:right;
+    cursor:pointer;
 }
 
 .close-btn{
-    font-size:32px;
+    font-size:20px;
+    font-weight:bold;
     color:#444;
     cursor:pointer;
-   font-weight:bold;
-   flex-shrink:0;
     margin-left:15px;
+    flex-shrink:0;
 }
 
 .dotted-line{
@@ -1089,10 +1107,13 @@ CHANGE
             <span class="close-btn" onclick="closeAddressModal()">✕</span>
         </div>
 
-        <input
-type="text"
-class="address-search"
-placeholder="Search by area, street name, pin code"/>
+        <div class="search-wrapper">
+    <span class="search-icon">🔍</span>
+    <input
+    type="text"
+    class="address-search"
+    placeholder="Search by area, street name, pin code">
+        </div>
 
         <div class="current-location">
             📍 Use my current location
