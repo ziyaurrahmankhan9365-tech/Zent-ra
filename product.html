@@ -649,6 +649,20 @@ font-size:22px;
 font-weight:bold;
 }
 
+.save-toast{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#212121;
+    color:white;
+    padding:14px 24px;
+    border-radius:30px;
+    font-size:16px;
+    display:none;
+    z-index:99999;
+}
+
 </style>
 
 </head>
@@ -1233,13 +1247,42 @@ function closeAddressForm(){
 
 function saveAddress(){
 
-    alert("Address Saved Successfully");
+    let inputs = document.querySelectorAll(".form-input");
+
+    for(let i=0; i<inputs.length; i++){
+
+        if(inputs[i].value.trim()==""){
+
+            showSaveToast("⚠ Please fill all address details");
+            return;
+
+        }
+    }
+
+    showSaveToast("🎊 Address Saved Successfully");
 
     document.getElementById("addressFormPage").style.display="none";
     document.getElementById("addAddressPage").style.display="none";
     document.getElementById("addressModal").style.display="none";
 
 }
+    
+ function showSaveToast(message){
+
+    const toast =
+    document.getElementById("saveToast");
+
+    toast.innerText = message;
+
+    toast.style.display = "block";
+
+    setTimeout(function(){
+
+        toast.style.display = "none";
+
+    },10000);
+
+ }
     
     window.onload = function(){
 
@@ -1468,6 +1511,23 @@ onclick="saveAddress()">
 
     
 </div>
+
+<div id="saveToast"
+style="
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:#222;
+color:white;
+padding:14px 20px;
+border-radius:10px;
+display:none;
+z-index:99999;
+font-weight:bold;
+">
+🎉 Address Saved Successfully
+</div>    
     
 </body>
 </html>
