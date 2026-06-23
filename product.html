@@ -474,6 +474,109 @@ text-align:right;
     margin:0 auto 20px;
 }
 
+.add-address-page{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#fff;
+    z-index:10000;
+}
+
+.add-header{
+    height:70px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:0 20px;
+    border-bottom:1px solid #eee;
+    font-size:20px;
+    font-weight:600;
+}
+
+.back-arrow{
+    font-size:34px;
+    cursor:pointer;
+}
+
+.location-search{
+    margin:20px;
+    border:1px solid #ddd;
+    border-radius:18px;
+    padding:16px;
+    font-size:18px;
+    color:#666;
+}
+
+.map-area{
+    height:55vh;
+    background:#e9ecef;
+    position:relative;
+}
+
+.pin-text{
+    position:absolute;
+    top:80px;
+    left:50%;
+    transform:translateX(-50%);
+    background:black;
+    color:white;
+    padding:10px 18px;
+    border-radius:12px;
+}
+
+.map-pin{
+    position:absolute;
+    top:45%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:48px;
+}
+
+.current-location-btn{
+    position:absolute;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    border:none;
+    background:white;
+    padding:14px 22px;
+    border-radius:30px;
+}
+
+.bottom-sheet{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    background:white;
+    border-radius:24px 24px 0 0;
+    padding:25px;
+    box-sizing:border-box;
+}
+
+.away-btn{
+    width:100%;
+    background:#2874f0;
+    color:white;
+    border:none;
+    border-radius:16px;
+    padding:18px;
+    font-size:20px;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+.use-location-btn{
+    width:100%;
+    background:white;
+    color:#2874f0;
+    border:2px solid #2874f0;
+    border-radius:16px;
+    padding:18px;
+    font-size:20px;
+    font-weight:bold;
+    margin-top:15px;
+}
+
 </style>
 
 </head>
@@ -1040,7 +1143,15 @@ function closeAddressModal(){
     document.getElementById("addressModal").style.display="none";
 }
 
-window.onload = function(){
+function openAddAddressPage(){
+    document.getElementById("addAddressPage").style.display="block";
+}
+
+function closeAddAddressPage(){
+    document.getElementById("addAddressPage").style.display="none";
+}
+    
+    window.onload = function(){
 
 document.getElementById("savedAddresses").innerHTML = `
 
@@ -1127,13 +1238,63 @@ CHANGE
 
         <div class="saved-header">
             <b>Saved addresses</b>
-            <span class="blue-text"
-onclick="openAddAddressPage()">
-+ Add New
+            <span class="blue-text" onclick="openAddAddressPage()">
+    + Add New
             </span>
         </div>
 
         <div id="savedAddresses"></div>
+
+    </div>
+
+</div>
+    
+<div id="addAddressPage" class="add-address-page">
+
+    <div class="add-header">
+        <span class="back-arrow"
+        onclick="closeAddAddressPage()">←</span>
+
+        <span class="header-title">
+            Add new address
+        </span>
+    </div>
+
+    <div class="location-search">
+        🔍 Search by area, name, street...
+    </div>
+
+    <div class="map-area">
+
+        <div class="pin-text">
+            Place pin on the exact location
+        </div>
+
+        <div class="map-pin">📍</div>
+
+        <button class="current-location-btn">
+            ⊕ Use my current location
+        </button>
+
+    </div>
+
+    <div class="bottom-sheet">
+
+        <h2>
+            Where do you want us to deliver the order?
+        </h2>
+
+        <p>
+            This will help with the right map location
+        </p>
+
+        <button class="away-btn">
+            Away from my location
+        </button>
+
+        <button class="use-location-btn">
+            ⊕ Use current location
+        </button>
 
     </div>
 
