@@ -1419,6 +1419,23 @@ function saveAddress(){
 
     showSaveToast("🎊 Address Saved Successfully");
 
+let addressData = {
+
+name: document.querySelectorAll(".form-input")[1].value,
+
+mobile: document.querySelectorAll(".form-input")[2].value,
+
+address: document.querySelectorAll(".form-input")[3].value,
+
+city: document.querySelectorAll(".form-input")[6].value
+
+};
+
+localStorage.setItem(
+"userAddress",
+JSON.stringify(addressData)
+);
+    
 document.getElementById("deliverToCard")
 .style.display="block";
 
@@ -1455,7 +1472,27 @@ document.querySelectorAll(".form-input")[3].value;
     
     window.onload = function(){
 
-document.getElementById("savedAddresses").innerHTML = `
+let savedAddress =
+JSON.parse(
+localStorage.getItem("userAddress")
+);
+
+if(savedAddress){
+
+document.getElementById("deliverToCard")
+.style.display="block";
+
+document.getElementById("deliverName")
+.innerText =
+savedAddress.name;
+
+document.getElementById("deliverAddress")
+.innerText =
+savedAddress.address + ", " +
+savedAddress.city;
+}
+        
+        document.getElementById("savedAddresses").innerHTML = `
 
 <div class="address-item">
    <div>
