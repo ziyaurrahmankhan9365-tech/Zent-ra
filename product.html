@@ -222,7 +222,8 @@ font-weight:700;
     position:absolute;
     left:20px;
     bottom:20px;
-
+}
+    
 .rating-badge span:first-child{
     color:#388e3c;
     font-weight:700;
@@ -914,12 +915,17 @@ Bank Offers
     <h3>Delivery details</h3>
 
     <div class="delivery-card location-card" onclick="openAddressModal()">
-        <span>📍</span>
-        <div>
-            <b>Location not set</b>
-            <span class="blue-text"> Select delivery location</span>
-        </div>
-        <span class="arrow">›</span>
+<span>📍</span>
+
+<div>
+<b id="deliveryTitle">Location not set</b>
+<br>
+<span id="deliverySubtitle" class="blue-text">
+Select delivery location
+</span>
+</div>
+
+<span class="arrow">›</span>
     </div>
 
     <div class="delivery-card">
@@ -1430,6 +1436,12 @@ document.getElementById("deliverAddress")
 .innerText =
 addr.address + ", " + addr.city;
 
+document.getElementById("deliveryTitle").innerText =
+addr.name;
+
+document.getElementById("deliverySubtitle").innerText =
+addr.address + ", " + addr.city;
+    
 localStorage.setItem(
 "userAddress",
 JSON.stringify(addr)
@@ -1529,6 +1541,12 @@ document.querySelectorAll(".form-input")[1].value;
 document.getElementById("deliverAddress")
 .innerText =
 document.querySelectorAll(".form-input")[3].value;
+
+document.getElementById("deliveryTitle").innerText =
+addressData.name;
+
+document.getElementById("deliverySubtitle").innerText =
+addressData.address + ", " + addressData.city;
     
     document.getElementById("addressFormPage").style.display="none";
     document.getElementById("addAddressPage").style.display="none";
@@ -1610,6 +1628,14 @@ document.getElementById("deliverAddress")
 .innerText =
 savedAddress.address + ", " +
 savedAddress.city;
+
+document.getElementById("deliveryTitle").innerText =
+savedAddress.name;
+
+document.getElementById("deliverySubtitle").innerText =
+savedAddress.address + ", " +
+savedAddress.city;  
+
 }
         
   }
