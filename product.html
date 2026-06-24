@@ -1411,6 +1411,37 @@ function selectChip(chip){
     chip.classList.add("active-chip");
 }
 
+function selectAddress(index){
+
+let addresses =
+JSON.parse(
+localStorage.getItem("allAddresses")
+) || [];
+
+let addr = addresses[index];
+
+document.getElementById("deliverToCard")
+.style.display="block";
+
+document.getElementById("deliverName")
+.innerText = addr.name;
+
+document.getElementById("deliverAddress")
+.innerText =
+addr.address + ", " + addr.city;
+
+localStorage.setItem(
+"userAddress",
+JSON.stringify(addr)
+);
+
+showSaveToast("✅ Address Selected");
+
+closeAddressModal();
+
+}
+
+    
 function getCurrentLocation(){
 
 if(navigator.geolocation){
@@ -1466,8 +1497,23 @@ address: document.querySelectorAll(".form-input")[3].value,
 
 city: document.querySelectorAll(".form-input")[6].value
 
+type:
+document.querySelector(".active-chip")
+.innerText    
 };
 
+let addresses =
+JSON.parse(
+localStorage.getItem("allAddresses")
+) || [];
+
+addresses.push(addressData);
+
+localStorage.setItem(
+"allAddresses",
+JSON.stringify(addresses)
+);
+    
 localStorage.setItem(
 "userAddress",
 JSON.stringify(addressData)
@@ -1514,6 +1560,43 @@ JSON.parse(
 localStorage.getItem("userAddress")
 );
 
+let allAddresses =
+JSON.parse(
+localStorage.getItem("allAddresses")
+) || [];
+
+let html = "";
+
+allAddresses.forEach((addr,index)=>{
+
+html += `
+<div class="address-item"
+onclick="selectAddress(${index})">
+
+<div>
+🏠 <b>${addr.name}</b><br>
+${addr.address}
+</div>
+
+<span class="menu-dot"
+onclick="event.stopPropagation();
+toggleAddressMenu(this)">
+⋮
+</span>
+
+<div class="address-popup">
+<div onclick="editAddress()">✏️ Edit</div>
+<div onclick="deleteAddress()">🗑 Delete</div>
+</div>
+
+</div>
+`;
+
+});
+
+document.getElementById("savedAddresses")
+.innerHTML = html;
+        
 if(savedAddress){
 
 document.getElementById("deliverToCard")
@@ -1605,7 +1688,9 @@ z-index:9999;
 
 <span id="toastAction"
 style="color:#ffb300;font-weight:bold;">
+<button onclick="openAddressModal()">
 CHANGE
+</button>
 </span>
 
 </div>
