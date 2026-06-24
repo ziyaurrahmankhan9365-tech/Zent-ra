@@ -776,6 +776,15 @@ font-weight:bold;
     background:#f5f5f5;
 }
 
+.change-btn{
+background:#2874f0;
+color:white;
+border:none;
+padding:6px 12px;
+border-radius:6px;
+font-weight:bold;
+}
+
 </style>
 
 </head>
@@ -1402,7 +1411,35 @@ function selectChip(chip){
     chip.classList.add("active-chip");
 }
 
+function getCurrentLocation(){
 
+if(navigator.geolocation){
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+showSaveToast("📍 Location Found");
+
+},
+
+function(){
+
+showSaveToast("❌ Location Permission Denied");
+
+}
+
+);
+
+}else{
+
+showSaveToast("❌ Geolocation Not Supported");
+
+}
+
+}
+
+    
 function saveAddress(){
 
     let inputs = document.querySelectorAll(".form-input");
@@ -1593,8 +1630,9 @@ CHANGE
     placeholder="Search by area, street name, pin code">
         </div>
 
-        <div class="current-location">
-            📍 Use my current location
+        <div class="current-location"
+onclick="getCurrentLocation()">
+📍 Use my current location
         </div>
 
         <div class="dotted-line"></div>
@@ -1612,7 +1650,8 @@ CHANGE
 Deliver to
 <span id="deliverName">ZIYA KHAN</span>
 
-<button onclick="openAddressModal()">
+<button class="change-btn"
+onclick="openAddressModal()">
 CHANGE
 </button>
 </div>
