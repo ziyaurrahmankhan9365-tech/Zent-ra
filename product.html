@@ -1419,6 +1419,17 @@ function saveAddress(){
 
     showSaveToast("🎊 Address Saved Successfully");
 
+document.getElementById("deliverToCard")
+.style.display="block";
+
+document.getElementById("deliverName")
+.innerText =
+document.querySelectorAll(".form-input")[1].value;
+
+document.getElementById("deliverAddress")
+.innerText =
+document.querySelectorAll(".form-input")[3].value;
+    
     document.getElementById("addressFormPage").style.display="none";
     document.getElementById("addAddressPage").style.display="none";
     document.getElementById("addressModal").style.display="none";
@@ -1558,6 +1569,35 @@ CHANGE
             </span>
         </div>
 
+   <div id="deliverToCard" style="display:none;">
+
+<div class="deliver-header">
+Deliver to
+<span id="deliverName">ZIYA KHAN</span>
+
+<button onclick="openAddressModal()">
+CHANGE
+</button>
+</div>
+
+<div id="deliverAddress">
+Select Address
+</div>
+
+<div class="chip-row">
+
+<span class="address-chip active-chip">
+🏠 Home
+</span>
+
+<span class="address-chip">
+💼 Work
+</span>
+
+</div>
+
+   </div>   
+        
         <div id="savedAddresses"></div>
 
     </div>
