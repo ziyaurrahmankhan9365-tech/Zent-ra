@@ -973,7 +973,8 @@ Buy Now
     const product =
 JSON.parse(localStorage.getItem("selectedProduct"));
 console.log(product);
-if(product){
+alert(JSON.stringify(product));
+    if(product){
 
 document.getElementById("productName").innerText =
 product.name;
