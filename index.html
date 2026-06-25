@@ -1115,7 +1115,11 @@ padding:10px;
 
   <!-- 🔍 SEARCH BAR -->
   <div style="margin-top:10px; width:100%;">
-    <input type="text" placeholder="🔍 Search for Products"
+    <input
+id="searchBox"
+type="text"
+placeholder="🔍 Search for Products"
+        
 style="
 width:100%;
 padding:12px;
@@ -2257,7 +2261,9 @@ function goCategory() {
       behavior: "smooth"
     });
   }
-  function goAccount() {
+}
+   
+        function goAccount() {
   window.location.href = "login.html";
 }
 
