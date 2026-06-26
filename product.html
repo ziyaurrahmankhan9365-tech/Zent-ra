@@ -978,11 +978,16 @@ alert("SECOND SCRIPT");
 
 <script>
 alert("SCRIPT STARTED");
-    const product =
+
+try {
+
+const product =
 JSON.parse(localStorage.getItem("selectedProduct"));
+
 console.log(product);
 alert(JSON.stringify(product));
-    if(product){
+
+if(product){
 
 document.getElementById("productName").innerText =
 product.name;
