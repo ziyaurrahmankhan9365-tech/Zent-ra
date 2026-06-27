@@ -2006,7 +2006,10 @@ loadUserName();
         }
 
         // Initialize when page loads
-            window.addEventListener('load', init);
+            window.addEventListener("load", function () {
+    renderProducts();
+    updateCartCount();
+});
 
 // ✅ SIGNUP FUNCTION
 function signup() {
