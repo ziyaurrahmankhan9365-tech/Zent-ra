@@ -781,14 +781,12 @@ border-radius:6px;
 font-weight:bold;
 }
 
-</style>
+</style><script>
 
 </head>
 <body>
-<script>
-alert("BODY START");
-</script>
-    
+
+
 <div class="top-header">
 
     <button class="back-btn" onclick="history.back()">
@@ -972,20 +970,16 @@ Add to Cart
 Buy Now
 </button>
 </div>
-<script>
-alert("SECOND SCRIPT");
-</script>
+
 
 <script>
-alert("SCRIPT STARTED");
 
-try {
 
 const product =
 JSON.parse(localStorage.getItem("selectedProduct"));
 
 console.log(product);
-alert(JSON.stringify(product));
+
 
 if(product){
 
@@ -1650,7 +1644,6 @@ savedAddress.city;
   }
 
  } catch (e) {
-    alert("ERROR: " + e.message);
     console.error(e);
  }
     
