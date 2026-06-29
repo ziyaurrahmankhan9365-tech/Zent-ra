@@ -1603,7 +1603,14 @@ JSON.parse(
 localStorage.getItem("allAddresses")
 ) || [];
 
-addresses.push(addressData);
+let editIndex = localStorage.getItem("editIndex");
+
+if (editIndex !== null) {
+    addresses[editIndex] = addressData;
+    localStorage.removeItem("editIndex");
+} else {
+    addresses.push(addressData);
+}
 
 localStorage.setItem(
 "allAddresses",
