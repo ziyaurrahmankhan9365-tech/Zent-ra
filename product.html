@@ -750,6 +750,16 @@ font-weight:bold;
     position:relative;
 }
 
+.selected-address{
+    border:2px solid #2874f0;
+    background:#f5f9ff;
+    box-shadow:0 0 0 2px rgba(40,116,240,.15);
+}
+
+.selected-address .change-btn{
+    display:inline-block;
+}
+    
 .address-popup{
     position:absolute;
     right:10px;
@@ -1487,7 +1497,14 @@ localStorage.setItem(
 JSON.stringify(addr)
 );
 
-showSaveToast("✅ Address Selected");
+document.querySelectorAll(".address-item").forEach(item=>{
+    item.classList.remove("selected-address");
+});
+
+document.querySelectorAll(".address-item")[index]
+.classList.add("selected-address");
+    
+    showSaveToast("✅ Address Selected");
 
 closeAddressModal();
 
@@ -1679,7 +1696,7 @@ let html = "";
 allAddresses.forEach((addr,index)=>{
 
 html += `
-<div class="address-item"
+<div class="address-item ${savedAddress && savedAddress.address===addr.address ? 'selected-address' : ''}"
 onclick="selectAddress(${index})">
 
 <div>
