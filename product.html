@@ -1414,6 +1414,8 @@ document.querySelectorAll(".form-input")[8].value = addr.state;
 
 localStorage.setItem("editIndex", index);
 
+document.getElementById("addressModal").style.display = "none";
+document.getElementById("addAddressPage").style.display = "block";
 document.getElementById("addressFormPage").style.display = "block";
 }
 
@@ -1578,11 +1580,20 @@ mobile: document.querySelectorAll(".form-input")[2].value,
 
 address: document.querySelectorAll(".form-input")[3].value,
 
-city: document.querySelectorAll(".form-input")[6].value,
+area: document.querySelectorAll(".form-input")[4].value,
 
-type:
-document.querySelector(".active-chip")
-.innerText    
+landmark: document.querySelectorAll(".form-input")[5].value,
+
+pincode: document.querySelectorAll(".form-input")[6].value,
+
+city: document.querySelectorAll(".form-input")[7].value,
+
+state: document.querySelectorAll(".form-input")[8].value,
+
+type: document.querySelector(".active-chip")
+? document.querySelector(".active-chip").innerText
+: "Home"
+
 };
 
 let addresses =
