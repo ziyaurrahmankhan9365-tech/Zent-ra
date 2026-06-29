@@ -1396,12 +1396,25 @@ function toggleAddressMenu(el){
     }
 }
 
-function editAddress(){
+function editAddress(index){
 
-    document.getElementById("addressFormPage")
-    .style.display="block";
+let addresses =
+JSON.parse(localStorage.getItem("allAddresses")) || [];
 
-    showSaveToast("✏️ Edit Address");
+let addr = addresses[index];
+
+document.querySelectorAll(".form-input")[1].value = addr.name;
+document.querySelectorAll(".form-input")[2].value = addr.mobile;
+document.querySelectorAll(".form-input")[3].value = addr.address;
+document.querySelectorAll(".form-input")[4].value = addr.area;
+document.querySelectorAll(".form-input")[5].value = addr.landmark;
+document.querySelectorAll(".form-input")[6].value = addr.pincode;
+document.querySelectorAll(".form-input")[7].value = addr.city;
+document.querySelectorAll(".form-input")[8].value = addr.state;
+
+localStorage.setItem("editIndex", index);
+
+document.getElementById("addressFormPage").style.display = "block";
 }
 
 function deleteAddress(index){
