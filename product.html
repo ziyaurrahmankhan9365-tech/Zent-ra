@@ -1492,7 +1492,13 @@ console.log(document.querySelectorAll(".form-input"));
 console.log(addr);
     
 document.querySelectorAll(".form-input")[7].value =
-addr.city || addr.town || addr.village || "";
+addr.city ||
+addr.town ||
+addr.village ||
+addr.county ||
+addr.suburb ||
+addr.municipality ||
+"";
 
 document.querySelectorAll(".form-input")[8].value =
 addr.state || "";
