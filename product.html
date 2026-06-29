@@ -1404,12 +1404,31 @@ function editAddress(){
     showSaveToast("✏️ Edit Address");
 }
 
-function deleteAddress(){
+function deleteAddress(index){
 
-    if(confirm("Delete this address?")){
+    if(!confirm("Delete this address?")) return;
 
-        showSaveToast("🗑 Address Deleted");
+    let addresses =
+    JSON.parse(localStorage.getItem("allAddresses")) || [];
+
+    addresses.splice(index,1);
+
+    localStorage.setItem(
+        "allAddresses",
+        JSON.stringify(addresses)
+    );
+
+    if(addresses.length>0){
+        localStorage.setItem(
+            "userAddress",
+            JSON.stringify(addresses[0])
+        );
+    }else{
+        localStorage.removeItem("userAddress");
     }
+
+    location.reload();
+
 }
 
 function selectChip(chip){
@@ -1642,8 +1661,8 @@ toggleAddressMenu(this)">
 </span>
 
 <div class="address-popup">
-<div onclick="editAddress()">✏️ Edit</div>
-<div onclick="deleteAddress()">🗑 Delete</div>
+<div onclick="editAddress(${index})">✏️ Edit</div>
+<div onclick="deleteAddress(${index})">🗑 Delete</div>
 </div>
 
 </div>
