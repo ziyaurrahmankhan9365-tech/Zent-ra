@@ -783,12 +783,15 @@ font-weight:bold;
 }
 
 .change-btn{
-background:#2874f0;
-color:white;
-border:none;
-padding:6px 12px;
-border-radius:6px;
-font-weight:bold;
+    background:#2874f0;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    padding:6px 12px;
+    font-size:13px;
+    font-weight:600;
+    float:right;
+    cursor:pointer;
 }
 
 </style>
@@ -1700,8 +1703,15 @@ html += `
 onclick="selectAddress(${index})">
 
 <div>
-🏠 <b>${addr.name}</b><br>
+<b>${addr.name}</b>
+
+${savedAddress && savedAddress.address===addr.address ?
+'<button class="change-btn">CHANGE</button>' : ''}
+
+<br>
+
 ${addr.address}
+
 </div>
 
 <span class="menu-dot"
