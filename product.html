@@ -783,6 +783,9 @@ font-weight:bold;
 }
 
 .change-btn{
+    position:absolute;
+    right:55px;   /* 3-dot se thoda left */
+    top:12px;
     background:#2874f0;
     color:#fff;
     border:none;
@@ -790,9 +793,6 @@ font-weight:bold;
     padding:6px 12px;
     font-size:13px;
     font-weight:600;
-    margin-left:auto;
-    display:flex;
-    align-items:center;
     cursor:pointer;
 }
 
@@ -1707,7 +1707,7 @@ html += `
 onclick="selectAddress(${index})">
 
 <div>
-<b>${addr.name}</b>
+<b style="padding-right:120px;">${addr.name}</b>
 
 ${savedAddress && savedAddress.address===addr.address ?
 '<button class="change-btn">CHANGE</button>' : ''}
