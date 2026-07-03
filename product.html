@@ -1631,9 +1631,7 @@ city: document.querySelectorAll(".form-input")[7].value,
 
 state: document.querySelectorAll(".form-input")[8].value,
 
-type: document.querySelector(".active-chip")
-? document.querySelector(".active-chip").innerText
-: "Home"
+type: document.querySelector(".active-chip").innerText.trim(),
 
 };
 
