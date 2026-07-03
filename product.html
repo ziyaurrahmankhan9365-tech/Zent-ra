@@ -796,6 +796,21 @@ font-weight:bold;
     cursor:pointer;
 }
 
+.address-chip{
+    display:inline-block;
+    padding:6px 14px;
+    border:1px solid #ccc;
+    border-radius:20px;
+    margin-right:8px;
+    cursor:pointer;
+}
+
+.address-chip.active-chip{
+    background:#2874f0;
+    color:#fff;
+    border-color:#2874f0;
+}
+    
 </style>
 
 </head>
@@ -1712,9 +1727,9 @@ onclick="selectAddress(${index})">
 ${savedAddress && savedAddress.address===addr.address ?
 '<button class="change-btn">CHANGE</button>' : ''}
 
-<br>
-
 ${addr.address}
+<br>
+${addr.type==="Home" ? "🏠 Home" : "💼 Work"}
 
 </div>
 
@@ -1841,11 +1856,13 @@ Select Address
 
 <div class="chip-row">
 
-<span class="address-chip active-chip">
+<span class="address-chip active-chip"
+onclick="selectChip(this)">
 🏠 Home
 </span>
 
-<span class="address-chip">
+<span class="address-chip"
+onclick="selectChip(this)">
 💼 Work
 </span>
 
