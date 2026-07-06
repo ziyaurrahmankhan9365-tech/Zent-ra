@@ -1364,6 +1364,9 @@ try {
 const product =
 JSON.parse(localStorage.getItem("selectedProduct"));
 
+const allProducts =
+JSON.parse(localStorage.getItem("allProducts")) || [];
+    
 console.log(product);
 
 
