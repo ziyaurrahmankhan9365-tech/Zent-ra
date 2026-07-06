@@ -1470,6 +1470,72 @@ product.reviews + " Reviews";
  document.getElementById("productDescription").innerText =
 product.description;
 
+// ===============================
+// Similar Products
+// ===============================
+
+let similarProducts = allProducts.filter(item =>
+item.category === product.category &&
+item.name !== product.name
+);
+
+let similarHTML = "";
+
+similarProducts.forEach(item => {
+
+let oldPrice = parseInt(item.oldPrice);
+let newPrice = parseInt(item.price);
+
+let discount = Math.round(
+((oldPrice - newPrice) / oldPrice) * 100
+);
+
+similarHTML += `
+<div class="similar-card"
+onclick='openSimilarProduct(${JSON.stringify(item).replace(/'/g,"&#39;")})'>
+
+<div class="similar-image-box">
+
+${item.ad ? `<div class="ad-badge">AD</div>` : ""}
+
+<img src="images/${item.img}"
+class="similar-image">
+
+</div>
+
+<div class="similar-info">
+
+<div class="similar-name">
+${item.name}
+</div>
+
+<div class="similar-rating">
+${item.rating} ★
+</div>
+
+<div class="similar-price">
+
+₹${item.price}
+
+<span class="similar-old-price">
+₹${item.oldPrice}
+</span>
+
+<span class="similar-discount">
+${discount}% off
+</span>
+
+</div>
+
+</div>
+
+</div>
+`;
+
+});
+
+document.getElementById("similarProducts").innerHTML = similarHTML;
+    
     let offerHTML = "";
 
 if(product.offers){
@@ -2134,7 +2200,90 @@ savedAddress.city;
         
   }
 
- } catch (e) {
+// ===============================
+// Open Similar Product
+// ===============================
+
+function openSimilarProduct(product){
+
+localStorage.setItem(
+"selectedProduct",
+JSON.stringify(product)
+);
+
+window.location.href = "product.html";
+
+}
+
+// ===============================
+// Scroll Similar Products
+// ===============================
+
+function scrollSimilarProducts(){
+
+document.getElementById("similarProducts").scrollBy({
+left:220,
+behavior:"smooth"
+});
+
+}
+
+// ===============================
+// Render Similar Products
+// ===============================
+
+const similarContainer = document.getElementById("similarProducts");
+
+if(similarContainer && product && allProducts.length){
+
+const similar = allProducts.filter(p =>
+p.category === product.category &&
+p.name !== product.name
+);
+
+similar.forEach(item => {
+
+const oldPrice = parseInt(item.oldPrice);
+const price = parseInt(item.price);
+const discount = Math.round(((oldPrice-price)/oldPrice)*100);
+
+similarContainer.innerHTML += `
+<div class="similar-card"
+onclick='openSimilarProduct(${JSON.stringify(item).replace(/"/g,"&quot;")})'>
+
+<div class="similar-image-box">
+
+${item.ad ? `<div class="ad-badge">AD</div>` : ""}
+
+<img src="images/${item.img}"
+class="similar-image">
+
+</div>
+
+<div class="similar-info">
+
+<div class="similar-name">${item.name}</div>
+
+<div class="similar-rating">
+${item.rating} ★
+</div>
+
+<div class="similar-price">
+₹${item.price}
+<span class="similar-old-price">₹${item.oldPrice}</span>
+<span class="similar-discount">${discount}% Off</span>
+</div>
+
+</div>
+</div>
+`;
+
+});
+
+}
+
+    
+} catch (e) {
     console.error(e);
  }
     
