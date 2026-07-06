@@ -941,6 +941,139 @@ font-weight:bold;
     font-weight:500;
 }
 
+/* ==========================
+   Similar Products
+========================== */
+
+.similar-section{
+    background:#fff;
+    margin-top:14px;
+    padding:16px;
+    border-radius:16px;
+}
+
+.similar-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+}
+
+.similar-header h3{
+    margin:0;
+    font-size:24px;
+    font-weight:700;
+    color:#111;
+}
+
+.similar-next-btn{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:50%;
+    background:#111;
+    color:#fff;
+    font-size:22px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.similar-products-row{
+    display:flex;
+    overflow-x:auto;
+    gap:12px;
+    scroll-behavior:smooth;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+}
+
+.similar-products-row::-webkit-scrollbar{
+    display:none;
+}
+
+.similar-card{
+    min-width:165px;
+    max-width:165px;
+    background:#fff;
+    border:1px solid #ececec;
+    border-radius:14px;
+    overflow:hidden;
+    flex-shrink:0;
+}
+
+.similar-image{
+    width:100%;
+    height:165px;
+    object-fit:contain;
+    background:#fafafa;
+    padding:12px;
+}
+
+.similar-info{
+    padding:10px;
+}
+
+.similar-name{
+    font-size:14px;
+    font-weight:600;
+    color:#222;
+    line-height:20px;
+    height:40px;
+    overflow:hidden;
+}
+
+.similar-rating{
+    display:inline-flex;
+    align-items:center;
+    background:#008c3a;
+    color:#fff;
+    font-size:12px;
+    padding:2px 6px;
+    border-radius:4px;
+    margin-top:8px;
+    font-weight:600;
+}
+
+.similar-price{
+    font-size:18px;
+    font-weight:700;
+    color:#111;
+    margin-top:8px;
+}
+
+.similar-old-price{
+    font-size:13px;
+    color:#878787;
+    text-decoration:line-through;
+    margin-left:5px;
+}
+
+.similar-discount{
+    color:#388e3c;
+    font-size:13px;
+    font-weight:700;
+    margin-left:5px;
+}
+
+.ad-badge{
+    position:absolute;
+    top:8px;
+    right:8px;
+    background:#d9d9d9;
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    padding:2px 6px;
+    border-radius:4px;
+}
+
+.similar-image-box{
+    position:relative;
+}
+
 </style>
 
 </head>
@@ -1175,6 +1308,28 @@ Select delivery location
     </div>
 
 </div>
+
+<div class="section similar-section">
+
+    <div class="similar-header">
+
+        <h3>Similar Products</h3>
+
+        <button class="similar-next-btn"
+        onclick="scrollSimilarProducts()">
+
+            ➜
+
+        </button>
+
+    </div>
+
+    <div id="similarProducts"
+         class="similar-products-row">
+
+    </div>
+
+</div>
     
 <div class="section">
 <h3>Product Highlights</h3>
@@ -1188,11 +1343,7 @@ Select delivery location
   <p id="productDescription"></p>
 </div>
 
-<div class="section">
-  <h3>Similar Products</h3>
-  <div id="similarProducts"></div>
-</div>
-    
+   
 <div style="height:90px;"></div>
 
 <div class="bottom-bar">
