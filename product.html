@@ -811,6 +811,136 @@ font-weight:bold;
     border-color:#2874f0;
 }
     
+/*==============================
+  SHOP WITH PEACE OF MIND
+==============================*/
+
+.peace-section{
+    background:#fff;
+    margin-top:14px;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.peace-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px;
+    cursor:pointer;
+}
+
+.peace-header h3{
+    margin:0;
+    font-size:18px;
+    font-weight:700;
+    color:#212121;
+}
+
+#peaceArrow{
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    background:#f5f5f5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    font-weight:700;
+    transition:.25s;
+}
+
+#peaceContent{
+    padding:0 16px 16px;
+}
+
+.peace-card{
+    height:72px;
+    border-radius:12px;
+    background:#f7f7f7;
+    display:flex;
+    align-items:center;
+    padding:0 14px;
+}
+
+.peace-text{
+    font-size:28px;
+    font-weight:500;
+    color:#444;
+    margin-left:14px;
+}
+
+.peace-doc{
+    position:relative;
+    width:42px;
+    height:42px;
+}
+
+.doc-paper{
+    width:34px;
+    height:40px;
+    background:#fff;
+    border-radius:8px;
+    position:relative;
+    box-shadow:0 1px 3px rgba(0,0,0,.12);
+}
+
+.doc-paper span{
+    position:absolute;
+    left:7px;
+    width:18px;
+    height:2px;
+    background:#bdbdbd;
+    border-radius:2px;
+}
+
+.doc-paper span:nth-child(1){top:9px;}
+.doc-paper span:nth-child(2){top:15px;}
+.doc-paper span:nth-child(3){top:21px;}
+.doc-paper span:nth-child(4){top:27px;}
+
+.doc-badge{
+    position:absolute;
+    right:-2px;
+    bottom:-2px;
+    width:18px;
+    height:18px;
+    background:#2874f0;
+    border-radius:50%;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    font-weight:bold;
+    border:2px solid #fff;
+}
+
+.peace-services{
+    display:flex;
+    justify-content:space-between;
+    margin-top:22px;
+}
+
+.peace-item{
+    width:33.33%;
+    text-align:center;
+}
+
+.peace-item img{
+    width:44px;
+    height:44px;
+    object-fit:contain;
+}
+
+.peace-item p{
+    margin-top:8px;
+    font-size:15px;
+    line-height:20px;
+    color:#212121;
+    font-weight:500;
+}
+
 </style>
 
 </head>
@@ -970,6 +1100,80 @@ Select delivery location
             <span class="blue-text">See other sellers</span>
         </div>
     </div>
+</div>
+
+<div class="section peace-section">
+
+    <div class="peace-header" onclick="togglePeaceSection()">
+
+        <h3>Shop with peace of mind</h3>
+
+        <span id="peaceArrow">⌃</span>
+
+    </div>
+
+    <div id="peaceContent">
+
+        <div class="peace-card">
+
+    <div class="peace-doc">
+
+        <div class="doc-paper">
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+        <div class="doc-badge">✓</div>
+
+    </div>
+
+    <span class="peace-text">N/A</span>
+
+        </div>
+
+        <div class="peace-services">
+
+            <div class="peace-item">
+
+                <img src="replacement.png">
+
+                <p>
+                    7 Days<br>
+                    Replacement
+                </p>
+
+            </div>
+
+            <div class="peace-item">
+
+                <img src="cod.png">
+
+                <p>
+                    Cash on<br>
+                    Delivery
+                </p>
+
+            </div>
+
+            <div class="peace-item">
+
+                <img src="support.png">
+
+                <p>
+                    Customer<br>
+                    Support
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
     
 <div class="section">
@@ -1780,6 +1984,25 @@ savedAddress.city;
     console.error(e);
  }
     
+function togglePeaceSection(){
+
+    const content = document.getElementById("peaceContent");
+    const arrow = document.getElementById("peaceArrow");
+
+    if(content.style.display === "none"){
+
+        content.style.display = "block";
+        arrow.innerHTML = "⌃";
+
+    }else{
+
+        content.style.display = "none";
+        arrow.innerHTML = "⌄";
+
+    }
+
+}
+
 </script>
 <div id="wishlistToast" style="
 position:fixed;
