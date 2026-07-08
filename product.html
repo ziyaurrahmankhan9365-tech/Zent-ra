@@ -1689,13 +1689,51 @@ document.getElementById("offerList").innerHTML = offerHTML;
 
 let highlightsHTML = "";
 
-product.highlights.forEach(item => {
-  highlightsHTML += `<p>✔ ${item}</p>`;
+product.highlights.forEach((item,index)=>{
+
+const icons = product.highlightIcons || [
+"memory",
+"storage",
+"display_settings",
+"bolt",
+"verified"
+];
+
+const subtitles = product.highlightSubtitles || [
+"Powerful performance",
+"Fast storage",
+"Crystal clear visuals",
+"High speed experience",
+"Trusted quality"
+];
+
+highlightsHTML += `
+<div class="highlight-item">
+
+<div class="highlight-icon">
+<span class="material-symbols-outlined">
+${icons[index] || "check_circle"}
+</span>
+</div>
+
+<div class="highlight-text">
+
+<div class="highlight-title">
+${item}
+</div>
+
+<div class="highlight-subtitle">
+${subtitles[index] || ""}
+</div>
+
+</div>
+
+</div>
+`;
+
 });
 
-document.getElementById("productHighlights").innerHTML =
-highlightsHTML;
-}
+document.getElementById("productHighlights").innerHTML = highlightsHTML;
 const arrow = document.getElementById("offerArrow");
 const content = document.getElementById("offerContent");
 
