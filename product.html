@@ -1689,7 +1689,7 @@ document.getElementById("offerList").innerHTML = offerHTML;
 
 let highlightsHTML = "";
 
-product.highlights.forEach((item,index)=>{
+(product.highlights || []).forEach((item,index)=>{
 
 const icons = product.highlightIcons || [
 "memory",
