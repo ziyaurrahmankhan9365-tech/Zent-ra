@@ -1,0 +1,3427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopMart - Online Shopping</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #ffffff;
+    margin:0;
+    padding:0;
+    overflow-x:hidden;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            color: black;
+            padding: 1rem 0;
+            position: relative;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Main Content */
+        main {
+    margin-top: 10px;
+    padding: 0;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: #ffffff;
+            border-radius: 15px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .add-to-cart:hover {
+            transform: scale(1.05);
+        }
+
+        /* Shopping Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+        }
+
+        .cart-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-total {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 1rem 0;
+            color: #333;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .close-cart {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            z-index: 3000;
+        }
+  /* 🔥 NEW UI */
+.top-bar {
+  margin: 0;
+  text-align: center;
+}
+
+.top-bar input {
+  width: 90%;
+  padding: 12px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+}
+
+.categories {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background: #fff;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.cat {
+  text-align: center;
+  font-size: 14px;
+ cursor: pointer;
+}
+   /* 🔝 Flipkart Style Top Header */
+.top-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #2874f0;
+  color: white;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.location {
+  font-size: 14px;
+}
+
+.address {
+  font-size: 12px;
+}
+
+.cart-mini {
+  background: yellow;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}     
+   #addressPopup {
+  font-family: Arial;
+}
+
+#addressPopup h3 {
+  margin-bottom: 10px;
+}
+
+#addressPopup input {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+#addressPopup button {
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+#addressList div:hover {
+  background: #f5f5f5;
+}
+ /* 🔻 Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+  z-index: 9999;
+}
+
+.nav-item {
+  text-align: center;
+  font-size: 12px;
+  color: #555;
+  cursor: pointer;
+}
+
+.nav-item div {
+  font-size: 18px;
+}
+
+.nav-item.active {
+  color: #2874f0;
+  font-weight: bold;
+}
+ body {
+  padding-bottom: 70px;
+ }
+
+        div::-webkit-scrollbar {
+  display: none;
+  }
+  .cat-item {
+  text-align: center;
+  min-width: 70px;
+  cursor: pointer;
+}
+
+.cat-icon {
+  height: 30px;
+  padding: 5px;
+  border-radius: 8px;
+  background: transparent;
+  transition: 0.3s;
+}
+
+.active-line {
+  height: 3px;
+  background: #2874f0;
+  margin-top: 5px;
+  border-radius: 10px;
+  display: none;
+}
+
+/* ACTIVE */
+.cat-item.active .cat-icon {
+  background: #e3f2fd;
+}
+
+.cat-item.active .active-line {
+  display: block;
+}
+  /* 🔥 SLIDER CSS */
+/* Aspect Ratio & Container Setup */
+.banner-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto 0 auto;
+    padding: 0 8px;
+    box-sizing: border-box;
+}
+
+.slider-wrapper {
+    width: 100%;
+    aspect-ratio: 1000 / 501;
+    overflow: hidden;
+    position: relative;
+    border-radius: 12px;
+    background: #f1f3f6;
+}
+
+.slider-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider-track img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+}
+
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.dot {
+    width: 18px;
+    height: 4px;
+    border-radius: 10px;
+    background: #d0d0d0;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: #2874f0;
+    width: 30px;
+}
+
+/* Mobile Responsiveness Check */
+@media (max-width: 768px) {
+    .banner-container {
+        max-width: 100%;
+        padding-bottom: 15px;
+    }
+    .dot {
+        width: 6px;
+        height: 6px;
+    }
+    .dot.active {
+        width: 12px;
+    }
+}
+
+ .product-scroll{
+    display:flex;
+    overflow-x:auto;
+    gap:12px;
+    padding:12px;
+    background:#f3e8ff;
+    border-radius:18px;
+    margin:15px;
+}
+
+.scroll-card{
+    min-width:120px;
+    max-width:120px;
+    background:white;
+    border-radius:14px;
+    padding:8px;
+    text-align:left;
+    flex-shrink:0;
+}
+
+.scroll-card img{
+    width:100%;
+    height:120px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+
+.scroll-card p{
+    color:gray;
+    font-size:14px;
+    margin-top:8px;
+}
+
+.scroll-card h4{
+    font-size:20px;
+    margin-top:4px;
+}
+
+.top-selection{
+    background:#dff5ee;
+    margin:15px;
+    border-radius:22px;
+    padding:18px;
+}
+
+.top-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.arrow-btn{
+    background:black;
+    color:white;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+}
+
+.selection-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-top:20px;
+}
+
+.selection-card{
+    background:white;
+    border-radius:14px;
+    padding:10px;
+}
+
+.selection-card img{
+    width:100%;
+    border-radius:12px;
+}
+
+.selection-card p{
+    color:gray;
+    margin-top:8px;
+}
+
+.selection-card h3{
+    margin-top:5px;
+}
+ .best-quality{
+    background:#dff0ff;
+}
+
+.spotlight-on{
+    background:#efe5ff;
+}
+ .brands-section{
+    padding:15px;
+}
+
+.brands-section h2{
+    font-size:36px;
+    margin-bottom:18px;
+    font-weight:bold;
+}
+
+.brands-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:12px;
+}
+
+.brand-box{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+}
+
+.brand-box img{
+    width:100%;
+    display:block;
+    border-radius:18px;
+}  
+  .suggested-section{
+    padding:15px;
+}
+
+.suggested-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.suggested-header h2{
+    font-size:36px;
+    white-space:nowrap;
+}
+
+.suggested-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:15px;
+}
+
+.suggested-card{
+    background:white;
+    border-radius:18px;
+    padding:10px;
+}
+
+.suggested-card img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:14px;
+}
+
+.suggested-card p{
+    font-size:16px;
+    margin-top:10px;
+    color:#444;
+}
+
+.suggested-card h3{
+    margin-top:6px;
+    font-size:22px;
+} 
+  .people-section{
+    background:#dff5ee;
+    margin:15px;
+    padding:18px;
+    border-radius:24px;
+}
+
+.people-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.people-header h2{
+    font-size:26px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.small-arrow{
+    background:black;
+    color:white;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+.people-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.people-card{
+    background:white;
+    border-radius:18px;
+    padding:10px;
+}
+
+.people-card img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:14px;
+}
+
+.people-card p{
+    font-size:16px;
+    margin-top:10px;
+    color:#444;
+}
+
+.people-card h3{
+    margin-top:6px;
+    font-size:24px;
+}
+  .brands2-section{
+    padding:15px;
+}
+
+.brands2-section h2{
+    font-size:36px;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.brands2-banner img{
+    width:100%;
+    border-radius:24px;
+    display:block;
+}
+ .discount-section{
+    background:#dff0ff;
+    margin:15px;
+    padding:18px;
+    border-radius:28px;
+}
+
+.discount-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.discount-header h2{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.small-arrow{
+    background:black;
+    color:white;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+}
+
+.discount-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.discount-card{
+    background:white;
+    border-radius:18px;
+    padding:10px;
+}
+
+.discount-card img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:14px;
+}
+
+.discount-card p{
+    font-size:16px;
+    margin-top:10px;
+}
+
+.discount-card h3{
+    font-size:22px;
+    margin-top:6px;
+}
+
+.grab-section{
+    background:#dff5ee;
+    margin:15px;
+    padding:18px;
+    border-radius:28px;
+}
+
+.grab-section h2{
+    font-size:34px;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.grab-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.grab-card{
+    background:white;
+    border-radius:18px;
+    padding:10px;
+}
+
+.grab-card img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:14px;
+}
+
+.grab-card p{
+    font-size:16px;
+    margin-top:10px;
+}
+
+.grab-card h3{
+    font-size:22px;
+    margin-top:6px;
+}
+ .quick-icons{
+   display:flex;
+   overflow-x:auto;
+   gap:18px;
+   padding:18px 15px;
+   background:white;
+   scrollbar-width:none;
+}
+
+.quick-icons::-webkit-scrollbar{
+   display:none;
+}
+
+.quick-item{
+   text-align:center;
+   min-width:72px;
+   flex-shrink:0;
+}
+
+.quick-item img{
+   width:60px;
+   height:60px;
+   object-fit:contain;
+}
+
+.quick-item p{
+   font-size:14px;
+   font-weight:500;
+   margin-top:6px;
+   color:#222;
+}  
+   /* GREAT FINDS SECTION */
+
+.great-finds-section{
+    padding:20px 14px;
+    background:#ffffff;
+    width:100%;
+    box-sizing:border-box;
+}
+
+.great-title{
+    font-size:24px;
+    font-weight:700;
+    color:#000;
+    margin-bottom:4px;
+}
+
+.sponsored-text{
+    font-size:14px;
+    color:#777;
+    margin-bottom:18px;
+}
+
+.great-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:10px;
+    width:100%;
+}
+
+.great-card{
+    background:#fff;
+}
+
+.great-card img{
+    width:100%;
+    height:110px;
+    object-fit:contain;
+    background:#f5f5f5;
+    border-radius:10px;
+}
+
+.rating-box{
+    display:inline-block;
+    background:#f2f2f2;
+    padding:4px 10px;
+    border-radius:8px;
+    font-size:14px;
+    margin-top:8px;
+    font-weight:600;
+}
+
+.great-card h3{
+    font-size:14px;
+    font-weight:500;
+    color:#333;
+    margin-top:10px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.price-row{
+    margin-top:6px;
+}
+
+.new-price{
+    font-size:16px;
+    font-weight:700;
+    color:#000;
+}
+
+.old-price{
+    font-size:14px;
+    color:#999;
+    text-decoration:line-through;
+    margin-left:5px;
+}
+
+.offer-text{
+    font-size:14px;
+    color:#1d3faa;
+    margin-top:6px;
+    line-height:20px;
+} 
+   .more-products{
+    padding:0;
+    margin:0;
+    width:100%;
+   
+}
+
+.more-products h2{
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:16px;
+    color:#212121;
+}
+
+.products-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:2px;
+    width:100%;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+.product-card{
+    position:relative;
+    width:100%;
+    margin:0;
+    padding:0;
+    border-radius:0;
+    min-height:420px;
+    box-sizing:border-box;
+}
+
+.product-image{
+    height:220px;
+    background:#f5f5f5;
+    border-radius:12px;
+    overflow:hidden;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.product-image img{
+    width:90%;
+    height:90%;
+    object-fit:contain;
+    display:block;
+}
+
+.rating-badge{
+    position:absolute;
+    left:8px;
+    bottom:8px;
+    background:#fff;
+    border-radius:8px;
+    padding:4px 8px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.product-title{
+    font-size:14px;
+    color:#212121;
+    margin-top:8px;
+    overflow:hidden;
+    line-height:20px;
+    height:40px;
+}
+
+.price-row{
+    margin-top:4px;
+}
+
+.old-price{
+    color:#878787;
+    text-decoration:line-through;
+    margin-right:5px;
+}
+
+.new-price{
+    font-size:24px;
+    font-weight:700;
+    color:#212121;
+}
+
+.offer-text{
+    color:#2874f0;
+    font-size:14px;
+    margin-top:4px;
+}
+
+.ad-tag{
+    position:absolute;
+    top:8px;
+    left:8px;
+    background:#9e9e9e;
+    color:white;
+    font-size:12px;
+    padding:4px 8px;
+    border-radius:8px;
+} 
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+<div style="
+background:#e3f2fd;
+padding:10px;
+">
+
+  <!-- 🔷 TOP 3 BOX -->
+  <div style="display:flex; gap:10px; padding:10px;">
+
+  <!-- 🛍️ SHOPMART -->
+  <div style="
+  flex:1;
+  background:white;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:65px;
+  ">
+    <img src="logo.png" style="height:34px;">
+  </div>
+
+  <!-- ✈️ TRAVEL -->
+  <div style="
+  flex:1;
+  background:white;
+  border-radius:12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:65px;
+  ">
+
+    <div style="font-size:22px;">✈️</div>
+    <div style="font-size:12px; color:black;">Travel</div>
+
+  </div>
+
+  <!-- 🧺 GROCERY -->
+  <div style="
+  flex:1;
+  background:white;
+  border-radius:12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:65px;
+  ">
+
+    <img src="grocery.jpg" style="height:26px;">
+    <div style="font-size:12px; color:black;">Grocery</div>
+
+  </div>
+
+  </div>
+
+
+    <!-- 📍 LOCATION + COIN -->
+  <div style="
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
+  ">
+
+    <div id="locationText" style="font-size:14px;">
+      📍 Detecting location...
+    </div>
+
+    <div style="
+    background:#fff;
+    padding:5px 10px;
+    border-radius:20px;
+    ">
+      ⚡ 0
+    </div>
+  </div>
+
+  <!-- 🔍 SEARCH BAR -->
+  <div style="margin-top:10px; width:100%;">
+    <input
+id="searchBox"
+type="text"
+placeholder="🔍 Search for Products"
+        
+style="
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid #bbdefb;
+outline:none;
+transition:all 0.3s ease;
+"
+onfocus="this.style.boxShadow='0 0 10px rgba(33,150,243,0.5)'"
+onblur="this.style.boxShadow='none'"
+>
+ </div>
+
+</div>   
+
+        <div class="category-bar" style="
+display:flex;
+overflow-x:auto;
+gap:15px;
+padding:10px;
+background:white;
+">
+
+<div class="cat-item active">
+  <img src="https://img.icons8.com/color/48/shop.png" class="cat-icon"><br>
+  <span style="font-size:12px; color:black;">For You</span>
+<div class="active-line"></div>
+</div>
+    
+    <div class="cat-item">
+    <img src="https://img.icons8.com/color/48/t-shirt.png" class="cat-icon"><br>
+    <span style="font-size:12px; color:black;">Fashion</span>
+ <div class="active-line"></div>
+    </div>
+
+  <div class="cat-item">
+    <img src="https://img.icons8.com/color/48/smartphone.png" class="cat-icon"><br>
+    <span style="font-size:12px;">Mobiles</span>
+ <div class="active-line"></div> 
+  </div>
+
+  <div class="cat-item">
+    <img src="https://img.icons8.com/color/48/lipstick.png" class="cat-icon"><br>
+    <span style="font-size:12px;">Beauty</span>
+ <div class="active-line"></div>
+  </div>
+
+  <div class="cat-item">
+    <img src="https://img.icons8.com/color/48/laptop.png" class="cat-icon"><br>
+    <span style="font-size:12px;">Electronics</span>
+<div class="active-line"></div>
+  </div>
+
+  <div class="cat-item">
+    <img src="https://img.icons8.com/color/48/sofa.png" class="cat-icon"><br>
+    <span style="font-size:12px;">Home</span>
+ <div class="active-line"></div>
+  </div>
+
+<div class="cat-item">
+  <img src="https://img.icons8.com/color/48/washing-machine.png" class="cat-icon"><br>
+  <span style="font-size:12px; color:black;">Appliances</span>
+<div class="active-line"></div>
+</div>
+   
+ <div class="cat-item">
+  <div style="display:flex; justify-content:center; gap:4px;">
+    <img src="https://img.icons8.com/color/48/toy.png" class="cat-icon">
+    <img src="https://img.icons8.com/color/48/baby.png" class="cat-icon">
+  </div>
+  <span style="font-size:12px; color:black;">Toys, Baby</span>
+<div class="active-line"></div>
+ </div>
+    
+  <div class="cat-item">
+  <img src="https://img.icons8.com/color/48/healthy-food.png" class="cat-icon"><br>
+  <span style="font-size:12px; color:black;">Food & Health</span>
+<div class="active-line"></div>
+  </div>
+    
+    <div class="cat-item">
+  <img src="https://img.icons8.com/color/48/book.png" class="cat-icon"><br>
+  <span style="font-size:12px; color:black;">Books & Media</span>
+    <div class="active-line"></div>
+    </div>
+        
+</div>
+    </header> 
+ <!-- 🔥 BANNER SLIDER -->
+    <div class="banner-container">
+    
+    <div class="slider-wrapper">
+        <div class="slider-track" id="sliderTrack">
+            <img src="ad1.png" alt="Banner 1">
+            <img src="ad2.png" alt="Banner 2">
+            <img src="ad3.png" alt="Banner 3">
+            <img src="ad4.png" alt="Banner 4">
+            <img src="ad5.png" alt="Banner 5">
+            <img src="ad6.png" alt="Banner 6">
+            <img src="ad7.png" alt="Banner 7">
+            <img src="ad8.png" alt="Banner 8">
+            <img src="ad9.png" alt="Banner 9">
+        </div>
+    </div>
+
+    <div class="slider-dots" id="sliderDots">
+    </div>
+
+    </div>
+</div>
+
+<div class="product-scroll">
+
+    <div class="scroll-card">
+        <img src="charger.png">
+        <p>Samsung</p>
+        <h4>Chargers</h4>
+    </div>
+
+    <div class="scroll-card">
+        <img src="perfume.png">
+        <p>Wild Stone</p>
+        <h4>Perfume</h4>
+    </div>
+
+    <div class="scroll-card">
+        <img src="boat.png">
+        <p>boAt</p>
+        <h4>Airdopes</h4>
+    </div>
+
+    <div class="scroll-card">
+        <img src="comfort.png">
+        <p>Comfort</p>
+        <h4>Fabric Care</h4>
+    </div>
+
+</div>
+  <div class="top-selection best-quality">
+
+   <div class="top-header">
+      <h2>Best quality</h2>
+
+      <div class="arrow-btn">
+         ➜
+      </div>
+   </div>
+
+   <div class="selection-grid">
+
+      <div class="selection-card">
+          <img src="bodywash.png">
+          <p>Body Wash</p>
+          <h3>In Focus Now</h3>
+      </div>
+
+      <div class="selection-card">
+          <img src="perfume2.png">
+          <p>Ajmal Eau De Parfum</p>
+          <h3>Bestsellers</h3>
+      </div>
+
+      <div class="selection-card">
+          <img src="deodorant.png">
+          <p>Be Bodywise Deodorant</p>
+          <h3>Popular</h3>
+      </div>
+
+      <div class="selection-card">
+          <img src="sunscreen.png">
+          <p>Dermatouch Sunscreen</p>
+          <h3>Specials</h3>
+      </div>
+
+   </div>
+
+  </div>
+    <div class="top-selection">
+
+   <div class="top-header">
+      <h2>Top Selection</h2>
+
+      <div class="arrow-btn">
+         ➜
+      </div>
+   </div>
+
+   <div class="selection-grid">
+
+      <div class="selection-card">
+          <img src="comfort.png">
+          <p>Comfort</p>
+          <h3>Top Picks</h3>
+      </div>
+
+      <div class="selection-card">
+          <img src="revive.png">
+          <p>Fabric</p>
+          <h3>Top Sellers</h3>
+      </div>
+
+      <div class="selection-card">
+          <img src="peanut.png">
+          <p>Peanut</p>
+          <h3>Best Deals</h3>
+      </div>
+
+      <div class="selection-card">
+          <img src="Soap.png">
+          <p>Soap</p>
+          <h3>Hot Sale</h3>
+      </div>
+
+   </div>
+
+</div>
+
+    <div class="top-selection spotlight-on">
+
+   <div class="top-header">
+      <h2>Spotlight's On</h2>
+
+      <div class="arrow-btn">
+         ➜
+      </div>
+   </div>
+
+   <div class="selection-grid">
+
+      <div class="selection-card">
+          <img src="watch.png">
+          <p>Luxury</p>
+          <h3>Watches</h3>
+      </div>
+
+      <div class="selection-card">
+          <img src="pant.png">
+          <p>Trending</p>
+          <h3>Fashion</h3>
+      </div>
+
+      <div class="selection-card">
+          <img src="glasses.png">
+          <p>Stylish</p>
+          <h3>Eyewear</h3>
+      </div>
+
+      <div class="selection-card">
+          <img src="bottle.png">
+          <p>Premium</p>
+          <h3>Bottle</h3>
+      </div>
+
+   </div>
+
+    </div>
+
+   <div class="brands-section">
+
+   <h2>Brands In Spotlight</h2>
+
+   <div class="brands-grid">
+
+      <div class="brand-box">
+         <img src="earbuds-ad.png">
+      </div>
+
+      <div class="brand-box">
+         <img src="speaker-ad.png">
+      </div>
+
+      <div class="brand-box">
+         <img src="watch-ad.png">
+      </div>
+
+      <div class="brand-box">
+         <img src="shoes-ad.png">
+      </div>
+
+      <div class="brand-box">
+         <img src="screen-care-ad.png">
+      </div>
+
+      <div class="brand-box">
+         <img src="royal-mist-ad.png">
+      </div>
+
+   </div>
+
+   </div> 
+ 
+   <div class="suggested-section">
+
+   <div class="suggested-header">
+      <h2>Suggested For You</h2>
+
+      <div class="arrow-btn">
+         ➜
+      </div>
+   </div>
+
+   <div class="suggested-grid">
+
+      <div class="suggested-card">
+         <img src="iphone17promax.png">
+         <p>Apple iPhone 17 Pro Max</p>
+         <h3>₹1,49,999</h3>
+      </div>
+
+      <div class="suggested-card">
+         <img src="s26ultra.png">
+         <p>Samsung Galaxy S26 Ultra</p>
+         <h3>₹1,39,999</h3>
+      </div>
+
+      <div class="suggested-card">
+         <img src="applewatchultra3.png">
+         <p>Apple Watch Ultra 3</p>
+         <h3>₹89,999</h3>
+      </div>
+
+      <div class="suggested-card">
+         <img src="ps6controller.png">
+         <p>Sony PS5 Controller</p>
+         <h3>₹6,999</h3>
+      </div>
+
+      <div class="suggested-card">
+         <img src="jblpartyspeaker.png">
+         <p>JBL Party Speaker</p>
+         <h3>₹14,999</h3>
+      </div>
+
+      <div class="suggested-card">
+         <img src="airpodspro.png">
+         <p>AirPods Pro</p>
+         <h3>₹24,999</h3>
+      </div>
+
+   </div>
+   
+   </div>
+       
+<div class="people-section">
+
+   <div class="people-header">
+
+      <h2>People also viewed</h2>
+
+      <div class="small-arrow">
+         ➜
+      </div>
+
+   </div>
+
+   <div class="people-grid">
+
+      <div class="people-card">
+         <img src="oversizedtshirt.png">
+         <p>Crazy Deal</p>
+         <h3>Up to 80% Off</h3>
+      </div>
+
+      <div class="people-card">
+         <img src="luxurywatch.png">
+         <p>Luxury Watches</p>
+         <h3>Up to 70% Off</h3>
+      </div>
+
+      <div class="people-card">
+         <img src="airpodspro.png">
+         <p>Premium Audio</p>
+         <h3>Starting ₹4,999</h3>
+      </div>
+
+      <div class="people-card">
+         <img src="Pumasneakers.png">
+         <p>Puma Sneakers</p>
+         <h3>Min. 50% Off</h3>
+      </div>
+
+   </div>
+
+</div>
+    
+    <div class="suggested-section">
+
+   <div class="suggested-header">
+      <h2>Suggested For You</h2>
+
+      <div class="arrow-btn">
+         ➜
+      </div>
+   </div>
+
+   <div class="suggested-grid"> 
+       <div class="suggested-card">
+         <img src="nikeair.png">
+         <p>Nike Air Shoes</p>
+         <h3>₹9,999</h3>
+      </div>
+
+      <div class="suggested-card">
+         <img src="gucciperfume.png">
+         <p>Gucci Perfume</p>
+         <h3>₹12,999</h3>
+      </div>
+
+      <div class="suggested-card">
+         <img src="rayban.png">
+         <p>RayBan Sunglasses</p>
+         <h3>₹7,999</h3>
+      </div>
+
+      <div class="suggested-card">
+         <img src="rgbkeyboard.png">
+         <p>RGB Keyboard</p>
+         <h3>₹4,999</h3>
+      </div>
+
+      <div class="suggested-card">
+         <img src="gamingmouse.png">
+         <p>Gaming Mouse</p>
+         <h3>₹2,999</h3>
+      </div>
+
+      <div class="suggested-card">
+         <img src="ringlight.png">
+         <p>Ring Light Camera Kit</p>
+         <h3>₹3,499</h3>
+      </div>
+
+   </div>
+
+   </div> 
+  
+  <div class="brands2-section">
+
+   <h2>Brands In Spotlight</h2>
+
+   <div class="brands2-banner">
+      <img src="boatstormcall-banner.png">
+   </div>
+
+  </div>  
+ 
+    <div class="discount-section">
+
+   <div class="discount-header">
+
+      <h2>Discounts for you</h2>
+
+      <div class="small-arrow">
+         ➜
+      </div>
+
+   </div>
+
+   <div class="discount-grid">
+
+      <div class="discount-card">
+         <img src="savlon-handwash.png">
+         <p>Hand Wash</p>
+         <h3>Min. 20% Off</h3>
+      </div>
+
+      <div class="discount-card">
+         <img src="vivel-bodywash.png">
+         <p>Body Wash</p>
+         <h3>Min. 50% Off</h3>
+      </div>
+
+      <div class="discount-card">
+         <img src="realme-buds.png">
+         <p>True Wireless</p>
+         <h3>Min. 50% Off</h3>
+      </div>
+
+      <div class="discount-card">
+         <img src="bellavita-perfume.png">
+         <p>Fragrances</p>
+         <h3>Min. 50% Off</h3>
+      </div>
+
+   </div>
+
+    </div>
+   
+    <div class="grab-section">
+
+   <h2>Grab or gone</h2>
+
+   <div class="grab-grid">
+
+      <div class="grab-card">
+         <img src="luxury-watch.png">
+         <p>Cool Collections</p>
+         <h3>Min 70 Off</h3>
+      </div>
+
+      <div class="grab-card">
+         <img src="mens-hightops.png">
+         <p>Men's High Tops</p>
+         <h3>Min. 40% Off</h3>
+      </div>
+
+      <div class="grab-card">
+         <img src="music-speaker.png">
+         <p>Music on the Go</p>
+         <h3>Flat 40% Off</h3>
+      </div>
+
+      <div class="grab-card">
+         <img src="mens-sliders.png">
+         <p>Men's Slippers, Sliders..</p>
+         <h3>From ₹129</h3>
+      </div>
+
+   </div>
+
+    </div>
+ 
+    <div class="quick-icons">
+
+  <div class="quick-item">
+    <img src="genz-icon.png">
+    <p>For GenZ</p>
+  </div>
+
+  <div class="quick-item">
+    <img src="smartpay-icon.png">
+    <p>SMart Pay</p>
+  </div>
+
+  <div class="quick-item">
+    <img src="originals-icon.png">
+    <p>Originals</p>
+  </div>
+
+  <div class="quick-item">
+    <img src="giftcards-icon.png">
+    <p>Gift Cards</p>
+  </div>
+
+  <div class="quick-item">
+    <img src="sellphone-icon.png">
+    <p>Sell Phone</p>
+  </div>
+
+  <div class="quick-item">
+    <img src="grocery-icon.png">
+    <p>Grocery</p>
+  </div>
+
+  <div class="quick-item">
+    <img src="travel-icon.png">
+    <p>Travel</p>
+  </div>
+
+  <div class="quick-item">
+    <img src="rewards-icon.png">
+    <p>Rewards</p>
+  </div>
+
+  <div class="quick-item">
+    <img src="pluszone-icon.png">
+    <p>Plus Zone</p>
+  </div>
+
+  <div class="quick-item">
+    <img src="ministore-icon.png">
+    <p>Mini Store</p>
+  </div>
+
+  <div class="quick-item">
+    <img src="fashionhub-icon.png">
+    <p>Fashion Hub</p>
+  </div>
+
+  <div class="quick-item">
+    <img src="aichoice-icon.png">
+    <p>AI Choice</p>
+  </div>
+
+  <div class="quick-item">
+    <img src="luckydrop-icon.png">
+    <p>Lucky Drop</p>
+  </div>
+
+    </div>
+ 
+    <!-- GREAT FINDS FOR YOU -->
+<div class="great-finds-section">
+
+    <h2 class="great-title">Great finds for you</h2>
+    <p class="sponsored-text">Sponsored</p>
+
+    <div class="great-grid">
+
+        <!-- PRODUCT 1 -->
+        <div class="great-card">
+            <img src="asus-expertbook.png">
+            <div class="rating-box">4.3 ★</div>
+
+            <h3>ASUS ExpertBook...</h3>
+
+            <div class="price-row">
+                <span class="new-price">₹49,990</span>
+                <span class="old-price">74,990</span>
+            </div>
+
+            <p class="offer-text">₹48,980 Only for you!</p>
+        </div>
+
+        <!-- PRODUCT 2 -->
+        <div class="great-card">
+            <img src="samsung-book4.png">
+            <div class="rating-box">4.2 ★</div>
+
+            <h3>Samsung Galaxy...</h3>
+
+            <div class="price-row">
+                <span class="new-price">₹62,990</span>
+                <span class="old-price">82,789</span>
+            </div>
+
+            <p class="offer-text">₹60,990 Only for you!</p>
+        </div>
+
+        <!-- PRODUCT 3 -->
+        <div class="great-card">
+            <img src="hp-ai-laptop.png">
+            <div class="rating-box">4.4 ★</div>
+
+            <h3>HP AI Laptop...</h3>
+
+            <div class="price-row">
+                <span class="new-price">₹82,990</span>
+                <span class="old-price">1,33,748</span>
+            </div>
+
+            <p class="offer-text">₹79,999 Only for you!</p>
+        </div>
+
+        <!-- PRODUCT 4 -->
+        <div class="great-card">
+            <img src="macbook-air.png">
+            <div class="rating-box">4.1 ★</div>
+
+            <h3>MacBook Air...</h3>
+
+            <div class="price-row">
+                <span class="new-price">₹1,34,800</span>
+                <span class="old-price">1,44,900</span>
+            </div>
+
+            <p class="offer-text">₹1,30,989 Only for you!</p>
+        </div>
+
+        <!-- PRODUCT 5 -->
+        <div class="great-card">
+            <img src="macbook-gradient.png">
+            <div class="rating-box">4.5 ★</div>
+
+            <h3>MacBook Gradient...</h3>
+
+            <div class="price-row">
+                <span class="new-price">₹63,990</span>
+                <span class="old-price">69,900</span>
+            </div>
+            <p class="offer-text">₹61,989 Only for you!</p>
+        </div>
+
+        <!-- PRODUCT 6 -->
+        <div class="great-card">
+            <img src="samsung-book360.png">
+            <div class="rating-box">4.6 ★</div>
+
+            <h3>Samsung Book360...</h3>
+
+            <div class="price-row">
+                <span class="new-price">₹1,14,990</span>
+                <span class="old-price">1,32,239</span>
+            </div>
+
+            <p class="offer-text">₹1,11,979 Only for you!</p>
+        </div>
+
+    </div>
+</div>
+    <!-- Main Content -->
+<main>
+    
+        <!-- Hero Section -->
+        
+<!-- Products Section -->
+
+        <!-- Products Section -->
+
+<section class="more-products">
+    <h2>More products for you</h2>
+
+    <div class="products-grid" id="productsGrid">
+    </div>
+</section>
+
+    </main>
+
+    <!-- Shopping Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <h2>Shopping Cart</h2>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+            <div id="cartItems"></div>
+            <div class="cart-total" id="cartTotal">$0.00</div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        Purchase completed successfully! 🎉
+    </div>
+<!-- 📍 Address Popup -->
+<div id="addressPopup" style="display:none; position:fixed; bottom:0; left:0; width:100%; background:#fff; padding:20px; border-top-left-radius:20px; border-top-right-radius:20px; box-shadow:0 -5px 15px rgba(0,0,0,0.2); z-index:9999;">
+
+  <h3>Select delivery address</h3>
+
+  <input type="text" id="popupAddress" placeholder="Enter your address" style="width:100%; padding:10px; margin-top:10px;">
+
+    <button onclick="useCurrentLocation()" style="margin-top:10px; padding:10px; width:100%; background:#2874f0; color:white;">📍 Use My Current Location</button>
+  
+    <button onclick="addNewAddress()" style="margin-top:10px; padding:10px; width:100%;">➕ Add Address</button>
+
+  <!-- 📦 Address List -->
+  <div id="addressList" style="margin-top:15px;"></div>
+
+  <button onclick="closePopup()" style="margin-top:10px; padding:10px; width:100%; background:red; color:white;">Close</button>
+
+</div> 
+    <!-- Firebase START -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyBPGqVgZJVGoTG-bhvtLT_zgDucNPixMB4",
+    authDomain: "zentra-6d057.firebaseapp.com",
+    projectId: "zentra-6d057",
+    storageBucket: "zentra-6d057.firebasestorage.app",
+    messagingSenderId: "972544114586",
+    appId: "1:972544114586:web:d4b8eba3ca0ca9762d4423"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+function goAccount() {
+  window.location.href = "https://ziyaurrahmankhan9365-tech.github.io/Zent-ra/login.html";
+}
+
+    function loadUserName() {
+  const email = localStorage.getItem("userEmail");
+
+  if (email) {
+    const name = email.split("@")[0].toUpperCase();
+
+    document.getElementById("userWelcome").textContent =
+      name + ", still looking for these? 👀";
+  } else {
+    document.getElementById("userWelcome").textContent =
+      "Welcome to ShopMart 👋";
+  }
+}
+
+loadUserName();
+</script>
+
+<!-- Firebase END -->
+    <script>
+        // Product Data
+        
+
+        // Shopping Cart
+        let cart = [];
+
+        // Initialize the page
+        
+
+        // Render Products
+        function renderProducts() {
+            const productsGrid = document.querySelector('.products-grid');
+            productsGrid.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">$${product.price.toFixed(2)}</div>
+                        <button class="add-to-cart" onclick="addToCart(${product.id})">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Add to Cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartCount();
+           renderCart();
+            showSuccess('Product added to cart!');
+        }
+
+
+        // Render Cart
+        function renderCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Your cart is empty</p>';
+                cartTotal.textContent = '$0.00';
+                return;
+            }
+
+            cartItems.innerHTML = cart.map(item => `
+  <div class="cart-item">
+    <span>${item.name}</span>
+
+    <div>
+      <button onclick="decreaseQty(${item.id})">➖</button>
+      <span>${item.quantity}</span>
+      <button onclick="increaseQty(${item.id})">➕</button>
+    </div>
+
+    <span>$${(item.price * item.quantity).toFixed(2)}</span>
+
+    <button onclick="removeItem(${item.id})" style="background:red;color:white;">❌</button>
+  </div>
+`).join('');
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        // Checkout
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            alert(`Thank you for your purchase! Total: $${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}`);
+            cart = [];
+            updateCartCount();
+            toggleCart();
+            showSuccess('Purchase completed successfully!');
+        }
+
+        // Show Success Message
+        function showSuccess(message) {
+            const successMsg = document.getElementById('successMessage');
+            successMsg.textContent = message;
+            successMsg.style.display = 'block';
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 3000);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('cartModal');
+            if (event.target === modal) {
+                toggleCart();
+            }
+        }
+
+        // Initialize when page loads
+            window.addEventListener("load", function () {
+    renderProducts();
+    updateCartCount();
+});
+
+// ✅ SIGNUP FUNCTION
+function signup() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .then(() => alert("Signup Successful ✅"))
+    .catch(error => alert(error.message));
+}
+
+// ✅ LOGIN FUNCTION
+function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => alert("Login Successful 🔥"))
+    .catch(error => alert(error.message));
+}
+    // ✅ AUTO LOGIN CHECK
+auth.onAuthStateChanged(user => {
+  if (user) {
+    document.getElementById("authBox").style.display = "none";
+
+document.querySelector(".hero").innerHTML += 
+  "<h2>Welcome " + user.email + " 🎉</h2><button onclick='logout()'>Logout</button>";
+  }
+});
+
+// ✅ LOGOUT FUNCTION
+function logout() {
+  auth.signOut().then(() => {
+    alert("Logout Successful 👋");
+    location.reload();
+  });
+}
+function forgotPassword() {
+  const email = document.getElementById("email").value;
+
+  if (!email) {
+    alert("Enter email first ⚠️");
+    return;
+  }
+
+  auth.sendPasswordResetEmail(email)
+    .then(() => alert("Password reset email sent 📩"))
+    .catch(error => alert(error.message));
+}
+ // ➕ Increase Quantity
+function increaseQty(id) {
+  const item = cart.find(i => i.id === id);
+  item.quantity++;
+  updateCartCount();
+  renderCart();
+}
+
+// ➖ Decrease Quantity
+function decreaseQty(id) {
+  const item = cart.find(i => i.id === id);
+
+  if (item.quantity > 1) {
+    item.quantity--;
+  } else {
+    cart = cart.filter(i => i.id !== id);
+  }
+
+  updateCartCount();
+  renderCart();
+}
+
+// ❌ Remove Item
+function removeItem(id) {
+  cart = cart.filter(i => i.id !== id);
+  updateCartCount();
+  renderCart();
+}
+// 🛒 Update Cart Count
+function updateCartCount() {
+  const cartCount = document.getElementById("cartCount");
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  cartCount.textContent = totalItems;
+}
+
+// 🛒 Toggle Cart Modal
+function toggleCart() {
+  const modal = document.getElementById("cartModal");
+  modal.style.display = modal.style.display === "block" ? "none" : "block";
+}
+ // 📍 Save Address
+function saveAddress() {
+  const address = document.getElementById("userAddress").value;
+
+  if (address === "") {
+    alert("Enter address first ⚠️");
+    return;
+  }
+
+  localStorage.setItem("userAddress", address);
+  document.querySelector(".address").textContent = address;
+}
+
+// 📍 Load saved address
+window.addEventListener("DOMContentLoaded", () => {
+  const savedAddress = localStorage.getItem("userAddress");
+
+  if (savedAddress) {
+    document.querySelector(".address").textContent = savedAddress;
+  }
+});
+     function useCurrentLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      const locationText = `Lat: ${lat.toFixed(3)}, Lon: ${lon.toFixed(3)}`;
+
+      localStorage.setItem("userAddress", locationText);
+      document.querySelector(".address").textContent = locationText;
+
+      closePopup();
+    });
+  } else {
+    alert("Geolocation not supported ❌");
+  }
+     }
+        // 📦 Get addresses
+function getAddresses() {
+  return JSON.parse(localStorage.getItem("addresses")) || [];
+}
+
+// 📍 Add new address
+function addNewAddress() {
+  const input = document.getElementById("popupAddress");
+  const value = input.value.trim();
+
+  if (value === "") {
+    alert("Enter address ⚠️");
+    return;
+  }
+
+  let addresses = getAddresses();
+  addresses.push(value);
+  localStorage.setItem("addresses", JSON.stringify(addresses));
+
+  input.value = "";
+  renderAddressList();
+}
+
+// 📍 Render address list
+function renderAddressList() {
+  const list = document.getElementById("addressList");
+  const addresses = getAddresses();
+
+  const selected = localStorage.getItem("userAddress");
+
+list.innerHTML = addresses.map((addr, index) => {
+  return `
+    <div style="padding:10px; border:1px solid #ddd; margin-top:5px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;">
+      
+      <div onclick="selectAddress('${addr}')" style="cursor:pointer;">
+        🏠 ${addr}
+        ${selected === addr ? `<span style="background:#2874f0; color:white; padding:2px 8px; border-radius:10px; font-size:12px; margin-left:5px;">Selected</span>` : ""}
+      </div>
+
+      <button onclick="deleteAddress(${index})">❌</button>
+    </div>
+  `;
+}).join('');
+}
+
+// 📍 Select address
+function selectAddress(addr) {
+  localStorage.setItem("userAddress", addr);
+  document.querySelector(".address").textContent = addr;
+  closePopup();
+}
+
+// 📍 Delete address
+function deleteAddress(index) {
+  let addresses = getAddresses();
+  addresses.splice(index, 1);
+  localStorage.setItem("addresses", JSON.stringify(addresses));
+  renderAddressList();
+}
+
+// 📍 Open popup (update)
+function openPopup() {
+  document.getElementById("addressPopup").style.display = "block";
+  renderAddressList();
+}
+
+// 📍 Close popup
+function closePopup() {
+  document.getElementById("addressPopup").style.display = "none";
+}
+        // 🔍 Search Function FIX
+document.addEventListener("DOMContentLoaded", function () {
+  const searchBox = document.getElementById("searchBox");
+
+  if (!searchBox) return;
+
+  searchBox.addEventListener("input", function (e) {
+  const value = e.target.value.toLowerCase();
+
+  if (value === "") {
+    renderProducts();   // ✅ sab products wapas
+    return;
+  }
+
+  const filtered = products.filter(p =>
+    p.name.toLowerCase().includes(value)
+  );
+
+  renderFilteredProducts(filtered);
+  });
+});
+
+function renderFilteredProducts(list) {
+  const productsGrid = document.querySelector('.products-grid');
+
+  if (list.length === 0) {
+    productsGrid.innerHTML = "<h3>No product found 😢</h3>";
+    return;
+  }
+
+  productsGrid.innerHTML = list.map(product => `
+    <div class="product-card">
+      <img src="${product.image}" class="product-image">
+      <div class="product-info">
+        <h3>${product.name}</h3>
+        <div>$${product.price}</div>
+        <button onclick="addToCart(${product.id})">Add to Cart</button>
+      </div>
+    </div>
+  `).join('');
+}
+  // 🔻 Bottom Nav Functions
+function goHome() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+function goCategory() {
+  const section = document.querySelector(".categories");
+  
+  if (section) {
+    section.scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+}
+   
+        function goAccount() {
+  window.location.href = "login.html";
+}
+
+function goCart() {
+  window.location.href = "cart.html";
+}
+  // 📍 AUTO LOCATION DETECT
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+
+    // 🌍 Reverse Geocoding API
+    fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+      .then(res => res.json())
+      .then(data => {
+
+        let address = data.address;
+
+        let country = address.country || "";
+        let postcode = address.postcode || "";
+        let state = address.state || "";
+        let city = address.city || address.town || address.village || "";
+
+        document.getElementById("locationText").innerText =
+          `📍 ${postcode}, ${city}, ${state}, ${country}`;
+
+      })
+      .catch(() => {
+        document.getElementById("locationText").innerText = "📍 Location not found";
+      });
+
+  }, function() {
+    document.getElementById("locationText").innerText = "📍 Permission denied";
+  });
+} else {
+  document.getElementById("locationText").innerText = "📍 Not supported";
+} 
+    </script>
+<!-- 🔻 Bottom Navigation -->
+<div class="bottom-nav">
+
+  <div class="nav-item active" onclick="goHome()">
+    <div>🏠</div>
+    <span>Home</span>
+  </div>
+
+  <div class="nav-item" onclick="goCategory()">
+    <div>📂</div>
+    <span>Categories</span>
+  </div>
+
+  <div class="nav-item" onclick="goAccount()">
+    <div>👤</div>
+    <span>Account</span>
+  </div>
+
+  <div class="nav-item" onclick="toggleCart()">
+    <div>🛒</div>
+    <span>Cart</span>
+  </div>
+
+</div>
+<script>
+  const items = document.querySelectorAll(".cat-item");
+
+  items.forEach(item => {
+    item.addEventListener("click", () => {
+
+      items.forEach(i => i.classList.remove("active"));
+      item.classList.add("active");
+
+    });
+  });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const track = document.getElementById("sliderTrack");
+    const dotsContainer = document.getElementById("sliderDots");
+    const slides = track.getElementsByTagName("img");
+    const totalSlides = slides.length;
+    let currentIndex = 0;
+    let slideInterval;
+
+    function createDots() {
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement("div");
+            dot.classList.add("dot");
+
+            if (i === 0) dot.classList.add("active");
+
+            dot.addEventListener("click", () => {
+                goToSlide(i);
+                resetTimer();
+            });
+
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function goToSlide(index) {
+        currentIndex = index;
+
+        if (currentIndex >= totalSlides) currentIndex = 0;
+        if (currentIndex < 0) currentIndex = totalSlides - 1;
+
+        track.style.transform =
+        `translateX(-${currentIndex * 100}%)`;
+
+        const dots =
+        dotsContainer.getElementsByClassName("dot");
+
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].classList.remove("active");
+        }
+
+        if (dots[currentIndex]) {
+            dots[currentIndex].classList.add("active");
+        }
+    }
+
+    function startTimer() {
+        slideInterval = setInterval(() => {
+            goToSlide(currentIndex + 1);
+        }, 3500);
+    }
+
+    function resetTimer() {
+        clearInterval(slideInterval);
+        startTimer();
+    }
+
+    if (totalSlides > 0) {
+        createDots();
+        startTimer();
+    }
+});
+</script>
+    <script>
+const products = [
+{
+img:"samsung-book4-360.png",
+category:"Laptop",
+    images:[
+ "book4_12.png",
+ "book4_1.jpg",
+ "book4_2.jpg",
+ "book4_3.jpg",
+ "book4_4.jpg",
+ "book4_5.jpg",
+ "book4_6.jpg",
+ "book4_7.jpg",
+ "book4_8.jpg",
+ "book4_9.jpg",
+ "book4_10.jpg",
+ "book4_11.jpg",
+],
+ name:"Samsung Galaxy Book4 360",
+rating:"4.3",
+reviews:"22",
+oldPrice:"159839",
+price:"126999",
+offer:"₹1,21,989 Only for you!",
+
+  offers:[
+    "₹2000 Off on HDFC Card",
+    "₹1000 Cashback on UPI",
+    "No Cost EMI up to 12 Months"
+  ],    
+    
+highlights:[
+ "Intel Evo Processor",
+ "Touch Screen Display",
+ "16GB RAM",
+ "512GB SSD",
+ "Windows 11"
+],
+
+highlightIcons:[
+"memory",
+"touch_app",
+"memory_alt",
+"hard_disk",
+"laptop_windows"
+],
+
+highlightSubtitles:[
+"Intel Evo performance",
+"Responsive touch display",
+"Smooth multitasking",
+"Ultra fast SSD storage",
+"Latest Windows experience"
+],
+    
+description:"Premium Samsung laptop with Intel Evo processor, touchscreen display and powerful performance."
+},
+
+{
+img:"samsung-powerbank.png",
+category:"Power Bank",
+ name:"Samsung 10000 mAh Power Bank",
+rating:"4.3",
+reviews:"4,360",
+oldPrice:"3999",
+price:"2999",
+offer:"₹2,919 with UPI offer",
+
+offers:[
+    "₹50 Off on Paytm",
+    "₹25 Cashback on UPI",
+    "Free Delivery"
+  ],
+    
+highlights:[
+ "10000mAh Battery",
+ "Fast Charging",
+ "Dual USB Output",
+ "Compact Design",
+ "LED Indicator"
+],
+
+highlightIcons:[
+"battery_full",
+"bolt",
+"usb",
+"inventory_2",
+"battery_charging_full"
+],
+
+highlightSubtitles:[
+"Long battery backup",
+"Super fast charging",
+"Charge two devices",
+"Pocket friendly size",
+"Battery level indicator"
+],
+    
+description:"Portable Samsung power bank with fast charging support and long battery backup."
+},
+
+{
+img:"revive-liquid-stiffener.png",
+category:"Fabric Care",
+    name:"Revive Liquid Stiffener",
+rating:"4.3",
+reviews:"486",
+oldPrice:"170",
+price:"119",
+offer:"₹59 with UPI offer + more",
+
+offers:[
+    "₹5 Cashback on UPI",
+    "Buy 2 Get 1 Free",
+    "Free Delivery"
+  ],
+    
+highlights:[
+ "Easy Fabric Stiffening",
+ "Long Lasting Effect",
+ "Quick Dry Formula",
+ "Suitable For Crafts",
+ "Easy To Use"
+],
+
+highlightIcons:[
+"checkroom",
+"verified",
+"air",
+"design_services",
+"science"
+],
+
+highlightSubtitles:[
+"Perfect fabric care",
+"Long lasting finish",
+"Quick drying formula",
+"Ideal for crafts",
+"Easy liquid solution"
+],
+    
+description:"Revive liquid stiffener helps fabrics maintain shape and stiffness for longer."
+},
+
+{
+img:"denver-magnus-perfume.png",
+category:"Perfume",
+ name:"Denver Magnus Perfume",
+rating:"4.3",
+reviews:"173",
+oldPrice:"399",
+price:"219",
+offer:"₹169 with UPI offer + more",
+ad:true,
+
+offers:[
+    "₹169 Off on UPI",
+    "10% Off with SBI Card",
+    "Free Delivery"
+  ],
+    
+highlights:[
+ "Long Lasting Fragrance",
+ "Premium Perfume",
+ "Fresh Scent",
+ "Daily Use",
+ "Travel Friendly"
+],
+
+highlightIcons:[
+"spa",
+"schedule",
+"air",
+"calendar_today",
+"luggage"
+],
+
+highlightSubtitles:[
+"Premium fragrance",
+"Lasts all day",
+"Fresh masculine scent",
+"Perfect everyday use",
+"Easy to carry"
+],
+    
+description:"Denver Magnus perfume with premium fragrance and long lasting freshness."
+},
+
+{
+img:"samsung-book5-360.png",
+category:"Laptop",
+name:"Samsung Galaxy Book5 360",
+rating:"4.5",
+reviews:"69",
+oldPrice:"137988",
+price:"107890",
+offer:"₹1,232 with UPI offer + more",
+
+offers:[
+ "₹3000 Instant Discount on HDFC Bank Card",
+ "₹2000 Cashback on UPI Transaction",
+ "No Cost EMI from ₹4,458/month"
+],
+    
+highlights:[
+ "Intel Processor",
+ "360 Degree Hinge",
+ "Touch Display",
+ "Fast SSD Storage",
+ "Windows 11"
+],
+
+highlightIcons:[
+"memory",
+"screen_rotation",
+"touch_app",
+"hard_disk",
+"laptop_windows"
+],
+
+highlightSubtitles:[
+"Powerful Intel processor",
+"Flexible 360° hinge",
+"Smooth touch display",
+"Lightning fast SSD",
+"Windows 11 preloaded"
+],
+    
+description:"Samsung Galaxy Book5 360 laptop with touchscreen and premium performance."
+},
+
+{
+img:"ajmal-zeal-perfume.png",
+category:"Perfume",
+ name:"Ajmal Zeal Eau De Parfum",
+rating:"4.3",
+reviews:"5632",
+oldPrice:"2000",
+price:"1350",
+offer:"₹1,232 with UPI offer + more",
+
+offers:[
+ "₹50 Cashback on UPI",
+ "10% Off on First Order",
+ "Free Delivery"
+],
+    
+highlights:[
+ "Premium Fragrance",
+ "Long Lasting",
+ "Fresh Notes",
+ "Travel Friendly",
+ "Daily Wear"
+],
+
+highlightIcons:[
+"spa",
+"schedule",
+"local_florist",
+"luggage",
+"diamond"
+],
+
+highlightSubtitles:[
+"Luxury fragrance",
+"Long lasting scent",
+"Refreshing aroma",
+"Travel ready bottle",
+"Premium quality"
+],
+    
+description:"Ajmal Zeal Eau De Parfum offers a refreshing and long lasting fragrance."
+},
+
+{
+img:"ujala-young-fresh-conditioner.png",
+category:"Fabric Care",
+ name:"Ujala Young & Fresh",
+rating:"4.8",
+reviews:"4",
+oldPrice:"390",
+price:"180",
+offer:"₹130 with UPI offer + more",
+
+offers:[
+ "₹20 Cashback on UPI Payment",
+ "₹15 Off on Paytm Wallet",
+ "Buy 2 Get Extra 5% Off"
+],
+    
+highlights:[
+ "Fresh Fragrance",
+ "Fabric Care",
+ "Easy To Use",
+ "Long Lasting Freshness",
+ "Value Pack"
+],
+
+highlightIcons:[
+"local_laundry_service",
+"spa",
+"check_circle",
+"schedule",
+"inventory_2"
+],
+
+highlightSubtitles:[
+"Pleasant fragrance",
+"Gentle fabric care",
+"Simple application",
+"Long lasting freshness",
+"Value family pack"
+],
+    
+description:"Ujala Young & Fresh keeps clothes smelling fresh and clean."
+},
+
+{
+img:"samsung-book3-360.png",
+category:"Laptop",
+ name:"Samsung Galaxy Book3 360",
+rating:"4.2",
+reviews:"17",
+oldPrice:"141439",
+price:"112999",
+offer:"₹1,07,989 Only for you!",
+
+offers:[
+ "₹2500 Instant Discount on HDFC Bank Card",
+ "₹1500 Cashback on UPI Payment",
+ "No Cost EMI up to 18 Months"
+],
+    
+highlights:[
+ "Intel Core Processor",
+ "360° Convertible Design",
+ "Touch Screen Display",
+ "16GB RAM",
+ "512GB SSD"
+],
+
+highlightIcons:[
+"memory",
+"screen_rotation",
+"touch_app",
+"memory_alt",
+"hard_disk"
+],
+
+highlightSubtitles:[
+"Intel Core performance",
+"Flexible 360° design",
+"Touch enabled display",
+"Smooth multitasking",
+"Fast SSD storage"
+],
+    
+description:"Samsung Galaxy Book3 360 premium laptop with touchscreen display, powerful performance and flexible 360 degree design for work and entertainment."
+},
+
+{
+img:"crompton-ceiling-fan.png",
+category:"Fan",
+name:"Crompton Surebreeze Fan",
+rating:"4.2",
+reviews:"1230",
+oldPrice:"4999",
+price:"2197",
+offer:"₹2,147 with UPI offer",
+
+offers:[
+ "₹300 Instant Discount on HDFC Bank Card",
+ "₹150 Cashback on UPI Payment",
+ "No Cost EMI for 3 Months"
+],
+    
+highlights:[
+ "High Speed Motor",
+ "Energy Efficient",
+ "Silent Operation",
+ "Durable Build",
+ "Wide Air Delivery"
+],
+
+highlightIcons:[
+"air",
+"eco",
+"volume_off",
+"construction",
+"airwave"
+],
+
+highlightSubtitles:[
+"Powerful airflow",
+"Low power consumption",
+"Quiet operation",
+"Durable build quality",
+"Wide air delivery"
+],
+    
+description:"Crompton Surebreeze ceiling fan with powerful airflow and energy efficiency."
+},
+
+{
+img:"kuhl-brown-remote-fan.png",
+category:"Fan",
+name:"KUHL Prima A7 BLDC Fan",
+rating:"4.2",
+reviews:"1230",
+oldPrice:"6350",
+price:"2949",
+offer:"₹2,949 with UPI offer",
+ad:true,
+
+offers:[
+ "₹400 Instant Discount on HDFC Bank Card",
+ "₹200 Cashback on UPI Payment",
+ "No Cost EMI up to 6 Months"
+],
+    
+highlights:[
+ "BLDC Motor",
+ "Remote Control",
+ "Energy Saving",
+ "Silent Operation",
+ "Premium Design"
+],
+
+highlightIcons:[
+"air",
+"settings_remote",
+"eco",
+"volume_off",
+"diamond"
+],
+
+highlightSubtitles:[
+"BLDC technology",
+"Remote control",
+"Energy efficient",
+"Silent performance",
+"Premium finish"
+],
+    
+description:"KUHL Prima A7 BLDC fan with remote control and low power consumption."
+},
+
+{
+img:"dennis-lingo-shirt.png",
+category:"Clothing",
+ name:"Dennis Lingo Shirt",
+rating:"4.0",
+reviews:"5,28,594",
+oldPrice:"1849",
+price:"469",
+offer:"₹419 with UPI offer",
+
+offers:[
+ "₹50 Instant Discount on UPI Payment",
+ "10% Off on First Fashion Order",
+ "Free Delivery on Orders Above ₹299"
+],
+    
+highlights:[
+ "Cotton Fabric",
+ "Comfort Fit",
+ "Stylish Design",
+ "Breathable Material",
+ "Daily Wear"
+],
+
+highlightIcons:[
+"checkroom",
+"accessibility",
+"style",
+"air",
+"today"
+],
+
+highlightSubtitles:[
+"Soft cotton fabric",
+"Comfortable fitting",
+"Modern look",
+"Breathable material",
+"Perfect daily wear"
+],
+    
+description:"Dennis Lingo shirt designed for comfort and modern style."
+},
+
+{
+img:"lux-radiant-bodywash.png",
+category:"Body Wash",
+name:"Lux Radiant Orchid Body Wash",
+rating:"4.3",
+reviews:"486",
+oldPrice:"99",
+price:"87",
+offer:"₹37 with UPI offer",
+
+offers:[
+ "₹20 Cashback on UPI Payment",
+ "Buy 2 Get Extra 10% Off",
+ "Free Delivery on Beauty Products"
+],
+    
+highlights:[
+ "Soft Skin",
+ "Pleasant Fragrance",
+ "Rich Foam",
+ "Daily Use",
+ "Refreshing Feel"
+],
+
+highlightIcons:[
+"spa",
+"local_florist",
+"water_drop",
+"self_improvement",
+"wb_sunny"
+],
+
+highlightSubtitles:[
+"Soft glowing skin",
+"Pleasant orchid scent",
+"Rich creamy foam",
+"Everyday freshness",
+"Refreshing bath"
+],
+    
+description:"Lux body wash with orchid fragrance for soft and refreshed skin."
+},
+
+{
+img:"samsung-25w-charger.png",
+category:"Charger",
+ name:"Samsung 25W Charger",
+rating:"4.5",
+reviews:"61,066",
+oldPrice:"1699",
+price:"999",
+offer:"₹949 with UPI offer",
+
+offers:[
+ "₹100 Instant Discount on UPI Payment",
+ "₹75 Cashback on Paytm Wallet",
+ "Free Delivery & 7 Days Replacement"
+],
+    
+highlights:[
+ "25W Fast Charging",
+ "Type-C Support",
+ "Compact Design",
+ "Safe Charging",
+ "Samsung Compatible"
+],
+
+highlightIcons:[
+"bolt",
+"usb",
+"electrical_services",
+"verified_user",
+"smartphone"
+],
+
+highlightSubtitles:[
+"25W Super Fast Charging",
+"USB Type-C support",
+"Original Samsung adapter",
+"Safe & reliable charging",
+"Wide device compatibility"
+],
+    
+description:"Original Samsung 25W charger for fast and reliable charging."
+},
+
+{
+img:"kuhl-remote-fan.png",
+category:"Fan",
+name:"KUHL Fest B2 Remote Fan",
+rating:"4.1",
+reviews:"20,014",
+oldPrice:"5000",
+price:"2399",
+offer:"₹2,349 with UPI offer",
+ad:true,
+
+offers:[
+ "₹350 Instant Discount on HDFC Bank Card",
+ "₹200 Cashback on UPI Payment",
+ "No Cost EMI up to 6 Months"
+],
+    
+highlights:[
+ "Remote Control",
+ "High Air Delivery",
+ "Energy Efficient",
+ "Silent Motor",
+ "Premium Finish"
+],
+
+highlightIcons:[
+"settings_remote",
+"air",
+"eco",
+"volume_off",
+"palette"
+],
+
+highlightSubtitles:[
+"Smart remote control",
+"High air delivery",
+"Power saving motor",
+"Silent performance",
+"Premium finish"
+],
+    
+description:"KUHL Fest B2 remote fan with powerful airflow and convenient controls."
+},
+
+{
+img:"denver-ascend-deo.png",
+category:"Perfume",
+ name:"Denver Ascend Deo",
+rating:"4.3",
+reviews:"173",
+oldPrice:"399",
+price:"219",
+offer:"₹169 with UPI offer + more",
+
+offers:[
+ "₹30 Cashback on UPI Payment",
+ "10% Off on First Beauty Order",
+ "Free Delivery on Orders Above ₹199"
+],
+    
+highlights:[
+ "Long Lasting Deo",
+ "Fresh Fragrance",
+ "Travel Friendly",
+ "Daily Use",
+ "Quick Dry"
+],
+
+highlightIcons:[
+"spa",
+"schedule",
+"air",
+"luggage",
+"flash_on"
+],
+
+highlightSubtitles:[
+"Long lasting freshness",
+"All day protection",
+"Refreshing fragrance",
+"Travel friendly pack",
+"Quick dry formula"
+],
+    
+description:"Denver Ascend deodorant provides long lasting freshness and confidence."
+},
+
+{
+img:"mcaffeine-caramel-bodywash.png",
+category:"Body Wash",
+name:"mCaffeine Body Wash Combo",
+rating:"4.4",
+reviews:"57",
+oldPrice:"698",
+price:"419",
+offer:"₹369 with UPI offer",
+
+offers:[
+ "₹50 Cashback on UPI Payment",
+ "Buy 2 Get Extra 10% Off",
+ "Free Delivery on Personal Care Products"
+],
+    
+highlights:[
+ "Coffee Extract",
+ "Deep Cleansing",
+ "Refreshing Aroma",
+ "Skin Friendly",
+ "Combo Pack"
+],
+
+highlightIcons:[
+"coffee",
+"water_drop",
+"spa",
+"favorite",
+"inventory_2"
+],
+
+highlightSubtitles:[
+"Coffee infused care",
+"Deep skin cleansing",
+"Refreshing experience",
+"Skin friendly formula",
+"Value combo pack"
+],
+    
+description:"mCaffeine body wash combo for refreshing and energizing skin care."
+},
+
+{
+img:"emirates-zara-rollon-perfume.png",
+category:"Perfume",
+ name:"Emirates Zara Floral Attar",
+rating:"4.3",
+reviews:"173",
+oldPrice:"295",
+price:"163",
+offer:"₹113 with UPI offer",
+
+offers:[
+ "₹25 Cashback on UPI Payment",
+ "10% Off on First Fragrance Order",
+ "Free Delivery on Orders Above ₹149"
+],
+    
+highlights:[
+ "Alcohol Free",
+ "Floral Fragrance",
+ "Long Lasting",
+ "Premium Quality",
+ "Travel Friendly"
+],
+
+highlightIcons:[
+"local_florist",
+"spa",
+"schedule",
+"diamond",
+"luggage"
+],
+
+highlightSubtitles:[
+"Premium floral aroma",
+"Alcohol free formula",
+"Long lasting fragrance",
+"Luxury quality",
+"Easy to carry"
+],
+    
+description:"Premium floral attar with rich fragrance and long lasting aroma."
+},
+
+{
+img:"mcaffeine-shampoo-conditioner.png",
+category:"Hair Care",
+    name:"mCaffeine Shampoo & Conditioner",
+rating:"4.5",
+reviews:"29",
+oldPrice:"948",
+price:"711",
+offer:"₹661 with UPI offer",
+
+offers:[
+ "₹75 Cashback on UPI Payment",
+ "Buy 2 Get Extra 10% Off",
+ "Free Delivery on Personal Care Products"
+],
+    
+highlights:[
+ "Hair Nourishment",
+ "Coffee Extract",
+ "Reduces Frizz",
+ "Smooth Hair",
+ "Combo Pack"
+],
+
+highlightIcons:[
+"shower",
+"spa",
+"auto_fix_high",
+"water_drop",
+"inventory_2"
+],
+
+highlightSubtitles:[
+"Hair nourishment",
+"Coffee infused care",
+"Smooth & shiny hair",
+"Reduces frizz",
+"Value combo pack"
+],
+    
+description:"mCaffeine shampoo and conditioner combo for healthy and smooth hair."
+},
+
+{
+img:"divulge-backpack.png",
+category:"Backpack",
+name:"Divulge Backpack",
+rating:"4.1",
+reviews:"117",
+oldPrice:"499",
+price:"264",
+offer:"₹214 with UPI offer + more",
+
+offers:[
+ "₹40 Cashback on UPI Payment",
+ "10% Off on First Fashion Order",
+ "Free Delivery on Orders Above ₹199"
+],
+    
+highlights:[
+ "Large Storage",
+ "Water Resistant",
+ "Comfortable Straps",
+ "Lightweight",
+ "Daily Use"
+],
+
+highlightIcons:[
+"backpack",
+"water_drop",
+"inventory_2",
+"fitness_center",
+"work"
+],
+
+highlightSubtitles:[
+"Large storage space",
+"Water resistant fabric",
+"Multiple compartments",
+"Lightweight carrying",
+"Perfect for daily use"
+],
+    
+description:"Stylish backpack with spacious compartments and comfortable carrying."
+},
+
+{
+img:"mcaffeine-guava-bodywash.png",
+category:"Body Wash",
+ name:"mCaffeine Guava Body Wash",
+rating:"4.5",
+reviews:"806",
+oldPrice:"898",
+price:"673",
+offer:"₹623 with UPI offer",
+
+offers:[
+ "₹75 Cashback on UPI Payment",
+ "Buy 2 Get Extra 15% Off",
+ "Free Delivery on Personal Care Products"
+],
+    
+highlights:[
+ "Guava Extract",
+ "Deep Cleansing",
+ "Refreshing Fragrance",
+ "Soft Skin",
+ "Daily Use"
+],
+
+highlightIcons:[
+"water_drop",
+"spa",
+"eco",
+"favorite",
+"local_florist"
+],
+
+highlightSubtitles:[
+"Deep skin cleansing",
+"Refreshing bath",
+"Natural guava extract",
+"Soft & healthy skin",
+"Pleasant fragrance"
+],
+    
+description:"mCaffeine Guava body wash provides freshness and gentle skin care."
+},
+
+{
+img:"revive-red.png",
+category:"Fabric Care",
+name:"Revive Liquid Stiffener Red",
+rating:"4.3",
+reviews:"486",
+oldPrice:"170",
+price:"119",
+offer:"₹59 with UPI offer + more",
+
+offers:[
+ "₹20 Cashback on UPI Payment",
+ "Buy 2 Get Extra 5% Off",
+ "Free Delivery on Orders Above ₹99"
+],
+    
+highlights:[
+ "Quick Dry",
+ "Fabric Stiffening",
+ "Long Lasting",
+ "Easy Application",
+ "Multipurpose Use"
+],
+
+highlightIcons:[
+"checkroom",
+"bolt",
+"verified",
+"science",
+"design_services"
+],
+
+highlightSubtitles:[
+"Quick drying formula",
+"Strong fabric support",
+"Long lasting finish",
+"Easy liquid application",
+"Multipurpose fabric care"
+],
+    
+description:"Revive Red liquid stiffener helps fabrics stay crisp and well shaped."
+},
+    
+{
+ img:"milton-water-bottle.png",
+category:"Bottle", 
+name:"Milton Water Bottle",
+ rating:"4.4",
+ reviews:"2366",
+ oldPrice:"599",
+ price:"449",
+ offer:"₹399 with UPI offer",
+
+offers:[
+ "₹50 Cashback on UPI Payment",
+ "Buy 2 Save Extra ₹100",
+ "Free Delivery & 7 Days Replacement"
+],
+    
+ highlights:[
+   "1 Litre Capacity",
+   "Stainless Steel",
+   "Leak Proof",
+   "24 Hours Cold",
+   "BPA Free"
+ ],
+
+highlightIcons:[
+"water_drop",
+"thermostat",
+"verified",
+"hiking",
+"health_and_safety"
+],
+
+highlightSubtitles:[
+"1 Litre capacity",
+"Keeps water cold longer",
+"Leak proof design",
+"Perfect for travel",
+"BPA free material"
+],
+    
+ description:"Premium Milton stainless steel water bottle perfect for travel and office."
+}
+];
+
+
+console.log("Script Running");
+const container = document.getElementById("productsGrid");
+if(!container){
+  // alert("productsGrid not found");
+}
+    console.log(container);
+// alert(products.length);
+    container.innerHTML = "";
+    products.forEach(product=>{
+
+container.innerHTML += `
+<div class="product-card" onclick="openProductPage(${JSON.stringify(product).replace(/"/g,'&quot;')})">
+
+${product.ad ? `<div class="ad-tag">AD</div>` : ""}
+
+<div class="product-image">
+<img src="images/${product.img}" alt="">
+<div class="rating-badge">
+${product.rating} ⭐ (${product.reviews})
+</div>
+</div>
+
+<div class="product-title">${product.name}</div>
+
+<div class="price-row">
+<span class="old-price">₹${product.oldPrice}</span>
+<span class="new-price">₹${product.price}</span>
+</div>
+
+<div class="offer-text">${product.offer}</div>
+
+</div>
+`;
+
+});
+    function openProductPage(product) {
+
+localStorage.setItem(
+"selectedProduct",
+JSON.stringify(product)
+);
+
+localStorage.setItem(
+"allProducts",
+JSON.stringify(products)
+);        
+        
+window.location.href = "product.html";
+    }
+</script>
+</body>
+</html>
