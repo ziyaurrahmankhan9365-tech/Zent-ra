@@ -1,0 +1,3641 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+    
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f1f3f6;
+}
+
+.product-container{
+   padding-top:10px;
+    background:#fff;
+    padding:15px;
+}
+
+.product-image{
+    width:100%;
+    max-height:350px;
+    object-fit:contain;
+}
+
+.rating{
+    display:inline-block;
+    background:#388e3c;
+    color:#fff;
+    padding:4px 8px;
+    border-radius:4px;
+    margin-top:10px;
+}
+
+.product-title{
+    font-size:22px;
+    margin-top:10px;
+    font-weight:600;
+   margin-bottom:12px;
+}
+
+.price{
+    font-size:32px;
+    font-weight:700;
+    color:#000;
+}
+
+.old-price{
+    text-decoration:line-through;
+    color:#888;
+    margin-left:10px;
+}
+
+.offer{
+    color:green;
+    font-weight:600;
+}
+
+.section{
+    background:#fff;
+    margin-top:10px;
+    padding:15px;
+}
+
+.bottom-bar{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    display:flex;
+}
+
+.cart-btn{
+    width:50%;
+    padding:18px;
+    border:none;
+    font-size:18px;
+    background:#fff;
+}
+
+.buy-btn{
+    width:50%;
+    padding:18px;
+    border:none;
+    font-size:20px;
+background:#ffc400;
+font-weight:700;
+}
+.slider{
+  position:relative;
+}
+
+#dots{
+  text-align:center;
+  margin:10px 0;
+}
+
+.dot{
+  height:8px;
+  width:8px;
+  margin:0 4px;
+  background:#ccc;
+  border-radius:50%;
+  display:inline-block;
+}
+
+.active-dot{
+  background:#2874f0;
+}
+
+.price-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+#discountPercent{
+    color:#388e3c;
+    font-weight:700;
+    font-size:30px;
+}
+
+.price{
+    font-size:32px;
+    font-weight:700;
+}
+
+.old-price{
+    text-decoration:line-through;
+    color:#878787;
+    font-size:18px;
+}
+.offer-box{
+    margin-top:15px;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid #b3d9ff;
+    background:#dff1ff;
+}
+
+.offer-header{
+    background:#0d5eff;
+    color:white;
+    padding:14px;
+    font-size:16px;
+    font-weight:500;
+}
+
+.offer-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+    
+.offer-content{
+    padding:15px;
+}
+
+.offer-price{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.offer-card{
+    background:white;
+    border-radius:12px;
+    border:1px solid #e5e5e5;
+    padding:10px;
+    min-height:110px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+    
+.offer-card{
+    transition:0.2s;
+}
+
+.offer-card:active{
+    transform:scale(0.98);
+}
+
+.offer-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.apply-btn{
+    color:#2874f0;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+}
+#offerArrow{
+    transition:0.3s;
+}
+.applied-offer{
+    background:white;
+    border-radius:12px;
+    padding:12px;
+    margin-bottom:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 6px rgba(0,0,0,0.08);
+}
+
+.remove-btn{
+    color:#2874f0;
+    font-weight:700;
+    cursor:pointer;
+}
+.image-wrapper{
+    position:relative;
+}
+
+.rating-badge{
+    position:absolute;
+    left:20px;
+    bottom:20px;
+    background:#fff;
+    border-radius:10px;
+    padding:6px 10px;
+    font-size:14px;
+    font-weight:700;
+    display:flex;
+    gap:6px;
+    align-items:center;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+}
+
+.rating-badge span:first-child{
+    color:#388e3c;
+    font-weight:700;
+}
+
+    #productReviews{
+    color:#878787;
+    font-weight:500;
+}
+.product-actions{
+    position:absolute;
+    top:20px;
+    right:12px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.action-btn{
+    width:44px;
+    height:44px;
+    background:#fff;
+    border:none;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+}
+
+.action-btn svg{
+    width:24px;
+    height:24px;
+}
+
+.top-header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    height:56px;
+    background:#2874f0;
+
+    display:flex;
+    align-items:center;
+
+    padding:0 12px;
+}
+
+.back-btn{
+    border:none;
+    background:none;
+    color:#fff;
+    font-size:38px;
+    font-weight:700;
+    padding:0;
+    flex-shrink:0;
+}
+
+.search-box{
+    flex:1;
+    margin:0 12px;
+
+    height:44px;
+    background:#fff;
+
+    border-radius:10px;
+
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+    padding:0 14px;
+
+    color:#878787;
+    font-size:16px;
+    min-width:0;
+}
+    
+
+.search-box span{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+    
+.header-cart-btn{
+    border:none;
+    background:none;
+    color:#fff;
+    font-size:24px;
+    flex-shrink:0;
+}
+    
+.delivery-card{
+    background:#f5f5f5;
+    border-radius:12px;
+    padding:15px;
+    margin-top:4px;
+    display:flex;
+    gap:12px;
+}
+
+.location-card{
+    background:#eef5ff;
+}
+
+.blue-text{
+    color:#2874f0;
+    font-weight:600;
+}
+
+.arrow{
+    margin-left:auto;
+    font-size:24px;
+    color:#2874f0;
+}
+
+.delivery-time{
+    color:#ff6b00;
+    margin-top:4px;
+}
+
+.address-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.4);
+    z-index:9999;
+}
+
+.address-sheet{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:75%;
+    background:#fff;
+    border-radius:20px 20px 0 0;
+    overflow:auto;
+    padding:15px 25px;
+    box-sizing:border-box;
+}
+
+.address-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+}
+
+.address-header h2{
+    font-size:18px;
+    margin:0;
+}
+
+
+.search-wrapper{
+    position:relative;
+    width:100%;
+}
+
+.search-icon{
+    position:absolute;
+    left:15px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:20px;
+}
+
+.address-search{
+    width:100%;
+    padding:12px 12px 12px 45px;
+    border:1px solid #ddd;
+    border-radius:16px;
+    font-size:16px;
+}
+    
+    .current-location{
+    margin-top:20px;
+    color:#2874f0;
+    font-weight:600;
+}
+
+.saved-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+   gap:10px;
+    margin-top:20px;
+   }
+
+.saved-header .blue-text{
+    white-space:nowrap;
+  font-size:18px;
+}
+    
+    .address-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding:10px 0;
+    font-size:15px;
+    border-bottom:1px solid #eee;
+ }
+
+.menu-dot{
+    font-size:28px;
+    font-weight:bold;
+    min-width:30px;
+text-align:right;
+    cursor:pointer;
+}
+
+.close-btn{
+    font-size:20px;
+    font-weight:bold;
+    color:#444;
+    cursor:pointer;
+    margin-left:15px;
+    flex-shrink:0;
+}
+
+.dotted-line{
+    border-top:2px dashed #e5e5e5;
+    margin:20px 0;
+}
+    
+.sheet-handle{
+    width:60px;
+    height:5px;
+    background:#d9d9d9;
+    border-radius:10px;
+    margin:0 auto 20px;
+}
+
+.add-address-page{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#fff;
+    z-index:10000;
+}
+
+.add-header{
+    height:70px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:0 20px;
+    border-bottom:1px solid #eee;
+    font-size:20px;
+    font-weight:600;
+}
+
+.back-arrow{
+    font-size:34px;
+    cursor:pointer;
+}
+
+.location-search{
+    margin:20px;
+    border:1px solid #ddd;
+    border-radius:18px;
+    padding:16px;
+    font-size:18px;
+    color:#666;
+}
+
+.map-area{
+    height:55vh;
+    background:#e9ecef;
+    position:relative;
+}
+
+.pin-text{
+    position:absolute;
+    top:80px;
+    left:50%;
+    transform:translateX(-50%);
+    background:black;
+    color:white;
+    padding:10px 18px;
+    border-radius:12px;
+}
+
+.map-pin{
+    position:absolute;
+    top:45%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:48px;
+}
+
+.current-location-btn{
+    position:absolute;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    border:none;
+    background:white;
+    padding:14px 22px;
+    border-radius:30px;
+}
+
+.bottom-sheet{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    background:white;
+    border-radius:24px 24px 0 0;
+    padding:25px;
+    box-sizing:border-box;
+}
+
+.away-btn{
+    width:100%;
+    background:#2874f0;
+    color:white;
+    border:none;
+    border-radius:16px;
+    padding:18px;
+    font-size:20px;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+.use-location-btn{
+    width:100%;
+    background:white;
+    color:#2874f0;
+    border:2px solid #2874f0;
+    border-radius:16px;
+    padding:18px;
+    font-size:20px;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+.address-form-page{
+display:none;
+position:fixed;
+inset:0;
+background:#fff;
+z-index:10001;
+overflow:auto;
+}
+
+.form-header{
+height:70px;
+display:flex;
+align-items:center;
+gap:15px;
+padding:0 20px;
+border-bottom:1px solid #eee;
+font-size:28px;
+font-weight:bold;
+background:#fff;
+}
+
+.form-container{
+padding:20px;
+}
+
+.form-container label{
+display:block;
+font-size:18px;
+font-weight:600;
+margin-top:18px;
+margin-bottom:8px;
+}
+
+.form-input{
+width:100%;
+padding:14px;
+font-size:17px;
+border:1px solid #ccc;
+border-radius:8px;
+box-sizing:border-box;
+}
+
+.row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.map-link{
+margin-top:20px;
+font-size:18px;
+color:#2874f0;
+font-weight:600;
+}
+
+.checkbox-row{
+display:flex;
+align-items:center;
+gap:10px;
+margin-top:20px;
+}
+
+.save-address-btn{
+margin-top:30px;
+background:#ffd814;
+padding:16px;
+text-align:center;
+border-radius:40px;
+font-size:22px;
+font-weight:bold;
+}
+
+.save-toast{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#212121;
+    color:white;
+    padding:14px 24px;
+    border-radius:30px;
+    font-size:16px;
+    display:none;
+    z-index:99999;
+}
+
+.map-area{
+    position:relative;
+    height:420px;
+    background:#e9edf2;
+    overflow:hidden;
+}
+
+/* Roads */
+.map-area::before{
+    content:"";
+    position:absolute;
+    width:120%;
+    height:22px;
+    background:#c5cfdb;
+    top:170px;
+    left:-20px;
+    transform:rotate(-8deg);
+}
+
+.map-area::after{
+    content:"";
+    position:absolute;
+    width:22px;
+    height:120%;
+    background:#c5cfdb;
+    right:90px;
+    top:-20px;
+}
+
+/* Buildings */
+.map-building{
+    position:absolute;
+    background:#dfe5ec;
+    border-radius:8px;
+}
+
+.b1{
+    width:110px;
+    height:70px;
+    top:90px;
+    left:40px;
+}
+
+.b2{
+    width:80px;
+    height:120px;
+    top:210px;
+    left:80px;
+}
+
+.b3{
+    width:100px;
+    height:80px;
+    top:120px;
+    right:50px;
+}
+
+.b4{
+    width:90px;
+    height:70px;
+    bottom:70px;
+    right:120px;
+}
+
+.map-pin{
+    width:28px;
+    height:28px;
+    background:#ff3b30;
+    border-radius:50% 50% 50% 0;
+    transform:rotate(-45deg);
+    position:absolute;
+    left:50%;
+    top:170px;
+    margin-left:-14px;
+}
+
+.map-pin::after{
+    content:"";
+    width:12px;
+    height:12px;
+    background:white;
+    border-radius:50%;
+    position:absolute;
+    top:8px;
+    left:8px;
+}
+
+.address-item{
+    position:relative;
+}
+
+.selected-address{
+    border:2px solid #2874f0;
+    background:#f5f9ff;
+    box-shadow:0 0 0 2px rgba(40,116,240,.15);
+}
+
+.selected-address .change-btn{
+    display:inline-block;
+}
+    
+.address-popup{
+    position:absolute;
+    right:10px;
+    top:35px;
+    background:white;
+    border-radius:12px;
+    box-shadow:0 4px 20px rgba(0,0,0,0.15);
+    display:none;
+    overflow:hidden;
+    z-index:999;
+}
+
+.address-popup div{
+    padding:12px 18px;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.address-popup div:hover{
+    background:#f5f5f5;
+}
+
+.change-btn{
+    position:absolute;
+    right:55px;   /* 3-dot se thoda left */
+    top:12px;
+    background:#2874f0;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    padding:6px 12px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.address-chip{
+    display:inline-block;
+    padding:6px 14px;
+    border:1px solid #ccc;
+    border-radius:20px;
+    margin-right:8px;
+    cursor:pointer;
+}
+
+.address-chip.active-chip{
+    background:#2874f0;
+    color:#fff;
+    border-color:#2874f0;
+}
+    
+/*==============================
+  SHOP WITH PEACE OF MIND
+==============================*/
+
+.peace-section{
+    background:#fff;
+    margin-top:14px;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.peace-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px;
+    cursor:pointer;
+}
+
+.peace-header h3{
+    margin:0;
+    font-size:18px;
+    font-weight:700;
+    color:#212121;
+}
+
+#peaceArrow{
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    background:#f5f5f5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    font-weight:700;
+    transition:.25s;
+}
+
+#peaceContent{
+    padding:0 16px 16px;
+}
+
+.peace-card{
+    height:72px;
+    border-radius:12px;
+    background:#f7f7f7;
+    display:flex;
+    align-items:center;
+    padding:0 14px;
+}
+
+.peace-text{
+    font-size:28px;
+    font-weight:500;
+    color:#444;
+    margin-left:14px;
+}
+
+.peace-doc{
+    position:relative;
+    width:42px;
+    height:42px;
+}
+
+.doc-paper{
+    width:34px;
+    height:40px;
+    background:#fff;
+    border-radius:8px;
+    position:relative;
+    box-shadow:0 1px 3px rgba(0,0,0,.12);
+}
+
+.doc-paper span{
+    position:absolute;
+    left:7px;
+    width:18px;
+    height:2px;
+    background:#bdbdbd;
+    border-radius:2px;
+}
+
+.doc-paper span:nth-child(1){top:9px;}
+.doc-paper span:nth-child(2){top:15px;}
+.doc-paper span:nth-child(3){top:21px;}
+.doc-paper span:nth-child(4){top:27px;}
+
+.doc-badge{
+    position:absolute;
+    right:-2px;
+    bottom:-2px;
+    width:18px;
+    height:18px;
+    background:#2874f0;
+    border-radius:50%;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    font-weight:bold;
+    border:2px solid #fff;
+}
+
+.peace-services{
+    display:flex;
+    justify-content:space-between;
+    margin-top:22px;
+}
+
+.peace-item{
+    width:33.33%;
+    text-align:center;
+}
+
+.peace-item img{
+    width:44px;
+    height:44px;
+    object-fit:contain;
+}
+
+.peace-item p{
+    margin-top:8px;
+    font-size:15px;
+    line-height:20px;
+    color:#212121;
+    font-weight:500;
+}
+
+/* ==========================
+   Similar Products
+========================== */
+
+.similar-section{
+    background:#fff;
+    margin-top:14px;
+    padding:16px;
+    border-radius:16px;
+}
+
+.similar-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+}
+
+.similar-header h3{
+    margin:0;
+    font-size:24px;
+    font-weight:700;
+    color:#111;
+}
+
+.similar-next-btn{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:50%;
+    background:#111;
+    color:#fff;
+    font-size:22px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.similar-products-row{
+    display:flex;
+    overflow-x:auto;
+    gap:12px;
+    scroll-behavior:smooth;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+}
+
+.similar-products-row::-webkit-scrollbar{
+    display:none;
+}
+
+.similar-card{
+    min-width:165px;
+    max-width:165px;
+    background:#fff;
+    border:1px solid #ececec;
+    border-radius:14px;
+    overflow:hidden;
+    flex-shrink:0;
+}
+
+.similar-image{
+    width:100%;
+    height:165px;
+    object-fit:contain;
+    background:#fafafa;
+    padding:12px;
+}
+
+.similar-info{
+    padding:10px;
+}
+
+.similar-name{
+    font-size:14px;
+    font-weight:600;
+    color:#222;
+    line-height:20px;
+    height:40px;
+    overflow:hidden;
+}
+
+.similar-rating{
+    display:inline-flex;
+    align-items:center;
+    background:#008c3a;
+    color:#fff;
+    font-size:12px;
+    padding:2px 6px;
+    border-radius:4px;
+    margin-top:8px;
+    font-weight:600;
+}
+
+.similar-price{
+    font-size:18px;
+    font-weight:700;
+    color:#111;
+    margin-top:8px;
+}
+
+.similar-old-price{
+    font-size:13px;
+    color:#878787;
+    text-decoration:line-through;
+    margin-left:5px;
+}
+
+.similar-discount{
+    color:#388e3c;
+    font-size:13px;
+    font-weight:700;
+    margin-left:5px;
+}
+
+.ad-badge{
+    position:absolute;
+    top:8px;
+    right:8px;
+    background:#d9d9d9;
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    padding:2px 6px;
+    border-radius:4px;
+}
+
+.similar-image-box{
+    position:relative;
+}
+
+/* ==========================
+   Flipkart Product Highlights
+========================== */
+
+.highlight-item{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:14px 0;
+}
+
+.highlight-icon{
+    width:56px;
+    height:56px;
+    background:#eef5ff;
+    border-radius:14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#7b8794;
+    flex-shrink:0;
+}
+
+.highlight-icon .material-symbols-outlined{
+    font-size:30px;
+}
+
+.highlight-text{
+    flex:1;
+}
+
+.highlight-title{
+    font-size:17px;
+    font-weight:600;
+    color:#212121;
+}
+
+.highlight-desc{
+    font-size:14px;
+    color:#878787;
+    margin-top:4px;
+    line-height:20px;
+}
+
+/* ===============================
+   All Details Section (Flipkart Mobile style)
+   =============================== */
+.all-details-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    cursor:pointer;
+}
+
+.all-details-header h3{
+    margin:0;
+    font-size:18px;
+    font-weight:600;
+    color:#212121;
+}
+
+.all-details-arrow{
+    font-size:22px;
+    color:#212121;
+    transition:transform .2s ease;
+}
+
+.all-details-arrow.open{
+    transform:rotate(180deg);
+}
+
+.all-details-body{
+    display:none;
+    margin-top:14px;
+    animation:allDetailsFadeIn .25s ease;
+}
+
+.all-details-body.open{
+    display:block;
+}
+
+@keyframes allDetailsFadeIn{
+    from{ opacity:0; transform:translateY(-6px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+.all-details-tabs{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding-bottom:10px;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+}
+
+.all-details-tabs::-webkit-scrollbar{
+    display:none;
+}
+
+.all-details-tab{
+    flex-shrink:0;
+    padding:8px 16px;
+    border-radius:20px;
+    border:1px solid #d4d5d9;
+    background:#fff;
+    color:#212121;
+    font-size:13px;
+    font-weight:600;
+    white-space:nowrap;
+    cursor:pointer;
+}
+
+.all-details-tab.active-tab{
+    background:#212121;
+    color:#fff;
+    border-color:#212121;
+}
+
+.all-details-content{
+    margin-top:14px;
+    animation:allDetailsFadeIn .2s ease;
+}
+
+.all-details-block-title{
+    font-size:15px;
+    font-weight:700;
+    color:#212121;
+    margin:18px 0 10px;
+    padding-top:12px;
+    border-top:1px solid #f0f0f0;
+}
+
+.all-details-block-title:first-child{
+    margin-top:0;
+    padding-top:0;
+    border-top:none;
+}
+
+.spec-row{
+    display:flex;
+    padding:10px 0;
+    border-bottom:1px solid #f0f0f0;
+    font-size:14px;
+    line-height:19px;
+}
+
+.spec-row:last-child{
+    border-bottom:none;
+}
+
+.spec-label{
+    width:42%;
+    flex-shrink:0;
+    color:#878787;
+}
+
+.spec-value{
+    width:58%;
+    color:#212121;
+}
+
+.showcase-row{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid #f0f0f0;
+    font-size:14px;
+}
+
+.showcase-row:last-child{
+    border-bottom:none;
+}
+
+.showcase-label{
+    color:#878787;
+}
+
+.showcase-value{
+    color:#212121;
+    font-weight:600;
+    text-align:right;
+}
+
+.warranty-summary{
+    font-size:14px;
+    color:#212121;
+    font-weight:600;
+    margin-bottom:12px;
+}
+
+.warranty-list-title{
+    font-size:13px;
+    font-weight:700;
+    color:#212121;
+    margin:14px 0 6px;
+}
+
+.warranty-list{
+    margin:0;
+    padding-left:18px;
+    font-size:14px;
+    color:#212121;
+    line-height:22px;
+}
+
+.all-details-desc-text{
+    font-size:14px;
+    color:#212121;
+    line-height:22px;
+    white-space:pre-line;
+}
+
+.not-available{
+    color:#878787;
+    font-style:italic;
+}
+
+/* ===============================
+   Ratings & Reviews Section
+   =============================== */
+.ratings-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.ratings-header h3{
+    margin:0;
+    font-size:18px;
+    font-weight:600;
+    color:#212121;
+}
+
+.ratings-toggle-arrow{
+    font-size:20px;
+    color:#212121;
+    cursor:pointer;
+    transition:transform .2s ease;
+}
+
+.ratings-toggle-arrow.collapsed{
+    transform:rotate(180deg);
+}
+
+.ratings-body{
+    margin-top:16px;
+    animation:allDetailsFadeIn .25s ease;
+}
+
+.ratings-overall-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.ratings-average{
+    font-size:32px;
+    font-weight:700;
+    color:#212121;
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.ratings-average .star-icon{
+    color:#388e3c;
+    font-size:26px;
+}
+
+.ratings-text-pill{
+    background:#e9f8ee;
+    color:#1a7a3c;
+    font-size:14px;
+    font-weight:600;
+    padding:5px 12px;
+    border-radius:16px;
+}
+
+.ratings-subtext{
+    font-size:13px;
+    color:#878787;
+    margin-top:8px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    flex-wrap:wrap;
+}
+
+.verified-icon{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    border:1.5px solid #878787;
+    font-size:10px;
+}
+
+.customer-photos-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:8px;
+    margin-top:18px;
+}
+
+.customer-photo-cell{
+    position:relative;
+    width:100%;
+    padding-top:100%;
+    border-radius:8px;
+    overflow:hidden;
+    background:#f0f0f0;
+    cursor:pointer;
+}
+
+.customer-photo-cell img{
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.customer-photo-more-overlay{
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.55);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    font-weight:700;
+}
+
+.rating-chips-row{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    margin-top:20px;
+    padding-bottom:6px;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+}
+
+.rating-chips-row::-webkit-scrollbar{
+    display:none;
+}
+
+.rating-chip{
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#f3f6fa;
+    border-radius:20px;
+    padding:9px 16px;
+    font-size:14px;
+    color:#212121;
+    white-space:nowrap;
+}
+
+.rating-chip b{
+    font-weight:700;
+}
+
+.rating-chip .star-icon{
+    color:#388e3c;
+    font-size:13px;
+}
+
+.review-cards-row{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    margin-top:20px;
+    padding-bottom:8px;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+}
+
+.review-cards-row::-webkit-scrollbar{
+    display:none;
+}
+
+.review-card{
+    flex-shrink:0;
+    width:82%;
+    max-width:320px;
+    background:#fafafa;
+    border:1px solid #eee;
+    border-radius:10px;
+    padding:14px;
+}
+
+.review-card-top{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.review-star-badge{
+    background:#388e3c;
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    padding:2px 7px;
+    border-radius:4px;
+    display:flex;
+    align-items:center;
+    gap:3px;
+}
+
+.review-title{
+    font-size:15px;
+    font-weight:700;
+    color:#212121;
+}
+
+.review-date{
+    margin-left:auto;
+    font-size:12px;
+    color:#878787;
+    flex-shrink:0;
+}
+
+.review-description{
+    font-size:13px;
+    color:#3e3e3e;
+    line-height:19px;
+    margin-top:8px;
+}
+
+.review-more-link{
+    color:#2874f0;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.review-meta-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:12px;
+    font-size:12px;
+    color:#212121;
+    font-weight:600;
+}
+
+.review-verified-badge{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    color:#388e3c;
+    font-size:12px;
+    font-weight:600;
+}
+
+.review-actions-row{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-top:12px;
+    font-size:13px;
+    color:#616161;
+}
+
+.review-action-btn{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    cursor:pointer;
+    user-select:none;
+}
+
+.review-action-btn.liked{
+    color:#2874f0;
+    font-weight:700;
+}
+
+.review-action-btn.disliked{
+    color:#e53935;
+    font-weight:700;
+}
+
+/* Photo Gallery Lightbox */
+.photo-gallery-overlay{
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.9);
+    z-index:9999;
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+.photo-gallery-overlay.open{
+    display:flex;
+}
+
+.photo-gallery-close{
+    position:absolute;
+    top:16px;
+    right:20px;
+    color:#fff;
+    font-size:28px;
+    cursor:pointer;
+    z-index:2;
+}
+
+.photo-gallery-image-wrap{
+    width:100%;
+    max-width:480px;
+    padding:0 16px;
+}
+
+.photo-gallery-image-wrap img{
+    width:100%;
+    max-height:70vh;
+    object-fit:contain;
+    border-radius:8px;
+}
+
+.photo-gallery-nav{
+    display:flex;
+    justify-content:space-between;
+    width:100%;
+    max-width:480px;
+    padding:16px;
+    color:#fff;
+}
+
+.photo-gallery-nav span{
+    font-size:26px;
+    cursor:pointer;
+    padding:0 14px;
+}
+
+.photo-gallery-counter{
+    color:#ccc;
+    font-size:14px;
+    margin-top:6px;
+}
+
+</style>
+
+</head>
+<body>
+
+
+<div class="top-header">
+
+    <button class="back-btn" onclick="history.back()">
+        ←
+    </button>
+
+    <div class="search-box" onclick="location.href='index.html'">
+        🔍
+        <span>Search for products</span>
+    </div>
+
+    <button class="header-cart-btn" onclick="location.href='cart.html'">
+        🛒
+    </button>
+
+</div>
+    
+<div class="product-container">
+
+<div class="image-wrapper">
+
+    <div class="slider">
+        <img id="productImage" src="" class="product-image">
+
+        <div class="product-actions">
+
+<button id="wishlistBtn" class="action-btn">
+🤍
+</button>
+
+<button id="shareBtn" class="action-btn" onclick="shareProduct()">
+
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+<path d="M21 3L10 14"
+stroke="#000"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+
+<path d="M21 3L14 21L10 14L3 10L21 3Z"
+stroke="#000"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+</svg>
+
+</button>
+
+</div>
+    </div>
+
+    <div class="rating-badge">
+        <span id="productRating"></span>
+        |
+        <span id="productReviews"></span>
+    </div>
+
+</div>
+
+<div id="dots"></div>
+    
+<div class="product-title" id="productName"></div>
+
+<div class="price-row">
+    <span id="discountPercent"></span>
+    <span class="old-price" id="oldPrice"></span>
+    <span class="price" id="productPrice"></span>
+</div>
+
+<p class="offer" id="productOffer"></p>
+
+<div class="offer-box">
+
+    <div class="offer-header">
+
+    <div style="display:flex;align-items:center;gap:10px;">
+
+        <div style="
+        background:#000;
+        color:#fff;
+        padding:4px 8px;
+        border-radius:6px;
+        font-size:12px;
+        font-weight:700;
+        ">
+        WOW DEAL
+        </div>
+
+        <span>Apply offers for maximum savings</span>
+
+    </div>
+
+    <span id="offerArrow" style="font-size:24px;cursor:pointer;">⌃</span>
+
+    </div>
+
+    <div class="offer-content" id="offerContent">
+
+        <h3 style="
+margin:0 0 12px;
+font-size:16px;
+font-weight:600;
+color:#444;
+">
+Bank Offers
+</h3>
+
+        <div class="offer-price" id="offerPrice">
+        </div>
+
+       <div id="appliedOfferBox" style="display:none;"></div>
+        
+        <div id="offerList" class="offer-grid"></div>
+
+    </div>
+
+</div>
+    
+</div>
+
+<div class="section">
+    <h3>Delivery details</h3>
+
+    <div class="delivery-card location-card" onclick="openAddressModal()">
+<span>📍</span>
+
+<div>
+<b id="deliveryTitle">Location not set</b>
+<br>
+<span id="deliverySubtitle" class="blue-text">
+Select delivery location
+</span>
+</div>
+
+<span class="arrow">›</span>
+    </div>
+
+    <div class="delivery-card">
+        <span>🚚</span>
+        <div>
+            <b>Delivery by 21 Jun, Sun</b>
+            <p class="delivery-time">Order in 00h 10m 21s</p>
+        </div>
+    </div>
+
+    <div class="delivery-card">
+        <span>🏪</span>
+        <div>
+            <b>Fulfilled by Superworlds</b>
+            <p>4.1 ⭐ • 3 years with ShopMart</p>
+            <span class="blue-text">See other sellers</span>
+        </div>
+    </div>
+</div>
+
+<div class="section peace-section">
+
+    <div class="peace-header" onclick="togglePeaceSection()">
+
+        <h3>Shop with peace of mind</h3>
+
+        <span id="peaceArrow">⌃</span>
+
+    </div>
+
+    <div id="peaceContent">
+
+        <div class="peace-card">
+
+    <div class="peace-doc">
+
+        <div class="doc-paper">
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+        <div class="doc-badge">✓</div>
+
+    </div>
+
+    <span class="peace-text">100% Genuine Products, guaranteed</span>
+
+        </div>
+
+        <div class="peace-services">
+
+            <div class="peace-item">
+
+                <img src="replacement.png">
+
+                <p>
+                    7 Days<br>
+                    Replacement
+                </p>
+
+            </div>
+
+            <div class="peace-item">
+
+                <img src="cod.png">
+
+                <p>
+                    Cash on<br>
+                    Delivery
+                </p>
+
+            </div>
+
+            <div class="peace-item">
+
+                <img src="support.png">
+
+                <p>
+                    Customer<br>
+                    Support
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="section">
+<h3>Product Highlights</h3>
+
+<div id="productHighlights"></div>
+
+</div>
+
+<div class="section">
+  <h3>Description</h3>
+  <p id="productDescription"></p>
+</div>
+
+<div class="section" id="allDetailsSection">
+
+    <div class="all-details-header" id="allDetailsToggle">
+        <h3>All Details</h3>
+        <span class="all-details-arrow" id="allDetailsArrow">⌄</span>
+    </div>
+
+    <div class="all-details-body" id="allDetailsBody">
+
+        <div class="all-details-tabs" id="allDetailsTabs">
+            <button class="all-details-tab active-tab" data-tab="showcase">Showcase</button>
+            <button class="all-details-tab" data-tab="specifications">Specifications</button>
+            <button class="all-details-tab" data-tab="description">Description</button>
+            <button class="all-details-tab" data-tab="warranty">Warranty</button>
+            <button class="all-details-tab" data-tab="manufacturer">Manufacturer</button>
+        </div>
+
+        <div class="all-details-content" id="allDetailsContent">
+        </div>
+
+    </div>
+
+</div>
+
+<div class="section similar-section">
+
+    <div class="similar-header">
+
+        <h3>Similar Products</h3>
+
+        <button class="similar-next-btn"
+        onclick="scrollSimilarProducts()">
+
+            ➜
+
+        </button>
+
+    </div>
+
+    <div id="similarProducts"
+         class="similar-products-row">
+
+    </div>
+
+</div>
+
+<div class="section" id="ratingsSection">
+
+    <div class="ratings-header" id="ratingsToggle">
+        <h3>Ratings and Reviews</h3>
+        <span class="ratings-toggle-arrow" id="ratingsArrow">⌃</span>
+    </div>
+
+    <div class="ratings-body" id="ratingsBody">
+
+        <div class="ratings-overall-row">
+            <div class="ratings-average" id="ratingsAverage"></div>
+            <div class="ratings-text-pill" id="ratingsTextPill"></div>
+        </div>
+
+        <div class="ratings-subtext" id="ratingsSubtext"></div>
+
+        <div class="customer-photos-grid" id="customerPhotosGrid"></div>
+
+        <div class="rating-chips-row" id="ratingChipsRow"></div>
+
+        <div class="review-cards-row" id="reviewCardsRow"></div>
+
+    </div>
+
+</div>
+
+<div class="photo-gallery-overlay" id="photoGalleryOverlay">
+    <span class="photo-gallery-close" id="photoGalleryClose">×</span>
+    <div class="photo-gallery-image-wrap">
+        <img id="photoGalleryImage" src="" alt="Customer photo">
+    </div>
+    <div class="photo-gallery-counter" id="photoGalleryCounter"></div>
+    <div class="photo-gallery-nav">
+        <span id="photoGalleryPrev">‹</span>
+        <span id="photoGalleryNext">›</span>
+    </div>
+</div>
+    
+
+<div style="height:90px;"></div>
+
+<div class="bottom-bar">
+<button class="cart-btn">
+Add to Cart
+</button>
+
+<button class="buy-btn">
+Buy Now
+</button>
+</div>
+
+
+<script>
+
+try {
+    
+const product =
+JSON.parse(localStorage.getItem("selectedProduct"));
+
+const allProducts =
+JSON.parse(localStorage.getItem("allProducts")) || [];
+    
+console.log(product);
+
+
+if(product){
+
+document.getElementById("productName").innerText =
+product.name;
+
+document.getElementById("productPrice").innerText =
+"₹" + product.price;
+
+document.getElementById("oldPrice").innerText =
+"₹" + product.oldPrice;
+
+document.getElementById("productOffer").innerText =
+product.offer;
+
+document.getElementById("offerPrice").innerText =
+product.offer;
+    
+let oldPrice = parseInt(product.oldPrice);
+let price = parseInt(product.price);
+
+let discount = Math.round(
+((oldPrice - price) / oldPrice) * 100
+);
+
+document.getElementById("discountPercent").innerHTML =
+"↓" + discount + "%";
+
+document.getElementById("productImage").src =
+"images/" + product.img;
+
+if(product.images && product.images.length > 0){
+
+let currentImage = 0;
+
+document.getElementById("productImage").src =
+"images/" + product.images[0];
+
+let dotsHTML = "";
+
+product.images.forEach((img,index)=>{
+dotsHTML += `
+<span class="dot ${index===0 ? 'active-dot' : ''}"></span>
+`;
+});
+
+document.getElementById("dots").innerHTML = dotsHTML;
+
+let startX = 0;
+
+const slider = document.querySelector(".slider");
+
+slider.addEventListener("touchstart",(e)=>{
+startX = e.touches[0].clientX;
+});
+
+slider.addEventListener("touchend",(e)=>{
+
+let endX = e.changedTouches[0].clientX;
+
+if(startX - endX > 50){
+
+currentImage++;
+
+if(currentImage >= product.images.length){
+currentImage = 0;
+}
+
+}
+
+else if(endX - startX > 50){
+
+currentImage--;
+
+if(currentImage < 0){
+currentImage = product.images.length - 1;
+}
+
+}
+
+document.getElementById("productImage").src =
+"images/" + product.images[currentImage];
+
+let dots = document.querySelectorAll(".dot");
+
+dots.forEach(dot=>dot.classList.remove("active-dot"));
+
+dots[currentImage].classList.add("active-dot");
+});
+
+}
+    
+document.getElementById("productRating").innerHTML =
+product.rating + ' <span style="color:#388e3c;">★</span>';
+
+document.getElementById("productReviews").innerText =
+product.reviews + " Reviews";
+    
+ document.getElementById("productDescription").innerText =
+product.description || "No description available for this product.";
+
+// ===============================
+// Similar Products
+// ===============================
+try {
+
+let similarProducts = (Array.isArray(allProducts) ? allProducts : []).filter(item =>
+item && item.category === product.category &&
+item.name !== product.name
+);
+
+let similarHTML = "";
+
+similarProducts.forEach(item => {
+
+let oldPrice = parseInt(item.oldPrice);
+let newPrice = parseInt(item.price);
+
+let discount = (oldPrice && !isNaN(oldPrice)) ? Math.round(
+((oldPrice - newPrice) / oldPrice) * 100
+) : 0;
+
+similarHTML += `
+<div class="similar-card"
+onclick='openSimilarProduct(${JSON.stringify(item).replace(/'/g,"&#39;")})'>
+
+<div class="similar-image-box">
+
+${item.ad ? `<div class="ad-badge">AD</div>` : ""}
+
+<img src="images/${item.img || 'placeholder.png'}"
+class="similar-image">
+
+</div>
+
+<div class="similar-info">
+
+<div class="similar-name">
+${item.name || "Unnamed product"}
+</div>
+
+<div class="similar-rating">
+${item.rating || "-"} ★
+</div>
+
+<div class="similar-price">
+
+₹${item.price || "-"}
+
+<span class="similar-old-price">
+₹${item.oldPrice || "-"}
+</span>
+
+<span class="similar-discount">
+${discount}% off
+</span>
+
+</div>
+
+</div>
+
+</div>
+`;
+
+});
+
+document.getElementById("similarProducts").innerHTML =
+similarHTML || `<p style="color:#878787;padding:10px 0;">No similar products found.</p>`;
+
+} catch(err) {
+console.error("Similar products render failed:", err);
+document.getElementById("similarProducts").innerHTML =
+`<p style="color:#878787;padding:10px 0;">No similar products found.</p>`;
+}
+    
+try {
+
+let offerHTML = "";
+
+if(Array.isArray(product.offers) && product.offers.length > 0){
+
+product.offers.forEach(offer => {
+
+offer = String(offer || "");
+
+offerHTML += `
+<div class="offer-card">
+
+<div>
+<div style="
+background:#f4d77a;
+display:inline-block;
+padding:3px 8px;
+border-radius:6px;
+font-size:12px;
+font-weight:700;
+margin-bottom:6px;">
+Best value for you
+</div>
+
+<div style="
+color:#008c3a;
+font-size:13px;
+font-weight:600;
+margin-top:4px;">
+${offer.includes("UPI")
+? "UPI Cashback"
+: offer.includes("EMI")
+? "Pay Later Available"
+: "Bank Offer"}
+</div>
+
+<div style="
+display:flex;
+flex-direction:column;
+align-items:flex-start;
+gap:10px;
+margin-top:10px;">
+
+<div style="
+display:flex;
+align-items:center;
+gap:8px;
+flex:1;">
+
+<img src="${
+offer.includes('UPI')
+? 'images/upi.png'
+: offer.includes('EMI')
+? 'images/emi.jpg'
+: 'images/hdfc.png'
+}" width="40">
+
+<b style="
+font-size:13px;
+line-height:1.3;
+font-weight:600;">
+${offer}
+</b>
+
+</div>
+
+<div class="apply-btn" style="align-self:flex-end;">
+Apply
+</div>
+
+</div>
+
+<div style="
+background:#f5f5f5;
+padding:6px 10px;
+margin-top:8px;
+border-radius:8px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:12px;
+font-weight:600;
+color:#333;">
+
+<span>
+${offer.includes('UPI')
+? 'UPI • Cashback'
+: offer.includes('EMI')
+? 'EMI • Pay Later'
+: 'Credit Card • Cashback'}
+</span>
+
+<span>›</span>
+
+</div>
+
+</div>
+
+</div>
+`;
+});
+
+document.getElementById("offerList").innerHTML = offerHTML;
+
+} else {
+document.getElementById("offerList").innerHTML =
+`<p style="color:#878787;">No bank offers available right now.</p>`;
+}
+
+} catch(err) {
+console.error("Offers render failed:", err);
+document.getElementById("offerList").innerHTML =
+`<p style="color:#878787;">No bank offers available right now.</p>`;
+}
+
+try {
+
+let highlightsHTML = "";
+
+let highlightsArr = Array.isArray(product.highlights) ? product.highlights : [];
+
+highlightsArr.forEach((item,index)=>{
+
+const icons = Array.isArray(product.highlightIcons) ? product.highlightIcons : [
+"memory",
+"storage",
+"display_settings",
+"bolt",
+"verified"
+];
+
+const subtitles = Array.isArray(product.highlightSubtitles) ? product.highlightSubtitles : [
+"Powerful performance",
+"Fast storage",
+"Crystal clear visuals",
+"High speed experience",
+"Trusted quality"
+];
+
+highlightsHTML += `
+<div class="highlight-item">
+
+<div class="highlight-icon">
+<span class="material-symbols-outlined">
+${icons[index] || "check_circle"}
+</span>
+</div>
+
+<div class="highlight-text">
+
+<div class="highlight-title">
+${item}
+</div>
+
+<div class="highlight-subtitle">
+${subtitles[index] || ""}
+</div>
+
+</div>
+
+</div>
+`;
+
+});
+
+document.getElementById("productHighlights").innerHTML =
+highlightsHTML || `<p style="color:#878787;">No highlights available for this product.</p>`;
+
+} catch(err) {
+console.error("Highlights render failed:", err);
+document.getElementById("productHighlights").innerHTML =
+`<p style="color:#878787;">No highlights available for this product.</p>`;
+}
+
+// ===============================
+// All Details: Showcase / Specifications / Description / Warranty / Manufacturer
+// ===============================
+try {
+
+const NA = `<span class="not-available">Not Available</span>`;
+const details = (product.allDetails && typeof product.allDetails === "object")
+    ? product.allDetails
+    : {};
+
+function renderShowcaseTab(){
+    let rows = Array.isArray(details.showcase) ? details.showcase : null;
+
+    // Fallback: reuse existing highlights/highlightSubtitles data so the
+    // tab is never empty even for a product without an allDetails object.
+    if(!rows){
+        const h = Array.isArray(product.highlights) ? product.highlights : [];
+        const s = Array.isArray(product.highlightSubtitles) ? product.highlightSubtitles : [];
+        rows = h.map((label,i)=>({ label: label, value: s[i] || "Not Available" }));
+    }
+
+    if(!rows.length) return `<p class="not-available">Not Available</p>`;
+
+    return rows.map(r => `
+        <div class="showcase-row">
+            <span class="showcase-label">${(r && r.label) || "Not Available"}</span>
+            <span class="showcase-value">${(r && r.value) || "Not Available"}</span>
+        </div>
+    `).join("");
+}
+
+function renderSpecGroups(groups){
+    if(!Array.isArray(groups) || !groups.length) return `<p class="not-available">Not Available</p>`;
+
+    return groups.map(group => {
+        const items = Array.isArray(group && group.items) ? group.items : [];
+        return `
+            <div class="all-details-block-title">${(group && group.category) || "Not Available"}</div>
+            ${
+                items.length
+                ? items.map(item => `
+                    <div class="spec-row">
+                        <span class="spec-label">${(item && item.label) || "Not Available"}</span>
+                        <span class="spec-value">${(item && item.value) || "Not Available"}</span>
+                    </div>
+                `).join("")
+                : `<p class="not-available">Not Available</p>`
+            }
+        `;
+    }).join("");
+}
+
+function renderSpecificationsTab(){
+    return renderSpecGroups(details.specifications);
+}
+
+function renderDescriptionTab(){
+    const text = details.description || product.description;
+    return `<p class="all-details-desc-text">${text || "Not Available"}</p>`;
+}
+
+function renderWarrantyTab(){
+    const w = (details.warranty && typeof details.warranty === "object") ? details.warranty : {};
+    const covered = Array.isArray(w.covered) ? w.covered : [];
+    const notCovered = Array.isArray(w.notCovered) ? w.notCovered : [];
+
+    return `
+        <div class="warranty-summary">${w.summary || "Not Available"}</div>
+
+        <div class="warranty-list-title">Covered in Warranty</div>
+        ${
+            covered.length
+            ? `<ul class="warranty-list">${covered.map(c=>`<li>${c}</li>`).join("")}</ul>`
+            : `<p class="not-available">Not Available</p>`
+        }
+
+        <div class="warranty-list-title">Not Covered in Warranty</div>
+        ${
+            notCovered.length
+            ? `<ul class="warranty-list">${notCovered.map(c=>`<li>${c}</li>`).join("")}</ul>`
+            : `<p class="not-available">Not Available</p>`
+        }
+
+        <div class="spec-row">
+            <span class="spec-label">Domestic Warranty</span>
+            <span class="spec-value">${w.domesticWarranty || "Not Available"}</span>
+        </div>
+        <div class="spec-row">
+            <span class="spec-label">International Warranty</span>
+            <span class="spec-value">${w.internationalWarranty || "Not Available"}</span>
+        </div>
+        <div class="spec-row">
+            <span class="spec-label">Service Type</span>
+            <span class="spec-value">${w.serviceType || "Not Available"}</span>
+        </div>
+    `;
+}
+
+function renderManufacturerTab(){
+    const md = (details.manufacturerDetails && typeof details.manufacturerDetails === "object")
+        ? details.manufacturerDetails
+        : {};
+
+    const fields = [
+        ["Manufacturer", md.manufacturer],
+        ["Brand", md.brand],
+        ["Country of Origin", md.countryOfOrigin],
+        ["Importer", md.importer],
+        ["Packer", md.packer],
+        ["Address", md.address],
+        ["Customer Care Email", md.customerCareEmail],
+        ["Customer Care Phone", md.customerCarePhone],
+        ["Manufacturing Date", md.manufacturingDate],
+        ["Model Number", md.modelNumber],
+        ["SKU", md.sku],
+        ["EAN / UPC", md.eanUpc],
+        ["Return Policy", md.returnPolicy],
+        ["GST Number", md.gstNumber]
+    ];
+
+    return fields.map(([label, value]) => `
+        <div class="spec-row">
+            <span class="spec-label">${label}</span>
+            <span class="spec-value">${value ? value : NA}</span>
+        </div>
+    `).join("");
+}
+
+const tabRenderers = {
+    showcase: renderShowcaseTab,
+    specifications: renderSpecificationsTab,
+    description: renderDescriptionTab,
+    warranty: renderWarrantyTab,
+    manufacturer: renderManufacturerTab
+};
+
+function showAllDetailsTab(tabName){
+    const contentEl = document.getElementById("allDetailsContent");
+    if(!contentEl) return;
+    const renderer = tabRenderers[tabName] || (()=> `<p class="not-available">Not Available</p>`);
+    contentEl.innerHTML = renderer();
+
+    document.querySelectorAll("#allDetailsTabs .all-details-tab").forEach(btn=>{
+        btn.classList.toggle("active-tab", btn.dataset.tab === tabName);
+    });
+}
+
+// Default tab on load
+showAllDetailsTab("showcase");
+
+document.querySelectorAll("#allDetailsTabs .all-details-tab").forEach(btn=>{
+    btn.addEventListener("click", ()=> showAllDetailsTab(btn.dataset.tab));
+});
+
+// Expand / collapse
+const allDetailsToggle = document.getElementById("allDetailsToggle");
+const allDetailsBody = document.getElementById("allDetailsBody");
+const allDetailsArrow = document.getElementById("allDetailsArrow");
+
+if(allDetailsToggle && allDetailsBody && allDetailsArrow){
+    allDetailsToggle.addEventListener("click", ()=>{
+        const isOpen = allDetailsBody.classList.toggle("open");
+        allDetailsArrow.classList.toggle("open", isOpen);
+        allDetailsArrow.innerHTML = isOpen ? "⌃" : "⌄";
+    });
+}
+
+} catch(err) {
+console.error("All Details render failed:", err);
+const contentEl = document.getElementById("allDetailsContent");
+if(contentEl) contentEl.innerHTML = `<p class="not-available">Not Available</p>`;
+}
+
+// ===============================
+// Ratings and Reviews
+// ===============================
+try {
+
+const ratingsData = (product.ratings && typeof product.ratings === "object") ? product.ratings : {};
+
+const overallRating = ratingsData.overallRating || parseFloat(product.rating) || 0;
+const ratingCount = ratingsData.ratingCount || 0;
+const verifiedBuyers = ratingsData.verifiedBuyers || 0;
+const customerImages = Array.isArray(ratingsData.customerImages) ? ratingsData.customerImages : [];
+const ratingBreakdown = Array.isArray(ratingsData.ratingBreakdown) ? ratingsData.ratingBreakdown : [];
+const reviewsList = Array.isArray(ratingsData.reviews) ? ratingsData.reviews : [];
+
+function ratingLabel(r){
+    if(r >= 4.5) return "Excellent";
+    if(r >= 4.0) return "Very Good";
+    if(r >= 3.0) return "Good";
+    if(r > 0) return "Average";
+    return "Not Available";
+}
+
+function formatCount(n){
+    if(!n) return "0";
+    return n.toLocaleString("en-IN");
+}
+
+document.getElementById("ratingsAverage").innerHTML =
+    overallRating ? `${overallRating} <span class="star-icon">★</span>` : `<span class="not-available">Not Available</span>`;
+
+document.getElementById("ratingsTextPill").innerText = ratingLabel(overallRating);
+document.getElementById("ratingsTextPill").style.display = overallRating ? "inline-block" : "none";
+
+document.getElementById("ratingsSubtext").innerHTML = ratingCount
+    ? `based on ${formatCount(ratingCount)} ratings ${verifiedBuyers ? `by <span class="verified-icon">✓</span> Verified Buyers` : ""}`
+    : `<span class="not-available">Not Available</span>`;
+
+// ---- Customer Photos ----
+const photosGrid = document.getElementById("customerPhotosGrid");
+if(customerImages.length){
+    const visibleCount = 6;
+    const shown = customerImages.slice(0, visibleCount);
+    const remaining = customerImages.length - shown.length;
+
+    photosGrid.innerHTML = shown.map((src, i) => {
+        const isLastCell = i === shown.length - 1 && remaining > 0;
+        return `
+            <div class="customer-photo-cell" data-photo-index="${i}">
+                <img src="${src}" alt="Customer photo ${i+1}" onerror="this.parentElement.style.background='#e0e0e0'">
+                ${isLastCell ? `<div class="customer-photo-more-overlay">+${remaining} More</div>` : ""}
+            </div>
+        `;
+    }).join("");
+
+    document.querySelectorAll(".customer-photo-cell").forEach(cell=>{
+        cell.addEventListener("click", ()=>{
+            openPhotoGallery(parseInt(cell.dataset.photoIndex));
+        });
+    });
+} else {
+    photosGrid.innerHTML = "";
+    photosGrid.style.display = "none";
+}
+
+let galleryIndex = 0;
+function openPhotoGallery(index){
+    if(!customerImages.length) return;
+    galleryIndex = index;
+    updateGalleryImage();
+    document.getElementById("photoGalleryOverlay").classList.add("open");
+}
+function updateGalleryImage(){
+    document.getElementById("photoGalleryImage").src = customerImages[galleryIndex];
+    document.getElementById("photoGalleryCounter").innerText =
+        `${galleryIndex + 1} / ${customerImages.length}`;
+}
+function closePhotoGallery(){
+    document.getElementById("photoGalleryOverlay").classList.remove("open");
+}
+
+const galleryOverlay = document.getElementById("photoGalleryOverlay");
+document.getElementById("photoGalleryClose").addEventListener("click", closePhotoGallery);
+galleryOverlay.addEventListener("click", (e)=>{
+    if(e.target === galleryOverlay) closePhotoGallery();
+});
+document.getElementById("photoGalleryPrev").addEventListener("click", ()=>{
+    galleryIndex = (galleryIndex - 1 + customerImages.length) % customerImages.length;
+    updateGalleryImage();
+});
+document.getElementById("photoGalleryNext").addEventListener("click", ()=>{
+    galleryIndex = (galleryIndex + 1) % customerImages.length;
+    updateGalleryImage();
+});
+document.addEventListener("keydown", (e)=>{
+    if(!galleryOverlay.classList.contains("open")) return;
+    if(e.key === "Escape") closePhotoGallery();
+    if(e.key === "ArrowLeft") document.getElementById("photoGalleryPrev").click();
+    if(e.key === "ArrowRight") document.getElementById("photoGalleryNext").click();
+});
+
+// ---- Rating Breakdown Chips ----
+const chipsRow = document.getElementById("ratingChipsRow");
+if(ratingBreakdown.length){
+    chipsRow.innerHTML = ratingBreakdown.map(chip => `
+        <div class="rating-chip">
+            <span>${(chip && chip.label) || "Not Available"}</span>
+            <b>${(chip && chip.rating) || "-"}</b>
+            <span class="star-icon">★</span>
+        </div>
+    `).join("");
+} else {
+    chipsRow.style.display = "none";
+}
+
+// ---- Review Cards ----
+const reviewsRow = document.getElementById("reviewCardsRow");
+if(reviewsList.length){
+    reviewsRow.innerHTML = reviewsList.map((review, idx) => {
+        const desc = (review && review.description) || "";
+        const isLong = desc.length > 120;
+        const shortDesc = isLong ? desc.slice(0, 120).trim() + "..." : desc;
+
+        return `
+        <div class="review-card">
+            <div class="review-card-top">
+                <div class="review-star-badge">${(review && review.rating) || "-"} ★</div>
+                <div class="review-title">${(review && review.title) || "Not Available"}</div>
+            </div>
+
+            <div class="review-description" id="reviewDesc-${idx}" data-full="${(desc || "").replace(/"/g,'&quot;')}" data-short="${shortDesc.replace(/"/g,'&quot;')}">
+                ${shortDesc || `<span class="not-available">Not Available</span>`}
+                ${isLong ? ` <span class="review-more-link" data-target="reviewDesc-${idx}">more</span>` : ""}
+            </div>
+
+            <div class="review-meta-row">
+                <span>${(review && review.reviewerName) || "Anonymous"}</span>
+                ${review && review.verified ? `<span class="review-verified-badge"><span class="verified-icon">✓</span> Verified Purchase</span>` : ""}
+                <span class="review-date" style="margin-left:auto;">${(review && review.date) || ""}</span>
+            </div>
+
+            <div class="review-actions-row">
+                <div class="review-action-btn" data-action="like" data-idx="${idx}">
+                    👍 <span class="like-count">${(review && review.likes) || 0}</span>
+                </div>
+                <div class="review-action-btn" data-action="dislike" data-idx="${idx}">
+                    👎 <span class="dislike-count">${(review && review.dislikes) || 0}</span>
+                </div>
+            </div>
+        </div>
+        `;
+    }).join("");
+
+    // Expand "more" long review text
+    reviewsRow.querySelectorAll(".review-more-link").forEach(link=>{
+        link.addEventListener("click", ()=>{
+            const target = document.getElementById(link.dataset.target);
+            if(!target) return;
+            target.innerHTML = target.dataset.full;
+        });
+    });
+
+    // Helpful (like/dislike) buttons — purely client-side interactive counters
+    reviewsRow.querySelectorAll(".review-action-btn").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+            const isLike = btn.dataset.action === "like";
+            const countEl = btn.querySelector(isLike ? ".like-count" : ".dislike-count");
+            const active = btn.classList.contains(isLike ? "liked" : "disliked");
+            countEl.innerText = parseInt(countEl.innerText) + (active ? -1 : 1);
+            btn.classList.toggle(isLike ? "liked" : "disliked");
+        });
+    });
+} else {
+    reviewsRow.innerHTML = `<p class="not-available" style="padding:10px 0;">No reviews available for this product yet.</p>`;
+}
+
+// ---- Expand / Collapse whole section ----
+const ratingsToggle = document.getElementById("ratingsToggle");
+const ratingsBody = document.getElementById("ratingsBody");
+const ratingsArrow = document.getElementById("ratingsArrow");
+
+if(ratingsToggle && ratingsBody && ratingsArrow){
+    ratingsToggle.addEventListener("click", ()=>{
+        const collapsed = ratingsBody.style.display === "none";
+        ratingsBody.style.display = collapsed ? "block" : "none";
+        ratingsArrow.classList.toggle("collapsed", !collapsed);
+    });
+}
+
+} catch(err) {
+console.error("Ratings and Reviews render failed:", err);
+const ratingsBodyEl = document.getElementById("ratingsBody");
+if(ratingsBodyEl) ratingsBodyEl.innerHTML = `<p class="not-available">Not Available</p>`;
+}
+
+} else {
+// Bug fix: previously there was zero feedback when no product data was
+// found in localStorage — the page just silently looked broken.
+document.getElementById("productName").innerText = "Product not found";
+document.getElementById("productDescription").innerText =
+"We couldn't load this product. Please go back and select it again.";
+document.querySelector(".bottom-bar").style.display = "none";
+} // end if(product)
+
+
+
+const arrow = document.getElementById("offerArrow");
+const content = document.getElementById("offerContent");
+
+arrow.addEventListener("click", ()=>{
+
+    if(content.style.display === "none"){
+        content.style.display = "block";
+        arrow.innerHTML = "⌃";
+       arrow.style.transform = "rotate(0deg)";
+    }else{
+        content.style.display = "none";
+        arrow.innerHTML = "⌄";
+    arrow.style.transform = "rotate(180deg)";
+    }
+
+});
+document.querySelectorAll(".apply-btn").forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+const offerText =
+btn.parentElement.querySelector("b").innerText;
+
+localStorage.setItem(
+"appliedOffer",
+offerText
+);
+
+showAppliedOffer();
+
+});
+
+});
+function showAppliedOffer(){
+
+const offer =
+localStorage.getItem("appliedOffer");
+
+if(!offer) return;
+
+document.getElementById("appliedOfferBox").style.display = "block";
+
+document.getElementById("appliedOfferBox").innerHTML = `
+
+<div class="applied-offer">
+
+<div>
+✅ ${offer}
+</div>
+
+<div class="remove-btn"
+onclick="removeOffer()">
+Remove
+</div>
+
+</div>
+
+`;
+
+}
+    function removeOffer(){
+
+localStorage.removeItem("appliedOffer");
+
+document.getElementById(
+"appliedOfferBox"
+).style.display = "none";
+
+    }
+ const wishlistBtn =
+document.getElementById("wishlistBtn");
+
+wishlistBtn.addEventListener("click",()=>{
+
+if(!product) return;
+
+if(wishlistBtn.innerHTML==="🤍"){
+
+wishlistBtn.innerHTML="❤️";
+showWishlistToast(
+"Product is added to My Wishlist"
+);
+    
+  let wishlist =
+JSON.parse(
+localStorage.getItem("wishlist")
+) || [];
+
+if(!wishlist.find(item => item.name === product.name)){
+
+    wishlist.push(product);
+
+}
+
+localStorage.setItem(
+"wishlist",
+JSON.stringify(wishlist)
+);
+}
+else{
+
+wishlistBtn.innerHTML="💔";
+let wishlist =
+JSON.parse(
+localStorage.getItem("wishlist")
+) || [];
+
+wishlist = wishlist.filter(
+item => item.name !== product.name
+);
+
+localStorage.setItem(
+"wishlist",
+JSON.stringify(wishlist)
+);
+    showWishlistToast(
+"Product removed from My Wishlist"
+);
+    
+setTimeout(()=>{
+wishlistBtn.innerHTML="🤍";
+},2000);
+
+}
+
+});
+   function showWishlistToast(message){
+
+const toast =
+document.getElementById("wishlistToast");
+
+document.getElementById("toastText")
+.innerText = message;
+
+toast.style.display = "flex";
+
+setTimeout(()=>{
+toast.style.display = "none";
+},5000);
+
+   }
+    showAppliedOffer();
+
+function shareProduct(){
+
+if(navigator.share){
+
+navigator.share({
+title: document.getElementById("productName").innerText,
+text: "Check out this product on ShopMart",
+url: window.location.href
+});
+
+}else{
+
+navigator.clipboard.writeText(window.location.href);
+alert("Link copied");
+
+}
+
+    }
+
+function openAddressModal(){
+    document.getElementById("addressModal").style.display="block";
+}
+
+function closeAddressModal(){
+    document.getElementById("addressModal").style.display="none";
+}
+
+function openAddAddressPage(){
+    document.getElementById("addAddressPage").style.display="block";
+}
+
+function closeAddAddressPage(){
+    document.getElementById("addAddressPage").style.display="none";
+}
+
+function openAddressForm(){
+    document.getElementById("addressFormPage").style.display="block";
+}
+
+function closeAddressForm(){
+    document.getElementById("addressFormPage").style.display="none";
+}
+
+function toggleAddressMenu(el){
+
+    let menu =
+    el.parentElement.querySelector(".address-popup");
+
+    if(menu.style.display==="block"){
+
+        menu.style.display="none";
+
+    }else{
+
+        document
+        .querySelectorAll(".address-popup")
+        .forEach(p=>p.style.display="none");
+
+        menu.style.display="block";
+    }
+}
+
+function editAddress(index){
+
+let addresses =
+JSON.parse(localStorage.getItem("allAddresses")) || [];
+
+let addr = addresses[index];
+
+document.querySelectorAll(".form-input")[1].value = addr.name;
+document.querySelectorAll(".form-input")[2].value = addr.mobile;
+document.querySelectorAll(".form-input")[3].value = addr.address;
+document.querySelectorAll(".form-input")[4].value = addr.area;
+document.querySelectorAll(".form-input")[5].value = addr.landmark;
+document.querySelectorAll(".form-input")[6].value = addr.pincode;
+document.querySelectorAll(".form-input")[7].value = addr.city;
+document.querySelectorAll(".form-input")[8].value = addr.state;
+
+localStorage.setItem("editIndex", index);
+
+document.getElementById("addressModal").style.display = "none";
+document.getElementById("addAddressPage").style.display = "block";
+document.getElementById("addressFormPage").style.display = "block";
+
+console.log(addresses[index]);   
+}
+
+function deleteAddress(index){
+
+    if(!confirm("Delete this address?")) return;
+
+    let addresses =
+    JSON.parse(localStorage.getItem("allAddresses")) || [];
+
+    addresses.splice(index,1);
+
+    localStorage.setItem(
+        "allAddresses",
+        JSON.stringify(addresses)
+    );
+
+    if(addresses.length>0){
+        localStorage.setItem(
+            "userAddress",
+            JSON.stringify(addresses[0])
+        );
+    }else{
+        localStorage.removeItem("userAddress");
+    }
+
+    location.reload();
+
+}
+
+function selectChip(chip){
+
+    document
+    .querySelectorAll(".address-chip")
+    .forEach(c=>c.classList.remove("active-chip"));
+
+    chip.classList.add("active-chip");
+}
+
+function selectAddress(index){
+
+let addresses =
+JSON.parse(
+localStorage.getItem("allAddresses")
+) || [];
+
+let addr = addresses[index];
+
+document.getElementById("deliverToCard")
+.style.display="block";
+
+document.getElementById("deliverName")
+.innerText = addr.name;
+
+document.getElementById("deliverAddress")
+.innerText =
+addr.address + ", " + addr.city;
+
+document.getElementById("deliveryTitle").innerText =
+addr.name;
+
+document.getElementById("deliverySubtitle").innerText =
+addr.address + ", " + addr.city;
+    
+localStorage.setItem(
+"userAddress",
+JSON.stringify(addr)
+);
+
+document.querySelectorAll(".address-item").forEach(item=>{
+    item.classList.remove("selected-address");
+});
+
+document.querySelectorAll(".address-item")[index]
+.classList.add("selected-address");
+
+  window.onload();  
+    
+    showSaveToast("✅ Address Selected");
+
+closeAddressModal();
+
+}
+
+    
+function getCurrentLocation(){
+
+if(!navigator.geolocation){
+showSaveToast("❌ Geolocation Not Supported");
+return;
+}
+
+showSaveToast("📍 Getting Location...");
+
+navigator.geolocation.getCurrentPosition(async function(position){
+
+const lat = position.coords.latitude;
+const lon = position.coords.longitude;
+
+try{
+
+const res = await fetch(
+`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`
+);
+
+const data = await res.json();
+
+const addr = data.address || {};
+
+document.querySelectorAll(".form-input")[3].value =
+data.display_name || "";
+
+document.querySelectorAll(".form-input")[6].value =
+addr.postcode || "";
+
+console.log(document.querySelectorAll(".form-input"));
+console.log(addr);
+    
+document.querySelectorAll(".form-input")[7].value =
+addr.city ||
+addr.town ||
+addr.village ||
+addr.county ||
+addr.suburb ||
+addr.municipality ||
+"";
+
+document.querySelectorAll(".form-input")[8].value =
+addr.state || "";
+
+showSaveToast("✅ Current Location Filled");
+
+openAddressForm();
+
+}catch(e){
+
+showSaveToast("❌ Unable to fetch address");
+
+}
+
+},function(){
+
+showSaveToast("❌ Location Permission Denied");
+
+});
+
+}
+
+    
+function saveAddress(){
+
+    let inputs = document.querySelectorAll(".form-input");
+
+    for(let i=0; i<inputs.length; i++){
+
+        if(inputs[i].value.trim()==""){
+
+            showSaveToast("⚠ Please fill all address details");
+            return;
+
+        }
+    }
+
+    showSaveToast("🎊 Address Saved Successfully");
+
+let addressData = {
+
+name: document.querySelectorAll(".form-input")[1].value,
+
+mobile: document.querySelectorAll(".form-input")[2].value,
+
+address: document.querySelectorAll(".form-input")[3].value,
+
+area: document.querySelectorAll(".form-input")[4].value,
+
+landmark: document.querySelectorAll(".form-input")[5].value,
+
+pincode: document.querySelectorAll(".form-input")[6].value,
+
+city: document.querySelectorAll(".form-input")[7].value,
+
+state: document.querySelectorAll(".form-input")[8].value,
+
+type: document.querySelector(".active-chip").innerText.trim(),
+
+};
+
+let addresses =
+JSON.parse(
+localStorage.getItem("allAddresses")
+) || [];
+
+let editIndex = localStorage.getItem("editIndex");
+
+if (editIndex !== null) {
+    addresses[editIndex] = addressData;
+    localStorage.removeItem("editIndex");
+} else {
+    addresses.push(addressData);
+}
+
+localStorage.setItem(
+"allAddresses",
+JSON.stringify(addresses)
+);
+    
+localStorage.setItem(
+"userAddress",
+JSON.stringify(addressData)
+);
+    
+document.getElementById("deliverToCard")
+.style.display="block";
+
+document.getElementById("deliverName")
+.innerText =
+document.querySelectorAll(".form-input")[1].value;
+
+document.getElementById("deliverAddress")
+.innerText =
+document.querySelectorAll(".form-input")[3].value;
+
+document.getElementById("deliveryTitle").innerText =
+addressData.name;
+
+document.getElementById("deliverySubtitle").innerText =
+addressData.address + ", " + addressData.city;
+    
+    document.getElementById("addressFormPage").style.display="none";
+    document.getElementById("addAddressPage").style.display="none";
+    document.getElementById("addressModal").style.display="none";
+
+}
+    
+ function showSaveToast(message){
+
+    const toast =
+    document.getElementById("saveToast");
+
+    toast.innerText = message;
+
+    toast.style.display = "block";
+
+    setTimeout(function(){
+
+        toast.style.display = "none";
+
+    },10000);
+
+ }
+    
+    window.onload = function(){
+
+let savedAddress =
+JSON.parse(
+localStorage.getItem("userAddress")
+);
+
+let allAddresses =
+JSON.parse(
+localStorage.getItem("allAddresses")
+) || [];
+
+let html = "";
+
+allAddresses.forEach((addr,index)=>{
+
+html += `
+<div class="address-item ${savedAddress && savedAddress.address===addr.address ? 'selected-address' : ''}"
+onclick="selectAddress(${index})">
+
+<div>
+<b style="padding-right:120px;">${addr.name}</b>
+
+${savedAddress && savedAddress.address===addr.address ?
+'<button class="change-btn">CHANGE</button>' : ''}
+
+<br>
+${addr.address}
+<br>
+${addr.type==="Home" ? "🏠 Home" : "💼 Work"}
+
+</div>
+
+<span class="menu-dot"
+onclick="event.stopPropagation();
+toggleAddressMenu(this)">
+⋮
+</span>
+
+<div class="address-popup">
+<div onclick="editAddress(${index})">✏️ Edit</div>
+<div onclick="deleteAddress(${index})">🗑 Delete</div>
+</div>
+
+</div>
+`;
+
+});
+
+document.getElementById("savedAddresses")
+.innerHTML = html;
+        
+if(savedAddress){
+
+document.getElementById("deliverToCard")
+.style.display="block";
+
+document.getElementById("deliverName")
+.innerText =
+savedAddress.name;
+
+document.getElementById("deliverAddress")
+.innerText =
+savedAddress.address + ", " +
+savedAddress.city;
+
+document.getElementById("deliveryTitle").innerText =
+savedAddress.name;
+
+document.getElementById("deliverySubtitle").innerText =
+savedAddress.address + ", " +
+savedAddress.city;  
+
+}
+        
+  }
+
+// ===============================
+// Open Similar Product
+// ===============================
+
+function openSimilarProduct(product){
+
+localStorage.setItem(
+"selectedProduct",
+JSON.stringify(product)
+);
+
+window.location.href = "product.html";
+
+}
+
+// ===============================
+// Scroll Similar Products
+// ===============================
+
+function scrollSimilarProducts(){
+
+document.getElementById("similarProducts").scrollBy({
+left:220,
+behavior:"smooth"
+});
+
+}
+
+// ===============================
+// Render Similar Products
+// ===============================
+
+const similarContainer = document.getElementById("similarProducts");
+
+if(similarContainer && product && allProducts.length){
+
+const similar = allProducts.filter(p =>
+p.category === product.category &&
+p.name !== product.name
+);
+
+similar.forEach(item => {
+
+const oldPrice = parseInt(item.oldPrice);
+const price = parseInt(item.price);
+const discount = Math.round(((oldPrice-price)/oldPrice)*100);
+
+similarContainer.innerHTML += `
+<div class="similar-card"
+onclick='openSimilarProduct(${JSON.stringify(item).replace(/"/g,"&quot;")})'>
+
+<div class="similar-image-box">
+
+${item.ad ? `<div class="ad-badge">AD</div>` : ""}
+
+<img src="images/${item.img}"
+class="similar-image">
+
+</div>
+
+<div class="similar-info">
+
+<div class="similar-name">${item.name}</div>
+
+<div class="similar-rating">
+${item.rating} ★
+</div>
+
+<div class="similar-price">
+₹${item.price}
+<span class="similar-old-price">₹${item.oldPrice}</span>
+<span class="similar-discount">${discount}% Off</span>
+</div>
+
+</div>
+</div>
+`;
+
+});
+
+}
+
+    
+} catch (e) {
+    console.error(e);
+ }
+    
+function togglePeaceSection(){
+
+    const content = document.getElementById("peaceContent");
+    const arrow = document.getElementById("peaceArrow");
+
+    if(content.style.display === "none"){
+
+        content.style.display = "block";
+        arrow.innerHTML = "⌃";
+
+    }else{
+
+        content.style.display = "none";
+        arrow.innerHTML = "⌄";
+
+    }
+
+}
+
+</script>
+<div id="wishlistToast" style="
+position:fixed;
+bottom:80px;
+left:15px;
+right:15px;
+background:#212121;
+color:white;
+padding:16px;
+border-radius:8px;
+display:none;
+justify-content:space-between;
+align-items:center;
+z-index:9999;
+">
+
+<span id="toastText"></span>
+
+<span id="toastAction"
+style="color:#ffb300;font-weight:bold;">
+<button onclick="openAddressModal()">
+CHANGE
+</button>
+</span>
+
+</div>
+
+<div id="addressModal" class="address-modal">
+
+    <div class="address-sheet">
+    <div class="sheet-handle"></div>
+        
+        <div class="address-header">
+          
+            <h2>Select delivery address</h2>
+           
+            <span class="close-btn" onclick="closeAddressModal()">✕</span>
+        </div>
+
+        <div class="search-wrapper">
+    <span class="search-icon">🔍</span>
+    <input
+    type="text"
+    class="address-search"
+    placeholder="Search by area, street name, pin code">
+        </div>
+
+        <div class="current-location"
+onclick="getCurrentLocation()">
+📍 Use my current location
+        </div>
+
+        <div class="dotted-line"></div>
+
+        <div class="saved-header">
+            <b>Saved addresses</b>
+            <span class="blue-text" onclick="openAddAddressPage()">
+    + Add New
+            </span>
+        </div>
+
+   <div id="deliverToCard" style="display:none;">
+
+<div class="deliver-header">
+Deliver to
+<span id="deliverName">ZIYA KHAN</span>
+
+</div>
+
+<div id="deliverAddress">
+Select Address
+</div>
+
+<div class="chip-row">
+
+<span class="address-chip active-chip"
+onclick="selectChip(this)">
+🏠 Home
+</span>
+
+<span class="address-chip"
+onclick="selectChip(this)">
+💼 Work
+</span>
+
+</div>
+
+   </div>   
+        
+        <div id="savedAddresses"></div>
+
+    </div>
+
+</div>
+    
+<div id="addAddressPage" class="add-address-page">
+
+    <div class="add-header">
+        <span class="back-arrow"
+        onclick="closeAddAddressPage()">←</span>
+
+        <span class="header-title">
+            Add new address
+        </span>
+    </div>
+
+    <div class="location-search">
+        🔍 Search by area, name, street...
+    </div>
+
+    <div class="map-area">
+
+    <div class="map-building b1"></div>
+<div class="map-building b2"></div>
+<div class="map-building b3"></div>
+<div class="map-building b4"></div>
+
+        
+        <div class="pin-text">
+            Place pin on the exact location
+        </div>
+
+        <div class="map-pin"></div>
+
+        <button class="current-location-btn"
+onclick="getCurrentLocation()">
+⊕ Use my current location
+        </button>
+
+    </div>
+
+    <div class="bottom-sheet">
+
+        <h2>
+            Where do you want us to deliver the order?
+        </h2>
+
+        <p>
+            This will help with the right map location
+        </p>
+
+        <button class="away-btn"
+onclick="openAddressForm()">
+Away from my location
+        </button>
+
+        <button class="use-location-btn"
+onclick="openAddressForm()">
+            ⊕ Use current location
+        </button>
+
+    </div>
+<div id="addressFormPage" class="address-form-page">
+
+<div class="form-header">
+<span class="back-arrow"
+onclick="closeAddressForm()">←</span>
+
+<span class="form-title">
+Add Address Details
+</span>
+</div>
+
+<div class="form-container">
+
+<label>Country/Region</label>
+<select class="form-input">
+<option>India</option>
+</select>
+
+<label>Full name (First and Last name)</label>
+<input type="text" class="form-input">
+
+<label>Mobile number</label>
+<input type="tel"
+class="form-input"
+placeholder="10-digit mobile number">
+
+<div class="map-link">
+📍 Add location on map
+</div>
+
+<label>Flat, House no., Building, Company, Apartment</label>
+<input type="text" class="form-input">
+
+<label>Area, Street, Sector, Village</label>
+<input type="text" class="form-input">
+
+<label>Landmark</label>
+<input type="text"
+class="form-input"
+placeholder="E.g. near hospital">
+
+<div class="row">
+<div>
+<label>Pincode</label>
+<input type="text"
+class="form-input"
+placeholder="6-digit">
+</div>
+
+<div>
+<label>Town/City</label>
+<input type="text"
+class="form-input">
+</div>
+</div>
+
+<label>State</label>
+<select class="form-input">
+<option>Select</option>
+<option>Assam</option>
+<option>Tripura</option>
+<option>Meghalaya</option>
+</select>
+
+<div class="checkbox-row">
+<input type="checkbox">
+<span>Make this my default address</span>
+</div>
+
+<div class="chip-row">
+
+<span class="address-chip active-chip"
+onclick="selectChip(this)">
+🏠 Home
+</span>
+
+<span class="address-chip"
+onclick="selectChip(this)">
+💼 Work
+</span>
+
+</div>
+    
+<div class="save-address-btn"
+onclick="saveAddress()">
+    Use this address
+</div>
+
+</div>
+</div>
+
+    
+</div>
+
+<div id="saveToast"
+style="
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:#222;
+color:white;
+padding:14px 20px;
+border-radius:10px;
+display:none;
+z-index:99999;
+font-weight:bold;
+">
+🎉 Address Saved Successfully
+</div>    
+    
+</body>
+</html>
